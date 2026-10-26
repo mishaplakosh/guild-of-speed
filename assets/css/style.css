@@ -12,7 +12,9 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+/* Everything is sized in rem, so on large screens we scale the root:
+   16px up to 1440px wide, then grows ~0.7px per 100px, capped at 32px (≈3840px). */
+html { scroll-behavior: smooth; font-size: clamp(1rem, calc(1rem + (100vw - 90rem) * 0.00714), 2rem); }
 
 body {
   font-family: 'Inter', sans-serif;
@@ -148,7 +150,7 @@ main > .section:nth-child(even)::after {
 
 /* VIDEO / SHORTS */
 .shorts-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 17rem)); gap: 1.5rem; margin-top: 2rem;
 }
 .short-card {
   position: relative; display: block; border-radius: var(--radius); overflow: hidden;
@@ -279,6 +281,12 @@ main > .section:nth-child(even)::after {
 .mobile-overlay.open { opacity: 1; pointer-events: auto; }
 
 /* RESPONSIVE */
+@media (min-width: 75rem) {
+  .services-grid { grid-template-columns: repeat(4, 1fr); }
+  .card { min-height: 22rem; }
+  .why-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
 @media (max-width: 1024px) {
   .nav__links { display: none; }
   .nav__cta { display: none; }
