@@ -28,48 +28,43 @@
   </svg>
   <header class="nav" id="nav">
     <div class="nav__inner">
-      <a href="#" class="nav__brand">
+      <a href="#hero" class="nav__brand" aria-label="Guild of Speed — на початок">
         <img src="assets/img/logo.webp" alt="Guild of Speed" class="nav__logo" width="52" height="52">
         <span class="nav__name">GUILD <span class="nav__of">OF</span> SPEED</span>
       </a>
-      <nav class="nav__links">
+      <nav class="nav__links" aria-label="Головне меню">
         <a href="#services">Послуги</a>
-        <a href="#contacts">Контакти</a>
-        <a href="#faq">Питання</a>
         <a href="#why">Переваги</a>
         <a href="#video">Відео</a>
+        <a href="#faq">Питання</a>
+        <a href="#contacts">Контакти</a>
       </nav>
-      <a href="tel:+380636000505" class="btn btn--primary nav__cta">Зателефонувати</a>
-      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+      <a href="tel:+380636000505" class="btn btn--primary nav__cta">+380 63 600 0505</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
     </div>
   </header>
-  <aside class="mobile-menu" id="mobileMenu">
+  <aside class="mobile-menu" id="mobileMenu" aria-label="Меню">
     <nav class="mobile-menu__links">
       <a href="#services">Послуги</a>
-      <a href="#contacts">Контакти</a>
-      <a href="#faq">Питання</a>
       <a href="#why">Переваги</a>
       <a href="#video">Відео</a>
-      <a href="#" class="btn btn--primary" data-modal>Записатись</a>
+      <a href="#faq">Питання</a>
+      <a href="#contacts">Контакти</a>
+      <a href="tel:+380636000505" class="btn btn--primary">Зателефонувати</a>
+      <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener" class="btn btn--ghost">Telegram</a>
     </nav>
   </aside>
   <div class="mobile-overlay" id="mobileOverlay"></div>
 
+  <main>
   <section class="hero" id="hero">
     <div class="hero__content">
       <h1 class="hero__title">Guild of Speed</h1>
       <p class="hero__desc">Досвідчені майстри, якісні запчастини та професійний підхід для вашого BMW.</p>
       <p class="hero__desc"><span class="hero__address">вул. Залізнична, 7, Львів, 79039 (заїзд з квазі-кільця)</span></p>
       <div class="hero__buttons">
-        <a href="#" class="btn btn--primary" data-modal>Записатись</a>
-        <a href="#services" class="btn btn--ghost">Послуги</a>
-      </div>
-      <div class="hero__socials">
-        <span>Ми в</span>
-        <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener">YouTube</a>
-        <a href="https://www.tiktok.com/@guild.ofspeed" target="_blank" rel="noopener">TikTok</a>
-        <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener">Telegram</a>
+        <a href="tel:+380636000505" class="btn btn--primary">Зателефонувати</a>
+        <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener" class="btn btn--ghost">Написати в Telegram</a>
       </div>
     </div>
     <div class="stats">
@@ -86,8 +81,8 @@
         <span class="stats__label">Років досвіду</span>
       </div>
       <div class="stats__item">
-        <span class="stats__value">100%</span>
-        <span class="stats__label">Якісні запчастини</span>
+        <span class="stats__value">Гарантія</span>
+        <span class="stats__label">На всі роботи</span>
       </div>
     </div>
   </section>
@@ -101,8 +96,8 @@
         <div class="card__body">
           <h3 class="card__title">Двигуни</h3>
           <ul class="card__list">
-            <li>Обслуговування</li>
-            <li>Діагностика/Комп'ютерна</li>
+            <li>Ремонт та обслуговування двигуна</li>
+            <li>Комп'ютерна діагностика</li>
             <li>Підбір та доставка запчастин</li>
           </ul>
         </div>
@@ -112,8 +107,8 @@
         <div class="card__body">
           <h3 class="card__title">Підвіска</h3>
           <ul class="card__list">
-            <li>Обслуговування</li>
-            <li>Діагностика/Комп'ютерна</li>
+            <li>Ремонт та заміна деталей ходової</li>
+            <li>Діагностика підвіски</li>
             <li>Підбір та доставка запчастин</li>
           </ul>
         </div>
@@ -132,7 +127,7 @@
       <article class="card card-detailing reveal">
         <div class="card__overlay"></div>
         <div class="card__body">
-          <h3 class="card__title">Detailing</h3>
+          <h3 class="card__title">Детейлінг</h3>
           <ul class="card__list">
             <li>Хімчистка салону</li>
             <li>Полірування авто</li>
@@ -144,49 +139,6 @@
     </div>
     <p class="section__note reveal">Для додаткової інформації зв'яжіться з менеджером</p>
   </section>
-
-  <section class="section" id="contacts">
-    <p class="section__label reveal">Зв'язок</p>
-    <h2 class="section__title reveal">Контакти</h2>
-    <div class="contacts-grid">
-      <div class="contacts__info reveal">
-        <p><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg> вул. Залізнична, 7, Львів, 79039 (заїзд з квазі-кільця)</p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-navigation"/></svg> <a href="https://www.instagram.com/p/DQ6l5WXjGse/" target="_blank" rel="noopener">Відео маршруту до нас</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> <a href="tel:+380636000505">+380 63 600 0505</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg> <a href="https://instagram.com/guild.ofspeed" target="_blank" rel="noopener">@guild.ofspeed</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg> <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener">Telegram</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Пн–Пт: 09:00–18:00, Сб–Нд: вихідний</p>
-      </div>
-      <div class="contacts__map reveal">
-        <iframe src="https://maps.google.com/maps?q=GUILDIA+OF+SPEED+Lviv&t=&z=17&ie=UTF8&iwloc=&output=embed" title="Карта" loading="lazy" allowfullscreen></iframe>
-        <a href="https://maps.app.goo.gl/MFkGtPc2WMFkr57UA" target="_blank" rel="noopener" class="map-link">Відкрити в Google Maps →</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="faq">
-    <p class="section__label reveal">Питання</p>
-    <h2 class="section__title reveal">Часті <span class="outline-text">запитання</span></h2>
-    <div class="faq-list">
-      <details class="reveal">
-        <summary>Чи працюєте з іншими марками, окрім BMW?</summary>
-        <p>Ні, ми спеціалізуємось виключно на BMW. Це дозволяє нам бути експертами саме у цій марці та забезпечувати найвищу якість обслуговування.</p>
-      </details>
-      <details class="reveal">
-        <summary>Скільки часу займає діагностика?</summary>
-        <p>Комп'ютерна діагностика зазвичай займає 30–60 хвилин залежно від складності. Результати обговорюємо одразу з клієнтом.</p>
-      </details>
-      <details class="reveal">
-        <summary>Чи є гарантія на виконані роботи?</summary>
-        <p>Так, ми надаємо гарантію на всі роботи та встановлені запчастини. Термін гарантії залежить від виду робіт.</p>
-      </details>
-      <details class="reveal">
-        <summary>Чи потрібен попередній запис?</summary>
-        <p>Рекомендуємо записуватись заздалегідь за телефоном, щоб ми могли виділити для вас зручний час.</p>
-      </details>
-    </div>
-  </section>
-
   <section class="section" id="why">
     <p class="section__label reveal">Переваги</p>
     <h2 class="section__title reveal">Чому <span class="outline-text">обирають нас</span></h2>
@@ -213,42 +165,79 @@
       </div>
     </div>
   </section>
-
-
   <section class="section" id="video">
-    <p class="section__label reveal">YouTube</p>
+    <p class="section__label reveal">Відео</p>
     <h2 class="section__title reveal">Наші <span class="outline-text">роботи</span></h2>
     <div class="shorts-grid" id="shortsGrid">
       <!-- Loaded from YouTube API -->
     </div>
     <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener" class="video-link reveal">Дивитись більше на YouTube →</a>
   </section>
+  <section class="section" id="faq">
+    <p class="section__label reveal">Питання</p>
+    <h2 class="section__title reveal">Часті <span class="outline-text">запитання</span></h2>
+    <div class="faq-list">
+      <details class="reveal">
+        <summary>Чи працюєте з іншими марками, окрім BMW?</summary>
+        <p>Ні, ми спеціалізуємось виключно на BMW. Це дозволяє нам бути експертами саме у цій марці та забезпечувати найвищу якість обслуговування.</p>
+      </details>
+      <details class="reveal">
+        <summary>Скільки часу займає діагностика?</summary>
+        <p>Комп'ютерна діагностика зазвичай займає 30–60 хвилин залежно від складності. Результати обговорюємо одразу з клієнтом.</p>
+      </details>
+      <details class="reveal">
+        <summary>Чи є гарантія на виконані роботи?</summary>
+        <p>Так, ми надаємо гарантію на всі роботи та встановлені запчастини. Термін гарантії залежить від виду робіт.</p>
+      </details>
+      <details class="reveal">
+        <summary>Чи потрібен попередній запис?</summary>
+        <p>Рекомендуємо записуватись заздалегідь за телефоном, щоб ми могли виділити для вас зручний час.</p>
+      </details>
+    </div>
+  </section>
+  <section class="section" id="contacts">
+    <p class="section__label reveal">Контакти</p>
+    <h2 class="section__title reveal">Як <span class="outline-text">нас знайти</span></h2>
+    <div class="contacts-grid">
+      <div class="contacts__info reveal">
+        <p><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg> вул. Залізнична, 7, Львів, 79039 (заїзд з квазі-кільця)</p>
+        <p><svg class="icon" aria-hidden="true"><use href="#i-navigation"/></svg> <a href="https://www.instagram.com/p/DQ6l5WXjGse/" target="_blank" rel="noopener">Відео маршруту до нас</a></p>
+        <p><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> <a href="tel:+380636000505">+380 63 600 0505</a></p>
+        <p><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg> <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">@guild.ofspeed</a></p>
+        <p><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg> <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener">Telegram</a></p>
+        <p><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Пн–Пт: 09:00–18:00, Сб–Нд: вихідний</p>
+      </div>
+      <div class="contacts__map reveal">
+        <iframe src="https://maps.google.com/maps?q=GUILDIA+OF+SPEED+Lviv&t=&z=17&ie=UTF8&iwloc=&output=embed" title="Карта" loading="lazy" allowfullscreen></iframe>
+        <a href="https://maps.app.goo.gl/MFkGtPc2WMFkr57UA" target="_blank" rel="noopener" class="map-link">Відкрити в Google Maps →</a>
+      </div>
+    </div>
+  </section>
 
+
+  </main>
 
   <!-- CTA BAND -->
   <section class="cta-band">
     <div class="cta-band__inner">
-      <h3 class="cta-band__title">Потрібен ремонт BMW?</h3>
+      <h2 class="cta-band__title">Потрібен ремонт BMW?</h2>
       <p class="cta-band__desc">Зателефонуйте — проконсультуємо та запишемо на зручний час</p>
-      <a href="tel:+380636000505" class="btn btn--dark">+380 63 600 0505</a>
-      <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener" class="btn btn--dark">Telegram</a>
+      <div class="cta-band__buttons">
+        <a href="tel:+380636000505" class="btn btn--dark">+380 63 600 0505</a>
+        <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener" class="btn btn--dark">Telegram</a>
+      </div>
     </div>
   </section>
 
   <footer class="footer">
-    <span>© <span id="year"></span> Guild of Speed</span>
+    <p>© <span id="year"></span> Guild of Speed · вул. Залізнична, 7, Львів</p>
+    <nav class="footer__links" aria-label="Соцмережі">
+      <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.tiktok.com/@guild.ofspeed" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener">Telegram</a>
+    </nav>
   </footer>
-
-  <!-- MODAL -->
-  <div class="modal-overlay" id="modalOverlay"></div>
-  <div class="modal" id="modal">
-    <button class="modal__close" id="modalClose">✕</button>
-    <h3 class="modal__title">Як з нами зв'язатись?</h3>
-    <p class="modal__desc">Напишіть нашому менеджеру в Telegram</p>
-    <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener" class="btn btn--primary modal__btn"><span class="modal__pre">Написати в</span> <strong>Telegram</strong></a>
-    <p class="modal__desc">або зателефонуйте нам</p>
-    <a href="tel:+380636000505" class="btn btn--primary modal__btn">+380 63 600 0505</a>
-  </div>
 
   <!-- FLOATING PHONE CTA -->
   <a href="tel:+380636000505" class="floating-cta" aria-label="Зателефонувати"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a>

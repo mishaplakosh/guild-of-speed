@@ -8,18 +8,16 @@ window.addEventListener('scroll', () => { nav.classList.toggle('nav--scrolled', 
 const burger = document.getElementById('burger');
 const menu = document.getElementById('mobileMenu');
 const overlay = document.getElementById('mobileOverlay');
-function toggleMenu() { menu.classList.toggle('open'); overlay.classList.toggle('open'); burger.classList.toggle('open'); }
-burger.addEventListener('click', toggleMenu);
-overlay.addEventListener('click', toggleMenu);
-menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); overlay.classList.remove('open'); burger.classList.remove('open'); }));
-
-const modal = document.getElementById('modal');
-const modalOv = document.getElementById('modalOverlay');
-function openModal(e) { e.preventDefault(); modal.classList.add('open'); modalOv.classList.add('open'); }
-function closeModal() { modal.classList.remove('open'); modalOv.classList.remove('open'); }
-document.querySelectorAll('[data-modal]').forEach(btn => btn.addEventListener('click', openModal));
-document.getElementById('modalClose').addEventListener('click', closeModal);
-modalOv.addEventListener('click', closeModal);
+function setMenu(open) {
+  menu.classList.toggle('open', open);
+  overlay.classList.toggle('open', open);
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+}
+burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+overlay.addEventListener('click', () => setMenu(false));
+menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
 
 // YouTube API - load latest shorts
 (async function() {
