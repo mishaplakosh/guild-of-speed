@@ -40,7 +40,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
       img.loading = 'lazy';
       const play = document.createElement('span');
       play.className = 'short-play';
-      play.textContent = '▶';
+      play.innerHTML = '<svg class="icon icon--fill" aria-hidden="true"><use href="#i-play"/></svg>';
       a.append(img, play);
       grid.append(a);
     });
