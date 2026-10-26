@@ -14,9 +14,10 @@
 
 /* Everything is sized in rem, so on large screens we scale the root:
    16px up to 1440px wide, then grows ~0.7px per 100px, capped at 32px (≈3840px). */
-html { scroll-behavior: smooth; font-size: clamp(1rem, calc(1rem + (100vw - 90rem) * 0.00714), 2rem); }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; font-size: clamp(1rem, calc(1rem + (100vw - 90rem) * 0.00714), 2rem); }
 
 body {
+  overflow-x: hidden;
   font-family: 'Inter', sans-serif;
   background: var(--midnight);
   color: var(--silver);
@@ -105,10 +106,10 @@ img { display: block; max-width: 100%; }
 /* STATS */
 .stats {
   position: relative; z-index: 1; margin-top: auto;
-  width: 100%; max-width: 75rem; margin-left: auto; margin-right: auto;
+  width: 100%;
   display: grid; grid-template-columns: repeat(4, 1fr);
-  background: var(--accent); box-shadow: 0 0 0 100vmax var(--accent); clip-path: inset(0 -100vmax);
-  padding: 1.5rem;
+  background: var(--accent);
+  padding: 1.5rem max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem));
 }
 .stats__item { text-align: center; }
 .stats__value { display: block; font-size: 1.5rem; font-weight: 800; color: var(--midnight); }
@@ -233,6 +234,9 @@ a.contact__value:hover { color: var(--accent); }
 .contacts__map { display: flex; flex-direction: column; min-height: 18.75rem; }
 .contacts__map iframe { flex: 1; width: 100%; border: none; min-height: 18.75rem; filter: invert(92%) hue-rotate(180deg) saturate(0.7) contrast(0.95); }
 .map-link { display: block; padding: 0.9rem 1.25rem; font-size: 0.9rem; font-weight: 600; }
+
+/* touch screens: don't let the map iframe trap page scrolling */
+@media (hover: none) { .contacts__map iframe { pointer-events: none; } }
 
 /* FOOTER */
 .footer {
