@@ -23,7 +23,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
 (async function() {
   const grid = document.getElementById('shortsGrid');
   try {
-    const res = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUX61Qdp-9MFJl_f3OcC0tKg&part=snippet&maxResults=3&key=AIzaSyCd4mM86xCu90rLKsHwATbzzoCIxVnxC3A');
+    const res = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUX61Qdp-9MFJl_f3OcC0tKg&part=snippet&maxResults=9&key=AIzaSyCd4mM86xCu90rLKsHwATbzzoCIxVnxC3A');
     if (!res.ok) throw new Error(res.status);
     const data = await res.json();
     if (!data.items || !data.items.length) throw new Error('no items');
@@ -44,6 +44,21 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
       a.append(img, play);
       grid.append(a);
     });
+
+    const nav = document.getElementById('shortsNav');
+    const prev = document.getElementById('shortsPrev');
+    const next = document.getElementById('shortsNext');
+    const updateNav = () => {
+      const max = grid.scrollWidth - grid.clientWidth;
+      nav.hidden = max <= 2;
+      prev.disabled = grid.scrollLeft <= 2;
+      next.disabled = grid.scrollLeft >= max - 2;
+    };
+    grid.addEventListener('scroll', updateNav, { passive: true });
+    window.addEventListener('resize', updateNav);
+    prev.addEventListener('click', () => grid.scrollBy({ left: -grid.clientWidth * 0.8, behavior: 'smooth' }));
+    next.addEventListener('click', () => grid.scrollBy({ left: grid.clientWidth * 0.8, behavior: 'smooth' }));
+    updateNav();
   } catch (e) {
     const p = document.createElement('p');
     p.className = 'shorts-error';

@@ -153,15 +153,16 @@ main > .section:nth-child(even)::after {
 
 /* VIDEO / SHORTS */
 .shorts-grid {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 17rem)); gap: 1.5rem; margin-top: 2rem;
+  display: flex; gap: 1.25rem; margin-top: 2rem; padding-bottom: 0.5rem;
+  overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
+.shorts-grid::-webkit-scrollbar { display: none; }
 .short-card {
+  flex: 0 0 min(16rem, 62vw); scroll-snap-align: start;
   position: relative; display: block; border-radius: var(--radius); overflow: hidden;
   aspect-ratio: 9/16; background: var(--charcoal);
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
-  transition: transform 0.3s, box-shadow 0.3s;
 }
-.short-card:hover { transform: translateY(-5px); box-shadow: 0 15px 50px rgba(0,0,0,0.5); }
 .short-card img { width: 100%; height: 100%; object-fit: cover; }
 .short-play {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
@@ -174,7 +175,18 @@ main > .section:nth-child(even)::after {
 .short-play .icon { width: 1.25rem; height: 1.25rem; margin-left: 0.15rem; }
 .short-card:hover .short-play { background: var(--accent); color: var(--midnight); }
 .shorts-error { color: var(--silver-dim); }
-.video-link { display: inline-block; margin-top: 1.5rem; font-weight: 500; }
+.video-actions { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 1.5rem; }
+.video-link { font-weight: 500; }
+.shorts-nav { display: flex; gap: 0.5rem; }
+.shorts-nav[hidden] { display: none; }
+.shorts-nav button {
+  width: 2.75rem; height: 2.75rem; display: grid; place-items: center; cursor: pointer;
+  background: transparent; color: var(--accent); border: 1px solid var(--hairline); transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.shorts-nav button:hover:not(:disabled) { background: var(--accent); color: var(--midnight); border-color: var(--accent); }
+.shorts-nav button:disabled { opacity: 0.35; cursor: default; }
+.shorts-nav .icon { width: 1.25rem; height: 1.25rem; }
+.icon--flip { transform: scaleX(-1); }
 
 /* FAQ */
 .faq-list { max-width: 50rem; margin-top: 2rem; }
@@ -338,6 +350,7 @@ a.contact__value:hover { color: var(--accent); }
   .why-grid { grid-template-columns: 1fr; }
 
   .shorts-grid { gap: 0.75rem; }
+  .shorts-nav { display: none; }
 
   .faq-list summary { font-size: 1rem; }
 

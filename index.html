@@ -183,10 +183,16 @@
   <section class="section" id="video">
     <p class="section__label reveal">Відео</p>
     <h2 class="section__title reveal">Наші <span class="outline-text">роботи</span></h2>
-    <div class="shorts-grid" id="shortsGrid">
+    <div class="shorts-grid" id="shortsGrid" tabindex="0" role="region" aria-label="Відео з YouTube, гортайте вбік">
       <!-- Loaded from YouTube API -->
     </div>
-    <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener" class="video-link link-arrow reveal">Дивитись більше на YouTube <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    <div class="video-actions reveal">
+      <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener" class="video-link link-arrow">Дивитись більше на YouTube <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <div class="shorts-nav" id="shortsNav" hidden>
+        <button type="button" id="shortsPrev" aria-label="Попередні відео"><svg class="icon icon--arrow icon--flip" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <button type="button" id="shortsNext" aria-label="Наступні відео"><svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+      </div>
+    </div>
   </section>
   <section class="section" id="faq">
     <p class="section__label reveal">Питання</p>
