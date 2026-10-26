@@ -23,7 +23,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
 (async function() {
   const grid = document.getElementById('shortsGrid');
   try {
-    const res = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUX61Qdp-9MFJl_f3OcC0tKg&part=snippet&maxResults=3&key=AIzaSyCd4mM86xCu90rLKsHwATbzzoCIxVnxC3A');
+    const res = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUSHX61Qdp-9MFJl_f3OcC0tKg&part=snippet&maxResults=9&key=AIzaSyCd4mM86xCu90rLKsHwATbzzoCIxVnxC3A');
     if (!res.ok) throw new Error(res.status);
     const data = await res.json();
     if (!data.items || !data.items.length) throw new Error('no items');
@@ -34,6 +34,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
       a.target = '_blank';
       a.rel = 'noopener';
       a.className = 'short-card reveal visible';
+      a.dataset.id = id;
+      a.addEventListener('click', e => {
+        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        openVideo(id, a);
+      });
       const img = document.createElement('img');
       img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/oar2.jpg';
       img.alt = item.snippet.title;
@@ -44,6 +50,15 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
       a.append(img, play);
       grid.append(a);
     });
+
+    const more = document.createElement('a');
+    more.href = 'https://www.youtube.com/@guildofspeed/shorts';
+    more.target = '_blank';
+    more.rel = 'noopener';
+    more.className = 'short-card short-card--more';
+    more.innerHTML = '<span class="short-more__ring"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="short-more__title">Більше на YouTube</span><span class="short-more__text">Ще багато робіт на нашому каналі</span>';
+    grid.append(more);
+    initCarousel(grid);
   } catch (e) {
     const p = document.createElement('p');
     p.className = 'shorts-error';
@@ -52,3 +67,100 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
   }
 })();
 document.getElementById('year').textContent = new Date().getFullYear();
+
+function initCarousel(grid) {
+  const counter = document.getElementById('shortsCounter');
+  const cur = document.getElementById('shortsCur');
+  const track = document.getElementById('shortsProgress');
+  const thumb = document.getElementById('shortsThumb');
+  const pad = n => String(n).padStart(2, '0');
+  const cards = [...grid.children].filter(el => !el.classList.contains('short-card--more'));
+  const step = () => cards[0].getBoundingClientRect().width + parseFloat(getComputedStyle(grid).columnGap || 0);
+
+  function update() {
+    const max = grid.scrollWidth - grid.clientWidth;
+    const scrollable = max > 2;
+    counter.hidden = !scrollable;
+    track.hidden = !scrollable;
+    if (!scrollable) return;
+    const atEnd = grid.scrollLeft >= max - 2;
+    const idx = atEnd ? cards.length : Math.min(cards.length, Math.round(grid.scrollLeft / step()) + 1);
+    cur.textContent = pad(idx);
+    grid.classList.toggle('at-end', grid.scrollLeft >= max - 2);
+    thumb.style.width = (grid.clientWidth / grid.scrollWidth * 100) + '%';
+    thumb.style.left = (grid.scrollLeft / grid.scrollWidth * 100) + '%';
+  }
+  grid.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+
+  // drag the videos with the mouse (touch already scrolls natively)
+  let down = false, startX = 0, startLeft = 0, moved = 0;
+  grid.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    down = true; moved = 0; startX = e.clientX; startLeft = grid.scrollLeft;
+  });
+  window.addEventListener('pointermove', e => {
+    if (!down) return;
+    moved = Math.abs(e.clientX - startX);
+    if (moved > 5) grid.classList.add('dragging');
+    if (grid.classList.contains('dragging')) grid.scrollLeft = startLeft - (e.clientX - startX);
+  });
+  window.addEventListener('pointerup', () => {
+    if (!down) return;
+    down = false;
+    grid.classList.remove('dragging');
+  });
+  grid.addEventListener('click', e => { if (moved > 5) { e.preventDefault(); e.stopPropagation(); moved = 0; } }, true);
+
+  // click or drag the progress line
+  let scrubbing = false;
+  const scrub = (e, smooth) => {
+    const r = track.getBoundingClientRect();
+    const f = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+    grid.scrollTo({ left: f * grid.scrollWidth - grid.clientWidth / 2, behavior: smooth ? 'smooth' : 'auto' });
+  };
+  track.addEventListener('pointerdown', e => { scrubbing = true; track.setPointerCapture(e.pointerId); grid.classList.add('dragging'); scrub(e, false); });
+  track.addEventListener('pointermove', e => { if (scrubbing) scrub(e, false); });
+  track.addEventListener('pointerup', () => { scrubbing = false; grid.classList.remove('dragging'); });
+  update();
+}
+
+// pop-up player: embeds YouTube (privacy mode) only after a tap
+const lb = document.getElementById('lightbox');
+const lbFrame = document.getElementById('lbFrame');
+const lbClose = document.getElementById('lbClose');
+const lbYt = document.getElementById('lbYt');
+let lbOpener = null;
+
+function openVideo(id, opener) {
+  lbOpener = opener;
+  const f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+  f.title = 'Відео Guild of Speed';
+  f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.allowFullscreen = true;
+  lbFrame.replaceChildren(f);
+  lbYt.href = 'https://www.youtube.com/shorts/' + encodeURIComponent(id);
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+  lbClose.focus();
+}
+function closeVideo() {
+  if (lb.hidden) return;
+  lbFrame.replaceChildren();
+  lb.hidden = true;
+  document.body.style.overflow = '';
+  if (lbOpener) lbOpener.focus();
+}
+lbClose.addEventListener('click', closeVideo);
+lb.addEventListener('click', e => { if (e.target === lb) closeVideo(); });
+document.addEventListener('keydown', e => {
+  if (lb.hidden) return;
+  if (e.key === 'Escape') closeVideo();
+  if (e.key === 'Tab') {
+    const items = [lbClose, lbYt];
+    const i = items.indexOf(document.activeElement);
+    e.preventDefault();
+    items[(i + (e.shiftKey ? items.length - 1 : 1)) % items.length].focus();
+  }
+});

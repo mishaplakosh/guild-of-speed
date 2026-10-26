@@ -35,6 +35,8 @@
     <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
     <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+    <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   </svg>
   <header class="nav" id="nav">
@@ -98,7 +100,8 @@
     </div>
   </section>
 
-  <section class="section" id="services">
+  <section class="band" id="services">
+    <div class="section">
     <p class="section__label reveal">Що ми робимо</p>
     <h2 class="section__title reveal">Наші <span class="outline-text">послуги</span></h2>
     <div class="services-grid">
@@ -153,8 +156,10 @@
         </ul>
       </article>
     </div>
+    </div>
   </section>
-  <section class="section" id="why">
+  <section class="band band--alt" id="why">
+    <div class="section">
     <p class="section__label reveal">Переваги</p>
     <h2 class="section__title reveal">Чому <span class="outline-text">обирають нас</span></h2>
     <div class="why-grid">
@@ -179,38 +184,56 @@
         <p class="card__text">Називаємо вартість до початку робіт. Без прихованих доплат.</p>
       </div>
     </div>
+    </div>
   </section>
-  <section class="section" id="video">
-    <p class="section__label reveal">Відео</p>
-    <h2 class="section__title reveal">Наші <span class="outline-text">роботи</span></h2>
-    <div class="shorts-grid" id="shortsGrid">
+  <section class="band" id="video">
+    <div class="section">
+    <div class="video-head">
+      <div>
+        <p class="section__label reveal">Відео</p>
+        <h2 class="section__title reveal">Наші <span class="outline-text">роботи</span></h2>
+      </div>
+      <div class="shorts-counter reveal" id="shortsCounter" hidden aria-label="Відео">
+        <span class="shorts-counter__num"><b id="shortsCur">01</b><i>/</i><svg class="icon shorts-counter__inf" aria-label="безліч" role="img"><use href="#i-infinity"/></svg></span>
+      </div>
+    </div>
+    <div class="shorts-grid" id="shortsGrid" tabindex="0" role="region" aria-label="Відео з YouTube, гортайте вбік">
       <!-- Loaded from YouTube API -->
     </div>
-    <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener" class="video-link link-arrow reveal">Дивитись більше на YouTube <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-  </section>
-  <section class="section" id="faq">
-    <p class="section__label reveal">Питання</p>
-    <h2 class="section__title reveal">Часті <span class="outline-text">запитання</span></h2>
-    <div class="faq-list">
-      <details class="reveal">
-        <summary>Чи працюєте з іншими марками, окрім BMW?</summary>
-        <p>Ні, ми спеціалізуємось виключно на BMW. Це дозволяє нам бути експертами саме у цій марці та забезпечувати найвищу якість обслуговування.</p>
-      </details>
-      <details class="reveal">
-        <summary>Скільки часу займає діагностика?</summary>
-        <p>Комп'ютерна діагностика зазвичай займає 30–60 хвилин залежно від складності. Результати обговорюємо одразу з клієнтом.</p>
-      </details>
-      <details class="reveal">
-        <summary>Чи є гарантія на виконані роботи?</summary>
-        <p>Так, ми надаємо гарантію на всі роботи та встановлені запчастини. Термін гарантії залежить від виду робіт.</p>
-      </details>
-      <details class="reveal">
-        <summary>Чи потрібен попередній запис?</summary>
-        <p>Рекомендуємо записуватись заздалегідь за телефоном, щоб ми могли виділити для вас зручний час.</p>
-      </details>
+    <div class="shorts-progress" id="shortsProgress" hidden aria-hidden="true"><div class="shorts-progress__thumb" id="shortsThumb"></div></div>
+    <a href="https://www.youtube.com/@guildofspeed/shorts" target="_blank" rel="noopener" class="video-link link-arrow reveal">Дивитись більше на YouTube <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
   </section>
-  <section class="section" id="contacts">
+  <section class="band band--alt" id="faq">
+    <div class="section">
+    <div class="faq-layout">
+      <div class="faq-intro">
+        <p class="section__label reveal">Питання</p>
+        <h2 class="section__title reveal">Часті <span class="outline-text">запитання</span></h2>
+      </div>
+      <div class="faq-list">
+      <details name="faq" class="reveal">
+        <summary><span class="faq-num">01</span><span class="faq-q">Чи працюєте з іншими марками, окрім BMW?</span></summary>
+        <p>Ні, ми спеціалізуємось виключно на BMW. Це дозволяє нам бути експертами саме у цій марці та забезпечувати найвищу якість обслуговування.</p>
+      </details>
+      <details name="faq" class="reveal">
+        <summary><span class="faq-num">02</span><span class="faq-q">Скільки часу займає діагностика?</span></summary>
+        <p>Комп'ютерна діагностика зазвичай займає 30–60 хвилин залежно від складності. Результати обговорюємо одразу з клієнтом.</p>
+      </details>
+      <details name="faq" class="reveal">
+        <summary><span class="faq-num">03</span><span class="faq-q">Чи є гарантія на виконані роботи?</span></summary>
+        <p>Так, ми надаємо гарантію на всі роботи та встановлені запчастини. Термін гарантії залежить від виду робіт.</p>
+      </details>
+      <details name="faq" class="reveal">
+        <summary><span class="faq-num">04</span><span class="faq-q">Чи потрібен попередній запис?</span></summary>
+        <p>Рекомендуємо записуватись заздалегідь за телефоном, щоб ми могли виділити для вас зручний час.</p>
+      </details>
+      </div>
+    </div>
+    </div>
+  </section>
+  <section class="band" id="contacts">
+    <div class="section">
     <p class="section__label reveal">Контакти</p>
     <h2 class="section__title reveal">Як <span class="outline-text">нас знайти</span></h2>
     <div class="contacts-grid">
@@ -243,6 +266,7 @@
         <a href="https://maps.app.goo.gl/MFkGtPc2WMFkr57UA" target="_blank" rel="noopener" class="map-link link-arrow">Відкрити в Google Maps <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </div>
+    </div>
   </section>
 
 
@@ -273,6 +297,11 @@
   <!-- FLOATING PHONE CTA -->
   <a href="tel:+380636000505" class="floating-cta" aria-label="Зателефонувати"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a>
 
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Відео">
+    <button type="button" class="lightbox__close" id="lbClose" aria-label="Закрити"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div class="lightbox__frame" id="lbFrame"></div>
+    <a class="lightbox__yt link-arrow" id="lbYt" href="https://www.youtube.com/@guildofspeed/shorts" target="_blank" rel="noopener">Відкрити на YouTube <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+  </div>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
