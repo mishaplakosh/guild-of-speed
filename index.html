@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guild of Speed — Спеціалізований сервіс BMW у Львові</title>
   <meta name="description" content="Професійне обслуговування BMW у Львові. Двигуни, підвіска, ТО, detailing.">
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
   <meta property="og:title" content="Guild of Speed — Спеціалізований сервіс BMW у Львові">
   <meta property="og:description" content="Професійне обслуговування BMW. Двигуни, підвіска, ТО, detailing. вул. Залізнична, 7, Львів.">
-  <meta property="og:image" content="https://guildofspeed.com.ua/logo.png">
+  <meta property="og:image" content="https://guildofspeed.com.ua/assets/img/logo.png">
   <meta property="og:url" content="https://guildofspeed.com.ua">
   <meta property="og:type" content="website">
-  <link rel="preload" href="hero-bg.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/img/hero-bg.webp" as="image" type="image/webp">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -29,7 +29,7 @@
   <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="#" class="nav__brand">
-        <img src="logo.webp" alt="Guild of Speed" class="nav__logo" width="52" height="52">
+        <img src="assets/img/logo.webp" alt="Guild of Speed" class="nav__logo" width="52" height="52">
         <span class="nav__name">GUILD <span class="nav__of">OF</span> SPEED</span>
       </a>
       <nav class="nav__links">
@@ -253,63 +253,6 @@
   <!-- FLOATING PHONE CTA -->
   <a href="tel:+380636000505" class="floating-cta" aria-label="Зателефонувати"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a>
 
-  <script>
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => { nav.classList.toggle('nav--scrolled', window.scrollY > 50); }, { passive: true });
-
-    const burger = document.getElementById('burger');
-    const menu = document.getElementById('mobileMenu');
-    const overlay = document.getElementById('mobileOverlay');
-    function toggleMenu() { menu.classList.toggle('open'); overlay.classList.toggle('open'); burger.classList.toggle('open'); }
-    burger.addEventListener('click', toggleMenu);
-    overlay.addEventListener('click', toggleMenu);
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); overlay.classList.remove('open'); burger.classList.remove('open'); }));
-
-    const modal = document.getElementById('modal');
-    const modalOv = document.getElementById('modalOverlay');
-    function openModal(e) { e.preventDefault(); modal.classList.add('open'); modalOv.classList.add('open'); }
-    function closeModal() { modal.classList.remove('open'); modalOv.classList.remove('open'); }
-    document.querySelectorAll('[data-modal]').forEach(btn => btn.addEventListener('click', openModal));
-    document.getElementById('modalClose').addEventListener('click', closeModal);
-    modalOv.addEventListener('click', closeModal);
-
-    // YouTube API - load latest shorts
-    (async function() {
-      const grid = document.getElementById('shortsGrid');
-      try {
-        const res = await fetch('https://www.googleapis.com/youtube/v3/playlistItems?playlistId=UUX61Qdp-9MFJl_f3OcC0tKg&part=snippet&maxResults=3&key=AIzaSyCd4mM86xCu90rLKsHwATbzzoCIxVnxC3A');
-        if (!res.ok) throw new Error(res.status);
-        const data = await res.json();
-        if (!data.items || !data.items.length) throw new Error('no items');
-        data.items.forEach(item => {
-          const id = item.snippet.resourceId.videoId;
-          const a = document.createElement('a');
-          a.href = 'https://www.youtube.com/shorts/' + encodeURIComponent(id);
-          a.target = '_blank';
-          a.rel = 'noopener';
-          a.className = 'short-card reveal visible';
-          const img = document.createElement('img');
-          img.src = 'https://i.ytimg.com/vi/' + encodeURIComponent(id) + '/oar2.jpg';
-          img.alt = item.snippet.title;
-          img.loading = 'lazy';
-          const play = document.createElement('span');
-          play.className = 'short-play';
-          play.textContent = '▶';
-          a.append(img, play);
-          grid.append(a);
-        });
-      } catch (e) {
-        const p = document.createElement('p');
-        p.className = 'shorts-error';
-        p.textContent = 'Не вдалось завантажити відео';
-        grid.append(p);
-      }
-    })();
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script src="assets/js/main.js" defer></script>
 </body>
 </html>
