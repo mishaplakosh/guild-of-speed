@@ -13,7 +13,7 @@
   <meta property="og:url" content="https://guildofspeed.com.ua">
   <meta property="og:type" content="website">
   <link rel="preload" href="assets/img/hero-bg.webp" as="image" type="image/webp">
-  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -24,6 +24,11 @@
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
     <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+    <symbol id="i-spring" viewBox="0 0 24 24"><path d="M12 2v3"/><path d="m7 7 10 2.5L7 12l10 2.5L7 17"/><path d="M12 19v3"/></symbol>
+    <symbol id="i-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4M22 5h-4"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   </svg>
   <header class="nav" id="nav">
@@ -59,7 +64,7 @@
   <main>
   <section class="hero" id="hero">
     <div class="hero__content">
-      <h1 class="hero__title">Guild of Speed</h1>
+      <h1 class="hero__tagline">BMW сервіс<br><span class="hero__city">у Львові</span></h1>
       <p class="hero__desc">Досвідчені майстри, якісні запчастини та професійний підхід для вашого BMW.</p>
       <p class="hero__desc"><span class="hero__address">вул. Залізнична, 7, Львів, 79039 (заїзд з квазі-кільця)</span></p>
       <div class="hero__buttons">
@@ -91,53 +96,57 @@
     <p class="section__label reveal">Що ми робимо</p>
     <h2 class="section__title reveal">Наші <span class="outline-text">послуги</span></h2>
     <div class="services-grid">
-      <article class="card card-engine reveal">
-        <div class="card__overlay"></div>
-        <div class="card__body">
-          <h3 class="card__title">Двигуни</h3>
-          <ul class="card__list">
-            <li>Ремонт та обслуговування двигуна</li>
-            <li>Комп'ютерна діагностика</li>
-            <li>Підбір та доставка запчастин</li>
-          </ul>
-        </div>
+      <article class="card reveal">
+        <svg class="icon card__icon" aria-hidden="true"><use href="#i-gauge"/></svg>
+        <h3 class="card__title">Двигуни</h3>
+        <p class="card__tag">Серце BMW — без зайвих ризиків</p>
+        <ul class="card__list">
+          <li>Заміна ременя/ланцюга ГРМ</li>
+          <li>Прокладки, сальники, підтікання</li>
+          <li>Діагностика двигуна</li>
+        </ul>
       </article>
-      <article class="card card-suspension reveal">
-        <div class="card__overlay"></div>
-        <div class="card__body">
-          <h3 class="card__title">Підвіска</h3>
-          <ul class="card__list">
-            <li>Ремонт та заміна деталей ходової</li>
-            <li>Діагностика підвіски</li>
-            <li>Підбір та доставка запчастин</li>
-          </ul>
-        </div>
+      <article class="card reveal">
+        <svg class="icon card__icon" aria-hidden="true"><use href="#i-spring"/></svg>
+        <h3 class="card__title">Підвіска</h3>
+        <p class="card__tag">Стукіт чи вібрація? Підвіска любить увагу</p>
+        <ul class="card__list">
+          <li>Амортизатори, пружини, сайлентблоки</li>
+          <li>Кульові опори, важелі, стійки</li>
+          <li>Розвал-сходження</li>
+        </ul>
       </article>
-      <article class="card card-fluids reveal">
-        <div class="card__overlay"></div>
-        <div class="card__body">
-          <h3 class="card__title">Технічні рідини та фільтри</h3>
-          <ul class="card__list">
-            <li>Заміна мастил</li>
-            <li>Гальмівна та охолоджуюча рідини</li>
-            <li>Заміна фільтрів</li>
-          </ul>
-        </div>
+      <article class="card reveal">
+        <svg class="icon card__icon" aria-hidden="true"><use href="#i-droplets"/></svg>
+        <h3 class="card__title">Рідини й фільтри</h3>
+        <p class="card__tag">Правильні рідини — роки життя двигуна</p>
+        <ul class="card__list">
+          <li>Мастила двигуна й трансмісії</li>
+          <li>Гальмівна та охолоджуюча рідини</li>
+          <li>Усі фільтри</li>
+        </ul>
       </article>
-      <article class="card card-detailing reveal">
-        <div class="card__overlay"></div>
-        <div class="card__body">
-          <h3 class="card__title">Детейлінг</h3>
-          <ul class="card__list">
-            <li>Хімчистка салону</li>
-            <li>Полірування авто</li>
-            <li>Нанесення кераміки</li>
-            <li>Глибока мийка авто</li>
-          </ul>
-        </div>
+      <article class="card reveal">
+        <svg class="icon card__icon" aria-hidden="true"><use href="#i-cpu"/></svg>
+        <h3 class="card__title">Електроніка</h3>
+        <p class="card__tag">Знайдемо причину, а не просто скинемо помилку</p>
+        <ul class="card__list">
+          <li>Діагностика всіх систем</li>
+          <li>Датчики та блоки управління</li>
+          <li>Помилки й «глюки» панелі приладів</li>
+        </ul>
+      </article>
+      <article class="card reveal">
+        <svg class="icon card__icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
+        <h3 class="card__title">Детейлінг</h3>
+        <p class="card__tag">Чистий і блискучий BMW</p>
+        <ul class="card__list">
+          <li>Хімчистка салону</li>
+          <li>Полірування та кераміка</li>
+          <li>Глибока мийка</li>
+        </ul>
       </article>
     </div>
-    <p class="section__note reveal">Для додаткової інформації зв'яжіться з менеджером</p>
   </section>
   <section class="section" id="why">
     <p class="section__label reveal">Переваги</p>
@@ -200,12 +209,28 @@
     <h2 class="section__title reveal">Як <span class="outline-text">нас знайти</span></h2>
     <div class="contacts-grid">
       <div class="contacts__info reveal">
-        <p><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg> вул. Залізнична, 7, Львів, 79039 (заїзд з квазі-кільця)</p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-navigation"/></svg> <a href="https://www.instagram.com/p/DQ6l5WXjGse/" target="_blank" rel="noopener">Відео маршруту до нас</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> <a href="tel:+380636000505">+380 63 600 0505</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg> <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">@guild.ofspeed</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg> <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener">Telegram</a></p>
-        <p><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Пн–Пт: 09:00–18:00, Сб–Нд: вихідний</p>
+        <ul class="contact-list">
+          <li>
+            <span class="contact__icon"><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></span>
+            <div><span class="contact__label">Адреса</span><span class="contact__value">вул. Залізнична, 7, Львів, 79039</span><span class="contact__hint">заїзд з квазі-кільця · <a href="https://www.instagram.com/p/DQ6l5WXjGse/" target="_blank" rel="noopener">відео маршруту →</a></span></div>
+          </li>
+          <li>
+            <span class="contact__icon"><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></span>
+            <div><span class="contact__label">Телефон</span><a class="contact__value" href="tel:+380636000505">+380 63 600 0505</a></div>
+          </li>
+          <li>
+            <span class="contact__icon"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg></span>
+            <div><span class="contact__label">Графік роботи</span><span class="contact__value">Пн–Пт 10:00–19:00</span><span class="contact__hint">Сб 10:00–15:00 · Нд вихідний</span></div>
+          </li>
+          <li>
+            <span class="contact__icon"><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg></span>
+            <div><span class="contact__label">Telegram</span><a class="contact__value" href="https://t.me/Guildofspeed" target="_blank" rel="noopener">@Guildofspeed</a></div>
+          </li>
+          <li>
+            <span class="contact__icon"><svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg></span>
+            <div><span class="contact__label">Instagram</span><a class="contact__value" href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">@guild.ofspeed</a></div>
+          </li>
+        </ul>
       </div>
       <div class="contacts__map reveal">
         <iframe src="https://maps.google.com/maps?q=GUILDIA+OF+SPEED+Lviv&t=&z=17&ie=UTF8&iwloc=&output=embed" title="Карта" loading="lazy" allowfullscreen></iframe>
