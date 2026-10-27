@@ -168,18 +168,91 @@ if (lb) {
   });
 }
 
-// ---- homepage: sliding hero words and counters ----
+// ---- homepage: the E46 drives across, its headlights light up the words ----
 (function () {
-  const runs = [...document.querySelectorAll('.run')];
-  function onScroll() {
-    runs.forEach(el => {
-      const dir = +el.dataset.dir;
-      el.style.transform = 'translateX(' + (dir * scrollY * 0.35 + (dir > 0 ? -innerWidth * 0.5 : 0)) + 'px)';
+  const hero = document.getElementById('hero');
+  const stage = hero && hero.querySelector('.hero3__stage');
+  if (stage) heroCar(hero, stage);
+})();
+
+function heroCar(hero, stage) {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const car = stage.querySelector('.hero3__car'), lamp = stage.querySelector('.hero3__lamp'), tail = stage.querySelector('.hero3__tail');
+  const beam = stage.querySelector('.hero3__beam'), wheels = [...stage.querySelectorAll('.hero3__wh')];
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+  const smooth = (a, b, v) => { v = clamp((v - a) / (b - a)); return v * v * (3 - 2 * v); };
+
+  // split the words into letters so each one can light up on its own
+  const letters = [];
+  stage.querySelectorAll('.hero3__t > *').forEach(line => {
+    const text = line.textContent; line.textContent = '';
+    [...text].forEach(c => { const sp = document.createElement('span'); sp.className = 'hero3__ch'; sp.textContent = c; sp.dataset.b = line.tagName === 'B' ? '1' : ''; line.append(sp); letters.push(sp); });
+  });
+  hero.classList.add('hero3--fx');
+  let pos = [], lastLeft = 0;
+  function measure() {
+    const sr = stage.getBoundingClientRect();
+    pos = letters.map(c => { const r = c.getBoundingClientRect(); return (r.left + r.right) / 2 - sr.left; });
+    const first = letters.find(c => c.dataset.b);   // where the last word (ЛЬВІВ) starts
+    lastLeft = first ? first.getBoundingClientRect().left - sr.left : 0;
+  }
+  addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+
+  let sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
+  function frame(now) {
+    requestAnimationFrame(frame);
+    const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
+    const r = hero.getBoundingClientRect();
+    if (r.bottom < -50 || r.top > innerHeight + 50) return;
+    const p = clamp(-r.top / (r.height - innerHeight));
+    sm = reduce ? p : sm + (p - sm) * Math.min(1, dt * 7);
+    const W = stage.clientWidth, cw = car.offsetWidth, ch = car.offsetHeight, sr = stage.getBoundingClientRect();
+    // it stops with its nose just before the last word (on phones: parked under the words)
+    const x0 = W * 0.04, gap = W * 0.02;
+    let xStop = lastLeft - gap - cw;
+    if (xStop < x0 + W * 0.1) xStop = W - cw - 20;
+    const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
+    if (lastX === null) lastX = x;
+    const dx = x - lastX; lastX = x;
+
+    // headlights stay on while it moves, and for a moment after
+    if (Math.abs(dx) > 0.3) { if (hold <= 0) flick = 0; hold = 1.4; } else hold -= dt;
+    flick += dt;
+    lampOn += ((hold > 0 ? 1 : 0) - lampOn) * Math.min(1, dt * 14);
+    const fl = (flick < 0.4 && !reduce) ? (Math.floor(flick * 28) % 2 === 0 ? 1 : 0.12) : 1;
+    rev += ((dx < -0.4 ? 1 : 0) - rev) * Math.min(1, dt * 10);
+    tail.style.opacity = rev.toFixed(3);
+
+    rot += dx / (110 * cw / 1939) * 57.2958;
+    wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
+    tilt += (-Math.min(1.6, Math.abs(dx) * 0.1) - tilt) * 0.2;
+    const mv = Math.min(1, Math.abs(dx) / 6), ty = reduce ? 0 : Math.sin(now / 45) * 0.9 * mv + Math.sin(now / 130) * 0.35;
+    car.style.transform = 'translate3d(' + x + 'px,' + ty + 'px,0) rotate(' + (reduce ? 0 : tilt) + 'deg)';
+
+    // the beam starts at the headlight (so it shakes and tilts with the car)
+    const mr = lamp.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
+    const L = W * 0.62, hT = ch * (0.5 + 1.7 * smooth(0.02, 0.26, sm));
+    const op = (lampOn * fl).toFixed(3);
+    lamp.style.opacity = op; beam.style.opacity = op;
+    beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
+    beam.style.clipPath = 'polygon(' + nx + 'px ' + (ny - ch * 0.012) + 'px,' + (nx + L) + 'px ' + (ny - hT) + 'px,' + (nx + L) + 'px ' + (ny + hT * 0.45) + 'px,' + nx + 'px ' + (ny + ch * 0.012) + 'px)';
+
+    // how far the light has reached: kept once it got there, rolls back when you scroll up
+    const tip = nx + W * (0.04 + 0.5 * smooth(0, 0.3, sm));
+    if (hold > 0 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
+    if (sm < 0.005) reach = -1e5;
+    letters.forEach((c, i) => {
+      const base = c.dataset.b ? 0.3 : 0.24, b = smooth(0, 170, reach - pos[i]);
+      c.style.opacity = (base + b * (1 - base)).toFixed(3);
+      c.style.textShadow = b > 0.02 ? '0 0 ' + (b * 26).toFixed(1) + 'px rgba(255,190,90,' + (b * 0.6).toFixed(2) + ')' : 'none';
     });
   }
-  addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  requestAnimationFrame(frame);
+}
 
+(function () {
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     io.unobserve(e.target);
@@ -194,19 +267,15 @@ if (lb) {
 
 })();
 
-// ---- bottom of page: reveal on arrival, right-side rail, call button ----
+// ---- bottom of page: reveal on arrival, call button ----
 (function () {
   const io2 = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); io2.unobserve(e.target); }
   }), { threshold: 0.2 });
   document.querySelectorAll('.cta2, .foot2').forEach(el => io2.observe(el));
 
-  const fill = document.getElementById('railfill'), dot = document.getElementById('raildot');
   const fab = document.querySelector('.floating-cta'), foot = document.getElementById('foot');
   function onScroll() {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    const p = max > 0 ? scrollY / max : 0;
-    if (fill) { fill.style.height = (p * 100) + '%'; dot.style.top = (p * 100) + '%'; }
     if (fab) {
       const nearFoot = foot && foot.getBoundingClientRect().top < innerHeight * 0.6;
       fab.classList.toggle('on', scrollY > innerHeight * 0.5 && !nearFoot);

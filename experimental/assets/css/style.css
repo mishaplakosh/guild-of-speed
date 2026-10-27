@@ -430,12 +430,26 @@ a.contact__value:hover { color: var(--accent); }
 .rpm { position: fixed; left: 0; top: 0; width: 100%; height: 3px; z-index: 120; background: rgba(255,255,255,0.05); }
 .rpm i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #b0721a, var(--accent), var(--accent-light)); }
 
-.hero2 { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 6.5rem 0 3rem; overflow: hidden; }
-.hero2__runs { margin-bottom: 2rem; font-size: inherit; }
-.run { display: block; white-space: nowrap; font: 700 clamp(4.5rem, 12.5vw, 12rem)/0.9 'Golos Text', sans-serif; text-transform: uppercase; will-change: transform; }
-.run--a { color: var(--white); }
-.run--b { color: transparent; -webkit-text-stroke: 2px var(--accent); }
-.run--c { color: var(--accent); }
+/* first screen: the E46 drives across; its headlights light up the words */
+.hero3 { position: relative; height: 180vh; height: 180svh; }
+.hero3__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; --ty: 44%; --base: 67%; --cw: min(44.2vw, 646px); }
+.hero3__t { position: absolute; z-index: 1; right: 1.5rem; top: var(--ty); transform: translateY(-50%); text-align: right; font: 700 clamp(3rem, 8.4vw, 8.8rem)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
+.hero3__t > span, .hero3__t > b { display: block; font-weight: 700; }
+.hero3__t > b { color: var(--accent); }
+.hero3__ch { display: inline-block; }
+.hero3--fx .hero3__ch { opacity: 0.24; }
+.hero3--fx .hero3__t > b .hero3__ch { opacity: 0.3; }
+.hero3__road { position: absolute; z-index: 1; left: 0; right: 0; top: var(--base); height: 1px; background: linear-gradient(90deg, transparent, rgba(245,246,248,0.28) 12%, rgba(245,246,248,0.28) 88%, transparent); }
+.hero3__car { position: absolute; z-index: 4; left: 0; width: var(--cw); bottom: calc(100% - var(--base) - var(--cw) * 0.004); transform-origin: 50% 100%; will-change: transform; pointer-events: none; }
+.hero3__body { display: block; width: 100%; height: auto; }
+.hero3__wh { position: absolute; width: 11.35%; height: auto; will-change: transform; }
+.hero3__wh[data-w="f"] { left: 75.4%; top: 56%; }
+.hero3__wh[data-w="r"] { left: 15.6%; top: 56%; }
+.hero3__lamp { position: absolute; left: 92.9%; top: 60.2%; width: calc(var(--cw) * 0.011); height: calc(var(--cw) * 0.021); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; box-shadow: 0 0 calc(var(--cw) * 0.02) calc(var(--cw) * 0.006) rgba(255,205,120,0.85); opacity: 0; }
+.hero3__tail { position: absolute; left: 1.1%; top: 50.8%; width: 4%; height: 7.1%; border-radius: 38% 22% 22% 38%; background: rgba(255,45,40,0.9); box-shadow: 0 0 calc(var(--cw) * 0.018) calc(var(--cw) * 0.004) rgba(255,40,40,0.8); mix-blend-mode: screen; opacity: 0; }
+.hero3__beam { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 56% 50% at var(--nx, 0) var(--ny, 0), rgba(255,205,120,0.4), transparent 72%); }
+.hero3__in { position: absolute; z-index: 6; left: 0; right: 0; bottom: 6.2rem; margin: 0 auto; }
+.hero3__stage .marq { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; }
 .hero2__in { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
 .hero2__title { font-size: clamp(1.5rem, 3.2vw, 2.4rem); line-height: 1.1; color: var(--white); margin-bottom: 0.75rem; }
 .hero2__text { max-width: 30rem; }
@@ -454,7 +468,7 @@ a.contact__value:hover { color: var(--accent); }
 .row { display: grid; grid-template-columns: 2.5rem 1fr auto; align-items: center; gap: 0.75rem; padding: 1.25rem 0; border-top: 1px solid var(--hairline); transition: padding 0.35s cubic-bezier(.2,.8,.2,1); }
 .row:last-child { border-bottom: 1px solid var(--hairline); }
 .row__n { font: 700 0.85rem 'Golos Text', sans-serif; color: var(--accent); letter-spacing: 0.1em; }
-.row h3 { font: 700 clamp(1.9rem, 6.5vw, 5.5rem)/1 'Golos Text', sans-serif; text-transform: uppercase; color: var(--white); transition: color 0.25s; }
+.row h3 { font: 700 clamp(1.9rem, 4.6vw, 3.8rem)/1 'Golos Text', sans-serif; text-transform: uppercase; color: var(--white); transition: color 0.25s; }
 .row__sub { display: block; margin-top: 0.35rem; font-size: 0.9rem; color: var(--silver-dim); }
 .row__go { width: 3rem; height: 3rem; border: 1.5px solid var(--accent); border-radius: 50%; display: grid; place-items: center; color: var(--accent); transition: background 0.25s, color 0.25s, transform 0.35s; }
 .row__go .icon { width: 1.3rem; height: 1.3rem; }
@@ -488,7 +502,7 @@ a.contact__value:hover { color: var(--accent); }
 .cat__in { max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
 .cat__back { margin-bottom: 2rem; font-weight: 500; color: var(--silver); }
 .icon--flip { transform: scaleX(-1); }
-.cat__title { font: 700 clamp(3.5rem, 15vw, 13rem)/0.9 'Golos Text', sans-serif; text-transform: uppercase; color: var(--white); margin: 0.5rem 0 1rem; letter-spacing: -0.02em; }
+.cat__title { font: 700 clamp(3.5rem, 10vw, 9rem)/0.9 'Golos Text', sans-serif; text-transform: uppercase; color: var(--white); margin: 0.5rem 0 1rem; letter-spacing: -0.02em; }
 .cat__lead { font-size: clamp(1.1rem, 2.4vw, 1.5rem); color: var(--silver); max-width: 34rem; margin-bottom: 1.75rem; }
 .cat__split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start; margin-top: 2rem; }
 .works { list-style: none; border-top: 1px solid var(--hairline); }
@@ -503,7 +517,7 @@ a.contact__value:hover { color: var(--accent); }
 @media (max-width: 800px) { .cat { padding-top: 6.5rem; } .cat__split, .steps { grid-template-columns: 1fr; } }
 
 /* ================= v3: fewer words, one accent per section ================= */
-.band .section__title { position: relative; padding-top: 1.4rem; font-size: clamp(2.2rem, 6vw, 4.5rem); line-height: 1; margin-bottom: 0.5rem; }
+.band .section__title { position: relative; padding-top: 1.4rem; font-size: clamp(2.2rem, 4.2vw, 3.4rem); line-height: 1; margin-bottom: 0.5rem; }
 .band .section__title::before { content: ''; position: absolute; top: 0; left: 0; width: 3rem; height: 3px; background: var(--accent); }
 .row { padding: 1.5rem 0; }
 .tilt { min-height: 0; }
@@ -566,11 +580,7 @@ a.contact__value:hover { color: var(--accent); }
 @media (hover: hover) { .foot2__up:hover .icon { transform: rotate(-90deg) translateX(0.25rem); } }
 @media (max-width: 800px) { .foot2__top { grid-template-columns: 1fr 1fr; gap: 2rem; } .foot2__brand { grid-column: 1 / -1; } .foot2 { padding-top: 3rem; } }
 
-/* right rail + call button that slides in */
-.rail { position: fixed; right: 0.9rem; top: 50%; width: 3px; height: 34vh; transform: translateY(-50%); background: rgba(255,255,255,0.08); z-index: 90; }
-.rail i { position: absolute; left: 0; top: 0; width: 100%; height: 0; background: var(--accent); }
-.rail b { position: absolute; left: 50%; top: 0; width: 0.7rem; height: 0.7rem; margin: -0.35rem 0 0 -0.35rem; background: var(--accent); border-radius: 50%; box-shadow: 0 0 0 4px rgba(242,154,31,0.2); }
-@media (max-width: 1024px) { .rail { display: none; } }
+/* call button that slides in */
 .floating-cta { transform: translateY(6rem) scale(0.8); opacity: 0; transition: transform 0.5s cubic-bezier(.2,.8,.2,1), opacity 0.4s, background 0.3s; }
 .floating-cta.on { transform: none; opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .foot2 a { opacity: 1; transform: none; } .foot2__word { background-size: 100% 100%; } }
@@ -578,3 +588,14 @@ a.contact__value:hover { color: var(--accent); }
 .cta2__map { height: clamp(15rem, 38vh, 26rem); border-block: 1px solid var(--hairline); }
 .cta2__map iframe { display: block; width: 100%; height: 100%; border: 0; filter: invert(92%) hue-rotate(180deg) saturate(0.7) contrast(0.95); }
 @media (hover: none) { .cta2__map iframe { pointer-events: none; } }
+
+/* phones: smaller car, words higher, one row of buttons */
+@media (max-width: 700px) {
+  .hero3__stage { --ty: 44%; --base: 70%; --cw: 71.4vw; }
+  .hero3__t { font-size: 17vw; }
+  .hero3__in { bottom: 5rem; }
+  .hero3__in .hero2__addr { display: none; }
+  .hero3__in .hero2__buttons { flex-wrap: nowrap; }
+  .hero3__in .btn { flex: 1; min-width: 0; padding-inline: 0.75rem; font-size: 0.78rem; min-height: 2.9rem; }
+}
+@media (min-width: 701px) and (max-height: 780px) { .hero3__stage { --base: 66%; } .hero3__in { bottom: 5.4rem; } .hero3__in .hero2__addr { margin: 0 0 0.7rem; } }
