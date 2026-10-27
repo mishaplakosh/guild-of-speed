@@ -7,3 +7,8 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
+
+# Hidden preview of the new design: keep out of search results
+/experimental/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
