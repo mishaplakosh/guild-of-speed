@@ -189,8 +189,13 @@ function heroCar(hero, stage) {
     [...text].forEach(c => { const sp = document.createElement('span'); sp.className = 'hero3__ch'; sp.textContent = c; sp.dataset.b = line.tagName === 'B' ? '1' : ''; line.append(sp); letters.push(sp); });
   });
   hero.classList.add('hero3--fx');
-  let pos = [];
-  function measure() { const sr = stage.getBoundingClientRect(); pos = letters.map(c => { const r = c.getBoundingClientRect(); return (r.left + r.right) / 2 - sr.left; }); }
+  let pos = [], lastLeft = 0;
+  function measure() {
+    const sr = stage.getBoundingClientRect();
+    pos = letters.map(c => { const r = c.getBoundingClientRect(); return (r.left + r.right) / 2 - sr.left; });
+    const first = letters.find(c => c.dataset.b);   // where the last word (ЛЬВІВ) starts
+    lastLeft = first ? first.getBoundingClientRect().left - sr.left : 0;
+  }
   addEventListener('resize', measure);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
   measure();
@@ -204,7 +209,11 @@ function heroCar(hero, stage) {
     const p = clamp(-r.top / (r.height - innerHeight));
     sm = reduce ? p : sm + (p - sm) * Math.min(1, dt * 7);
     const W = stage.clientWidth, cw = car.offsetWidth, ch = car.offsetHeight, sr = stage.getBoundingClientRect();
-    const x0 = W * 0.04, x1 = W + 30, x = x0 + (x1 - x0) * Math.pow(sm, 1.8);
+    // it stops with its nose just before the last word (on phones: parked under the words)
+    const x0 = W * 0.04, gap = W * 0.02;
+    let xStop = lastLeft - gap - cw;
+    if (xStop < x0 + W * 0.1) xStop = W - cw - 20;
+    const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
     if (lastX === null) lastX = x;
     const dx = x - lastX; lastX = x;
 

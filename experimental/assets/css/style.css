@@ -431,8 +431,8 @@ a.contact__value:hover { color: var(--accent); }
 .rpm i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #b0721a, var(--accent), var(--accent-light)); }
 
 /* first screen: the E46 drives across; its headlights light up the words */
-.hero3 { position: relative; height: 200vh; height: 200svh; }
-.hero3__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; --ty: 44%; --base: 67%; --cw: min(52vw, 760px); }
+.hero3 { position: relative; height: 180vh; height: 180svh; }
+.hero3__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; --ty: 44%; --base: 67%; --cw: min(44.2vw, 646px); }
 .hero3__t { position: absolute; z-index: 1; right: 1.5rem; top: var(--ty); transform: translateY(-50%); text-align: right; font: 700 clamp(3rem, 8.4vw, 8.8rem)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
 .hero3__t > span, .hero3__t > b { display: block; font-weight: 700; }
 .hero3__t > b { color: var(--accent); }
@@ -591,7 +591,7 @@ a.contact__value:hover { color: var(--accent); }
 
 /* phones: smaller car, words higher, one row of buttons */
 @media (max-width: 700px) {
-  .hero3__stage { --ty: 44%; --base: 70%; --cw: 84vw; }
+  .hero3__stage { --ty: 44%; --base: 70%; --cw: 71.4vw; }
   .hero3__t { font-size: 17vw; }
   .hero3__in { bottom: 5rem; }
   .hero3__in .hero2__addr { display: none; }
