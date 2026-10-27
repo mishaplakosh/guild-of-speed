@@ -444,8 +444,7 @@ a.contact__value:hover { color: var(--accent); }
 
 /* amber ticker */
 .marq { background: var(--accent); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
-.marq__t { display: inline-flex; animation: marq 28s linear infinite; }
-.marq:hover .marq__t { animation-play-state: paused; }
+.marq__t { display: inline-flex; animation: marq 50s linear infinite; }
 .marq span { font: 700 clamp(1.4rem, 3.2vw, 2.4rem)/1 'Golos Text', sans-serif; text-transform: uppercase; padding: 1rem 0; }
 .marq span::after { content: ''; display: inline-block; width: 0.6em; height: 0.6em; margin: 0 1.2em; border: 2px solid var(--midnight); border-radius: 50%; vertical-align: 0.05em; }
 @keyframes marq { to { transform: translateX(-50%); } }
