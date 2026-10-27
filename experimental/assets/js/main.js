@@ -241,7 +241,7 @@ function heroCar(hero, stage) {
     const mr = lamp.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
     const L = W * 0.62, hT = ch * (0.5 + (phone.matches ? 4.2 : 1.7) * smooth(0.02, 0.26, phone.matches ? 0.26 : sm));   // phone: the words are high above the car, so the beam fans out steeper
     const op = (lampOn * fl).toFixed(3);
-    lamp.style.opacity = op; beam.style.opacity = op;
+    lamp.style.setProperty('--g', op); beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
     beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
     beam.style.clipPath = 'polygon(' + nx + 'px ' + (ny - ch * 0.012) + 'px,' + (nx + L) + 'px ' + (ny - hT) + 'px,' + (nx + L) + 'px ' + (ny + hT * 0.45) + 'px,' + nx + 'px ' + (ny + ch * 0.012) + 'px)';
 
