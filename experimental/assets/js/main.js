@@ -189,10 +189,11 @@ function heroCar(hero, stage) {
     [...text].forEach(c => { const sp = document.createElement('span'); sp.className = 'hero3__ch'; sp.textContent = c; sp.dataset.b = line.tagName === 'B' ? '1' : ''; line.append(sp); letters.push(sp); });
   });
   hero.classList.add('hero3--fx');
-  let pos = [], lastLeft = 0;
+  let pos = [], posY = [], lastLeft = 0;
   function measure() {
     const sr = stage.getBoundingClientRect();
     pos = letters.map(c => { const r = c.getBoundingClientRect(); return (r.left + r.right) / 2 - sr.left; });
+    posY = letters.map(c => { const r = c.getBoundingClientRect(); return (r.top + r.bottom) / 2 - sr.top; });
     const first = letters.find(c => c.dataset.b);   // where the last word (ЛЬВІВ) starts
     lastLeft = first ? first.getBoundingClientRect().left - sr.left : 0;
   }
@@ -202,7 +203,7 @@ function heroCar(hero, stage) {
 
   // phones: the drive plays by itself on load (no scroll-jacking); desktop: follows the scroll
   const phone = matchMedia('(max-width: 700px)'), tStart = performance.now();
-  let sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
+  let glow = 0, sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
   if (phone.matches && reduce) reach = 1e5;
   function frame(now) {
     requestAnimationFrame(frame);
@@ -225,6 +226,7 @@ function heroCar(hero, stage) {
     if (Math.abs(dx) > 0.3) { if (hold <= 0) flick = 0; hold = 1.4; } else hold -= dt;
     flick += dt;
     lampOn += ((hold > 0 ? 1 : 0) - lampOn) * Math.min(1, dt * 14);
+    glow += ((hold > 0 ? 1 : 0) - glow) * Math.min(1, dt * 3);   // the words fade out a bit slower than the beam
     const fl = (flick < 0.4 && !reduce) ? (Math.floor(flick * 28) % 2 === 0 ? 1 : 0.12) : 1;
     rev += ((Math.abs(dx) < 0.3 ? 1 : 0) - rev) * Math.min(1, dt * 6);   // brake light: on when it stands still
     tail.style.opacity = rev.toFixed(3);
@@ -237,7 +239,7 @@ function heroCar(hero, stage) {
 
     // the beam starts at the headlight (so it shakes and tilts with the car)
     const mr = lamp.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
-    const L = W * 0.62, hT = ch * (0.5 + 1.7 * smooth(0.02, 0.26, sm));
+    const L = W * 0.62, hT = ch * (0.5 + (phone.matches ? 4.2 : 1.7) * smooth(0.02, 0.26, phone.matches ? 0.26 : sm));   // phone: the words are high above the car, so the beam fans out steeper
     const op = (lampOn * fl).toFixed(3);
     lamp.style.opacity = op; beam.style.opacity = op;
     beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
@@ -247,18 +249,17 @@ function heroCar(hero, stage) {
     const tip = nx + W * (0.04 + 0.5 * smooth(0, 0.3, sm));
     if (hold > 0 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
     if (sm < 0.005) reach = -1e5;
+    // each letter is lit by the real beam: only inside the cone, only while the lights are on
     letters.forEach((c, i) => {
-      const base = c.dataset.b ? 0.3 : 0.24, floor = phone.matches ? 0.7 : 0.5;
-      let b;
-      if (phone.matches) {
-        // phone: grows as the car comes under the word, fades once the headlights have gone past it
-        const a = pos[i] - nx;
-        b = reduce ? 1 : a >= 0 ? 1 - smooth(0, W * 0.5, a) : floor + (1 - floor) * (1 - smooth(0, W * 0.35, -a));
-      } else {
-        // laptop: grows as the light reaches the word (and goes back when you scroll up); fades if the headlights pass it
-        b = smooth(0, 170, reach - pos[i]);
-        const passed = nx - pos[i];
-        if (passed > 0) b *= floor + (1 - floor) * (1 - smooth(0, W * 0.12, passed));
+      const base = c.dataset.b ? 0.3 : 0.24;
+      let b = 0;
+      if (phone.matches && reduce) b = 1;
+      else {
+        const d = pos[i] - nx;
+        const top = ny - Math.max(d, 0) * (hT / L), bot = ny + Math.max(d, 0) * (hT * 0.45 / L), soft = 26;
+        const inCone = smooth(top - soft, top + soft, posY[i]) * (1 - smooth(bot - soft, bot + soft, posY[i]));
+        const ahead = smooth(-20, 60, d) * (1 - smooth(L * 0.85, L * 1.15, d)) * (1 - 0.45 * smooth(0, L, d));
+        b = Math.min(1, glow * fl * inCone * ahead * 1.25);
       }
       c.style.opacity = (base + b * (1 - base)).toFixed(3);
       c.style.textShadow = b > 0.02 ? '0 0 ' + (b * 26).toFixed(1) + 'px rgba(255,190,90,' + (b * 0.6).toFixed(2) + ')' : 'none';
