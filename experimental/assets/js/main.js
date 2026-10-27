@@ -226,7 +226,7 @@ function heroCar(hero, stage) {
     flick += dt;
     lampOn += ((hold > 0 ? 1 : 0) - lampOn) * Math.min(1, dt * 14);
     const fl = (flick < 0.4 && !reduce) ? (Math.floor(flick * 28) % 2 === 0 ? 1 : 0.12) : 1;
-    rev += ((dx < -0.4 ? 1 : 0) - rev) * Math.min(1, dt * 10);
+    rev += ((Math.abs(dx) < 0.3 ? 1 : 0) - rev) * Math.min(1, dt * 6);   // brake light: on when it stands still
     tail.style.opacity = rev.toFixed(3);
 
     rot += dx / (110 * cw / 1939) * 57.2958;
@@ -248,7 +248,18 @@ function heroCar(hero, stage) {
     if (hold > 0 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
     if (sm < 0.005) reach = -1e5;
     letters.forEach((c, i) => {
-      const base = c.dataset.b ? 0.3 : 0.24, b = smooth(0, 170, reach - pos[i]);
+      const base = c.dataset.b ? 0.3 : 0.24, floor = phone.matches ? 0.7 : 0.5;
+      let b;
+      if (phone.matches) {
+        // phone: grows as the car comes under the word, fades once the headlights have gone past it
+        const a = pos[i] - nx;
+        b = reduce ? 1 : a >= 0 ? 1 - smooth(0, W * 0.5, a) : floor + (1 - floor) * (1 - smooth(0, W * 0.35, -a));
+      } else {
+        // laptop: grows as the light reaches the word (and goes back when you scroll up); fades if the headlights pass it
+        b = smooth(0, 170, reach - pos[i]);
+        const passed = nx - pos[i];
+        if (passed > 0) b *= floor + (1 - floor) * (1 - smooth(0, W * 0.12, passed));
+      }
       c.style.opacity = (base + b * (1 - base)).toFixed(3);
       c.style.textShadow = b > 0.02 ? '0 0 ' + (b * 26).toFixed(1) + 'px rgba(255,190,90,' + (b * 0.6).toFixed(2) + ')' : 'none';
     });
