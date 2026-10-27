@@ -421,6 +421,8 @@ a.contact__value:hover { color: var(--accent); }
   z-index: 1; margin: calc(-1 * var(--cut)) 0; padding: var(--cut) 0;
   clip-path: polygon(0 var(--cut), 100% 0, 100% calc(100% - var(--cut)), 0 100%);
 }
+/* the last band sits right above the map: straight bottom edge so the map is not cut */
+#faq { margin-bottom: 0; clip-path: polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%); }
 @media (max-width: 767px) {
   :root { --cut: 1.5rem; }
   .band > .section { padding-top: 4rem; padding-bottom: 4rem; }
