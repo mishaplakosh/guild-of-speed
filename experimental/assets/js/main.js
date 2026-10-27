@@ -171,14 +171,29 @@ if (lb) {
 // ---- homepage: sliding hero words and counters ----
 (function () {
   const runs = [...document.querySelectorAll('.run')];
-  function onScroll() {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = scrollY, target = scrollY, raf = 0;
+  function paint() {
     runs.forEach(el => {
       const dir = +el.dataset.dir;
-      el.style.transform = 'translateX(' + (dir * scrollY * 0.35 + (dir > 0 ? -innerWidth * 0.5 : 0)) + 'px)';
+      el.style.transform = 'translate3d(' + (dir * current * 0.35 + (dir > 0 ? -innerWidth * 0.5 : 0)) + 'px,0,0)';
     });
   }
+  // ease toward the scroll position instead of jumping to it: silky even with a wheel mouse
+  function tick() {
+    current += (target - current) * 0.09;
+    if (Math.abs(target - current) < 0.2) { current = target; raf = 0; paint(); return; }
+    paint();
+    raf = requestAnimationFrame(tick);
+  }
+  function onScroll() {
+    target = scrollY;
+    if (reduce) { current = target; paint(); return; }
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
   addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  addEventListener('resize', paint);
+  paint();
 
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
