@@ -177,7 +177,7 @@ if (lb) {
 
 function heroCar(hero, stage) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const car = stage.querySelector('.hero3__car'), lamp = stage.querySelector('.hero3__lamp'), tail = stage.querySelector('.hero3__tail');
+  const car = stage.querySelector('.hero3__car'), lamp = stage.querySelector('.hero3__lamp'), src = stage.querySelector('.hero3__src'), tail = stage.querySelector('.hero3__tail');
   const beam = stage.querySelector('.hero3__beam'), wheels = [...stage.querySelectorAll('.hero3__wh')];
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smooth = (a, b, v) => { v = clamp((v - a) / (b - a)); return v * v * (3 - 2 * v); };
@@ -238,10 +238,10 @@ function heroCar(hero, stage) {
     car.style.transform = 'translate3d(' + x + 'px,' + ty + 'px,0) rotate(' + (reduce ? 0 : tilt) + 'deg)';
 
     // the beam starts at the headlight (so it shakes and tilts with the car)
-    const mr = lamp.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
+    const mr = src.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
     const L = W * 0.62, hT = ch * (0.5 + (phone.matches ? 4.2 : 1.7) * smooth(0.02, 0.26, phone.matches ? 0.26 : sm));   // phone: the words are high above the car, so the beam fans out steeper
     const op = (lampOn * fl).toFixed(3);
-    lamp.style.setProperty('--g', op); beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
+    lamp.style.setProperty('--g', op); src.style.opacity = op; beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
     beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
     beam.style.clipPath = 'polygon(' + nx + 'px ' + (ny - ch * 0.012) + 'px,' + (nx + L) + 'px ' + (ny - hT) + 'px,' + (nx + L) + 'px ' + (ny + hT * 0.45) + 'px,' + nx + 'px ' + (ny + ch * 0.012) + 'px)';
 
