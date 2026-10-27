@@ -418,22 +418,19 @@ a.contact__value:hover { color: var(--accent); }
 .lightbox__yt { font-size: 0.9rem; font-weight: 500; }
 @media (prefers-reduced-motion: reduce) { .lightbox, .faq-list details p { animation: none; } }
 
-/* ---- section bands + diagonal edges on the two lighter blocks ---- */
+/* ---- section bands: flat, alternating (first screen dark, services light, videos dark, FAQ light) ---- */
 .band { position: relative; }
-.band--alt { background: #132439; }
+.band--alt, #services { background: #132439; }
 .band > .section { padding-top: var(--s-section); padding-bottom: var(--s-section); }
-:root { --cut: 3rem; }
-.band--alt {
-  z-index: 1; margin: calc(-1 * var(--cut)) 0; padding: var(--cut) 0;
-  clip-path: polygon(0 var(--cut), 100% 0, 100% calc(100% - var(--cut)), 0 100%);
-}
-/* the last band sits right above the map: straight bottom edge so the map is not cut */
-/* services sit on the lighter blue so the first screen and the list do not melt together (straight edges: the amber ticker above must stay visible) */
-#services { background: #132439; }
-#faq { margin-bottom: 0; clip-path: polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%); }
-@media (max-width: 767px) {
-  :root { --cut: 1.5rem; }
-}
+
+/* services: a compact grid of squares (grows to 10+ without turning into a long list) */
+.sq-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(9.5rem, 17vw, 16rem), 1fr)); gap: 1rem; margin-top: 2rem; }
+.sq { position: relative; display: flex; flex-direction: column; justify-content: space-between; aspect-ratio: 1 / 1; padding: clamp(0.9rem, 1.6vw, 1.4rem); background: #1b2838; color: var(--white); transition: background 0.3s, color 0.3s, transform 0.3s cubic-bezier(.2,.8,.2,1); }
+.sq__n { font: 700 var(--fs-label) 'Golos Text', sans-serif; letter-spacing: 0.14em; color: var(--accent); transition: color 0.3s; }
+.sq h3 { font: 700 clamp(1.05rem, 1.9vw, 1.7rem)/1.08 'Golos Text', sans-serif; text-transform: uppercase; hyphens: auto; overflow-wrap: anywhere; }
+.sq__go { position: absolute; top: clamp(0.9rem, 1.6vw, 1.4rem); right: clamp(0.9rem, 1.6vw, 1.4rem); width: 1.4rem; height: 1.4rem; color: var(--accent); transition: transform 0.35s cubic-bezier(.2,.8,.2,1), color 0.3s; }
+@media (hover: hover) { .sq:hover { background: var(--accent); color: var(--midnight); } .sq:hover .sq__n, .sq:hover .sq__go { color: var(--midnight); } .sq:hover .sq__go { transform: translate(0.2rem, -0.2rem); } }
+.sq:active { background: var(--accent); color: var(--midnight); }
 
 /* ================= HOMEPAGE v2: big type + motion ================= */
 .rpm { position: fixed; left: 0; top: 0; width: 100%; height: 3px; z-index: 120; background: rgba(255,255,255,0.05); }
