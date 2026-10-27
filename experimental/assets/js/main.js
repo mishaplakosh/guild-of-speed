@@ -177,7 +177,7 @@ if (lb) {
 
 function heroCar(hero, stage) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const car = stage.querySelector('.hero3__car'), lamp = stage.querySelector('.hero3__lamp'), tail = stage.querySelector('.hero3__tail');
+  const car = stage.querySelector('.hero3__car'), lamp = stage.querySelector('.hero3__lamp'), src = stage.querySelector('.hero3__src'), tail = stage.querySelector('.hero3__tail');
   const beam = stage.querySelector('.hero3__beam'), wheels = [...stage.querySelectorAll('.hero3__wh')];
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smooth = (a, b, v) => { v = clamp((v - a) / (b - a)); return v * v * (3 - 2 * v); };
@@ -189,10 +189,11 @@ function heroCar(hero, stage) {
     [...text].forEach(c => { const sp = document.createElement('span'); sp.className = 'hero3__ch'; sp.textContent = c; sp.dataset.b = line.tagName === 'B' ? '1' : ''; line.append(sp); letters.push(sp); });
   });
   hero.classList.add('hero3--fx');
-  let pos = [], lastLeft = 0;
+  let pos = [], posY = [], lastLeft = 0;
   function measure() {
     const sr = stage.getBoundingClientRect();
     pos = letters.map(c => { const r = c.getBoundingClientRect(); return (r.left + r.right) / 2 - sr.left; });
+    posY = letters.map(c => { const r = c.getBoundingClientRect(); return (r.top + r.bottom) / 2 - sr.top; });
     const first = letters.find(c => c.dataset.b);   // where the last word (ЛЬВІВ) starts
     lastLeft = first ? first.getBoundingClientRect().left - sr.left : 0;
   }
@@ -202,7 +203,7 @@ function heroCar(hero, stage) {
 
   // phones: the drive plays by itself on load (no scroll-jacking); desktop: follows the scroll
   const phone = matchMedia('(max-width: 700px)'), tStart = performance.now();
-  let sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
+  let glow = 0, sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
   if (phone.matches && reduce) reach = 1e5;
   function frame(now) {
     requestAnimationFrame(frame);
@@ -213,7 +214,8 @@ function heroCar(hero, stage) {
     sm = reduce ? p : sm + (p - sm) * Math.min(1, dt * 7);
     const W = stage.clientWidth, cw = car.offsetWidth, ch = car.offsetHeight, sr = stage.getBoundingClientRect();
     // it stops with its nose just before the last word (on phones: parked under the words)
-    const x0 = phone.matches ? -cw : W * 0.04, gap = W * 0.02;   // on phones it drives in from the left edge
+    const statsEl = stage.querySelector('.hero3__stats'), padL = statsEl ? statsEl.getBoundingClientRect().left - sr.left : W * 0.04;
+    const x0 = phone.matches ? -cw : padL, gap = W * 0.02;   // the car starts right under the numbers   // on phones it drives in from the left edge
     let xStop = lastLeft - gap - cw;
     if (phone.matches || xStop < x0 + W * 0.1) xStop = W - cw - 20;
     const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
@@ -224,8 +226,9 @@ function heroCar(hero, stage) {
     if (Math.abs(dx) > 0.3) { if (hold <= 0) flick = 0; hold = 1.4; } else hold -= dt;
     flick += dt;
     lampOn += ((hold > 0 ? 1 : 0) - lampOn) * Math.min(1, dt * 14);
+    glow += ((hold > 0 ? 1 : 0) - glow) * Math.min(1, dt * 3);   // the words fade out a bit slower than the beam
     const fl = (flick < 0.4 && !reduce) ? (Math.floor(flick * 28) % 2 === 0 ? 1 : 0.12) : 1;
-    rev += ((dx < -0.4 ? 1 : 0) - rev) * Math.min(1, dt * 10);
+    rev += ((Math.abs(dx) < 0.3 ? 1 : 0) - rev) * Math.min(1, dt * 6);   // brake light: on when it stands still
     tail.style.opacity = rev.toFixed(3);
 
     rot += dx / (110 * cw / 1939) * 57.2958;
@@ -235,10 +238,10 @@ function heroCar(hero, stage) {
     car.style.transform = 'translate3d(' + x + 'px,' + ty + 'px,0) rotate(' + (reduce ? 0 : tilt) + 'deg)';
 
     // the beam starts at the headlight (so it shakes and tilts with the car)
-    const mr = lamp.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
-    const L = W * 0.62, hT = ch * (0.5 + 1.7 * smooth(0.02, 0.26, sm));
+    const mr = src.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
+    const L = W * 0.62, hT = ch * (0.5 + (phone.matches ? 4.2 : 1.7) * smooth(0.02, 0.26, phone.matches ? 0.26 : sm));   // phone: the words are high above the car, so the beam fans out steeper
     const op = (lampOn * fl).toFixed(3);
-    lamp.style.opacity = op; beam.style.opacity = op;
+    lamp.style.setProperty('--g', op); src.style.opacity = op; beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
     beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
     beam.style.clipPath = 'polygon(' + nx + 'px ' + (ny - ch * 0.012) + 'px,' + (nx + L) + 'px ' + (ny - hT) + 'px,' + (nx + L) + 'px ' + (ny + hT * 0.45) + 'px,' + nx + 'px ' + (ny + ch * 0.012) + 'px)';
 
@@ -246,8 +249,18 @@ function heroCar(hero, stage) {
     const tip = nx + W * (0.04 + 0.5 * smooth(0, 0.3, sm));
     if (hold > 0 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
     if (sm < 0.005) reach = -1e5;
+    // each letter is lit by the real beam: only inside the cone, only while the lights are on
     letters.forEach((c, i) => {
-      const base = c.dataset.b ? 0.3 : 0.24, b = smooth(0, 170, reach - pos[i]);
+      const base = c.dataset.b ? 0.3 : 0.24;
+      let b = 0;
+      if (phone.matches && reduce) b = 1;
+      else {
+        const d = pos[i] - nx;
+        const top = ny - Math.max(d, 0) * (hT / L), bot = ny + Math.max(d, 0) * (hT * 0.45 / L), soft = 26;
+        const inCone = smooth(top - soft, top + soft, posY[i]) * (1 - smooth(bot - soft, bot + soft, posY[i]));
+        const ahead = smooth(-20, 60, d) * (1 - smooth(L * 0.85, L * 1.15, d)) * (1 - 0.45 * smooth(0, L, d));
+        b = Math.min(1, glow * fl * inCone * ahead * 1.25);
+      }
       c.style.opacity = (base + b * (1 - base)).toFixed(3);
       c.style.textShadow = b > 0.02 ? '0 0 ' + (b * 26).toFixed(1) + 'px rgba(255,190,90,' + (b * 0.6).toFixed(2) + ')' : 'none';
     });
@@ -281,7 +294,7 @@ function heroCar(hero, stage) {
   function onScroll() {
     if (fab) {
       const nearFoot = foot && foot.getBoundingClientRect().top < innerHeight * 0.6;
-      fab.classList.toggle('on', scrollY > innerHeight * 0.5 && !nearFoot);
+      fab.classList.toggle('on', !nearFoot);
     }
   }
   addEventListener('scroll', onScroll, { passive: true });
