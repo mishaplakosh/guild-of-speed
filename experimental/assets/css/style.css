@@ -485,17 +485,10 @@ a.contact__value:hover { color: var(--accent); }
 
 /* counters + tilt cards */
 .bignums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2.5rem 0; }
-.bignum { border-top: 2px solid var(--accent); padding-top: 1rem; }
+.bignum { border-top: 1px solid var(--hairline); padding-top: 1rem; }
 .bignum b { display: block; font: 700 clamp(2.4rem, 8vw, 6rem)/1 'Golos Text', sans-serif; color: var(--white); font-variant-numeric: tabular-nums; }
-.bignum span { font: 700 0.75rem 'Golos Text', sans-serif; letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver-dim); }
-.tilts { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; perspective: 1200px; }
-.tilt { background: var(--charcoal); border-top: 3px solid var(--accent); padding: 1.5rem; min-height: 14rem; transform-style: preserve-3d; transition: transform 0.15s ease-out, box-shadow 0.3s; }
-.tilt__ic { width: 2.5rem; height: 2.5rem; color: var(--accent); display: block; margin-bottom: 1rem; transition: transform 0.6s cubic-bezier(.2,.8,.2,1); }
-.tilt h3 { font-size: 1.15rem; color: var(--white); margin-bottom: 0.5rem; }
-.tilt p { color: var(--silver-dim); font-size: 0.93rem; }
-@media (hover: hover) { .tilt:hover { box-shadow: 0 30px 60px rgba(0,0,0,0.45); } .tilt:hover .tilt__ic { transform: rotate(360deg) scale(1.1); } }
-@media (max-width: 1000px) { .tilts { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .tilts { grid-template-columns: 1fr; } .bignums { gap: 0.75rem; } .bignum span { font-size: 0.62rem; letter-spacing: 0.08em; } .row { grid-template-columns: 2rem 1fr auto; } .row__go { width: 2.6rem; height: 2.6rem; } }
+.bignum span { font: 700 0.75rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+@media (max-width: 600px) { .bignums { gap: 0.75rem; } .bignum span { font-size: 0.62rem; letter-spacing: 0.08em; } .row { grid-template-columns: 2rem 1fr auto; } .row__go { width: 2.6rem; height: 2.6rem; } }
 @media (prefers-reduced-motion: reduce) { .marq__t { animation: none; } }
 
 /* ================= CATEGORY PAGE ================= */
@@ -521,8 +514,6 @@ a.contact__value:hover { color: var(--accent); }
 .band .section__title { position: relative; padding-top: 1.4rem; font-size: clamp(2.2rem, 4.2vw, 3.4rem); line-height: 1; margin-bottom: 0.5rem; }
 .band .section__title::before { content: ''; position: absolute; top: 0; left: 0; width: 3rem; height: 3px; background: var(--accent); }
 .row { padding: 1.5rem 0; }
-.tilt { min-height: 0; }
-.tilt h3 { margin-bottom: 0.35rem; }
 .cta-band { padding: 4rem 1.5rem; }
 .cta-band__title { font-size: clamp(2.2rem, 7vw, 5rem); line-height: 1; margin-bottom: 1.5rem; }
 
@@ -594,3 +585,12 @@ a.contact__value:hover { color: var(--accent); }
 @media (min-width: 701px) and (max-height: 780px) { .hero3__stage { --base: 66%; } }
 .foot2__k { display: block; font: 700 0.72rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
 .foot2__p { color: var(--silver); line-height: 1.7; }
+
+/* why us: numbered list, same language as services and FAQ */
+.why-list { border-top: 1px solid var(--hairline); }
+.why { display: grid; grid-template-columns: clamp(3rem, 9vw, 6rem) minmax(0, 1.1fr) minmax(0, 1fr); align-items: baseline; gap: 0.5rem 1rem; padding: 1.7rem 0; border-bottom: 1px solid var(--hairline); transition: padding 0.35s cubic-bezier(.2,.8,.2,1); }
+.why__n { font: 700 0.85rem 'Golos Text', sans-serif; letter-spacing: 0.1em; color: var(--accent); }
+.why h3 { font: 700 clamp(1.5rem, 3.2vw, 2.6rem)/1.05 'Golos Text', sans-serif; text-transform: uppercase; color: var(--white); transition: color 0.25s; }
+.why p { font-size: 1.05rem; color: var(--silver); }
+@media (hover: hover) { .why:hover { padding-left: 1rem; } .why:hover h3 { color: var(--accent); } }
+@media (max-width: 700px) { .why { grid-template-columns: 2.2rem 1fr; padding: 1.4rem 0; } .why p { grid-column: 2; } }
