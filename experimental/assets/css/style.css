@@ -534,8 +534,8 @@ a.contact__value:hover { color: var(--accent); }
 .foot2__logo img { width: 2.6rem; height: 2.6rem; border-radius: 50%; }
 .foot2__logo i { font-style: normal; color: var(--accent); }
 .foot2 .foot2__num { font: 700 clamp(1.6rem, 3vw, 2.3rem)/1.1 'Golos Text', sans-serif; color: var(--white); padding: 0.1rem 0 0.3rem; white-space: nowrap; }
-.foot2__word { font: 700 clamp(2.4rem, 11vw, 14rem)/0.8 'Golos Text', sans-serif; text-align: center; white-space: nowrap; margin: 3.5rem 0 -0.3em; user-select: none; color: transparent; -webkit-text-stroke: 1px rgba(242,154,31,0.35);
-  background: linear-gradient(rgba(242,154,31,0.2), rgba(242,154,31,0.2)) no-repeat; background-size: 0% 100%; -webkit-background-clip: text; background-clip: text; transition: background-size 2s cubic-bezier(.2,.8,.2,1); }
+.foot2__word { font: 700 clamp(2.4rem, 11vw, 14rem)/0.8 'Golos Text', sans-serif; text-align: center; white-space: nowrap; margin: 3.5rem 0 -0.12em; user-select: none; color: transparent; -webkit-text-stroke: 1px rgba(242,154,31,0.5);
+  background: linear-gradient(rgba(242,154,31,0.3), rgba(242,154,31,0.3)) no-repeat; background-size: 0% 100%; -webkit-background-clip: text; background-clip: text; transition: background-size 2s cubic-bezier(.2,.8,.2,1); }
 .foot2.in .foot2__word { background-size: 100% 100%; }
 .foot2__bar { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.1rem max(1.5rem, calc((100% - var(--wrap)) / 2 + var(--gut))); background: #070d15; border-top: 1px solid var(--hairline); color: var(--silver-dim); font-size: 0.82rem; }
 .foot2 .foot2__up { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); opacity: 1; transform: none; }

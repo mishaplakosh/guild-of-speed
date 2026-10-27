@@ -239,7 +239,7 @@ function heroCar(hero, stage) {
 
     // the beam starts at the headlight (so it shakes and tilts with the car)
     const mr = src.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
-    const L = W * 0.62, hT = ch * (0.5 + (phone.matches ? 4.2 : 1.7) * smooth(0.02, 0.26, phone.matches ? 0.26 : sm));   // phone: the words are high above the car, so the beam fans out steeper
+    const L = W * 0.62, hT = ch * (0.5 + 1.7 * smooth(0.02, 0.26, sm));
     const op = (lampOn * fl).toFixed(3);
     lamp.style.setProperty('--g', op); src.style.opacity = op; beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
     beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
@@ -253,7 +253,7 @@ function heroCar(hero, stage) {
     letters.forEach((c, i) => {
       const base = c.dataset.b ? 0.3 : 0.24;
       let b = 0;
-      if (phone.matches && reduce) b = 1;
+      if (phone.matches) b = 1;   // phone: the words are always bright (the car is below them, the beam does not reach)
       else {
         const d = pos[i] - nx;
         const top = ny - Math.max(d, 0) * (hT / L), bot = ny + Math.max(d, 0) * (hT * 0.45 / L), soft = 26;
