@@ -484,11 +484,7 @@ a.contact__value:hover { color: var(--accent); }
 @media (hover: none) { .peek { display: none; } }
 
 /* counters + tilt cards */
-.bignums { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2.5rem 0; }
-.bignum { border-top: 1px solid var(--hairline); padding-top: 1rem; }
-.bignum b { display: block; font: 700 clamp(2.4rem, 8vw, 6rem)/1 'Golos Text', sans-serif; color: var(--white); font-variant-numeric: tabular-nums; }
-.bignum span { font: 700 0.75rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-@media (max-width: 600px) { .bignums { gap: 0.75rem; } .bignum span { font-size: 0.62rem; letter-spacing: 0.08em; } .row { grid-template-columns: 2rem 1fr auto; } .row__go { width: 2.6rem; height: 2.6rem; } }
+@media (max-width: 600px) { .row { grid-template-columns: 2rem 1fr auto; } .row__go { width: 2.6rem; height: 2.6rem; } }
 @media (prefers-reduced-motion: reduce) { .marq__t { animation: none; } }
 
 /* ================= CATEGORY PAGE ================= */
@@ -586,11 +582,9 @@ a.contact__value:hover { color: var(--accent); }
 .foot2__k { display: block; font: 700 0.72rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
 .foot2__p { color: var(--silver); line-height: 1.7; }
 
-/* why us: numbered list, same language as services and FAQ */
-.why-list { border-top: 1px solid var(--hairline); }
-.why { display: grid; grid-template-columns: clamp(3rem, 9vw, 6rem) minmax(0, 1.1fr) minmax(0, 1fr); align-items: baseline; gap: 0.5rem 1rem; padding: 1.7rem 0; border-bottom: 1px solid var(--hairline); transition: padding 0.35s cubic-bezier(.2,.8,.2,1); }
-.why__n { font: 700 0.85rem 'Golos Text', sans-serif; letter-spacing: 0.1em; color: var(--accent); }
-.why h3 { font: 700 clamp(1.5rem, 3.2vw, 2.6rem)/1.05 'Golos Text', sans-serif; text-transform: uppercase; color: var(--white); transition: color 0.25s; }
-.why p { font-size: 1.05rem; color: var(--silver); }
-@media (hover: hover) { .why:hover { padding-left: 1rem; } .why:hover h3 { color: var(--accent); } }
-@media (max-width: 700px) { .why { grid-template-columns: 2.2rem 1fr; padding: 1.4rem 0; } .why p { grid-column: 2; } }
+/* first-screen numbers */
+.hero3__stats { position: absolute; z-index: 6; left: max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem)); bottom: calc(100% - var(--base) + var(--cw) * 0.289 + 2.4rem); display: flex; gap: clamp(2rem, 6vw, 4.5rem); }
+.hero3__stats b { display: block; font: 700 clamp(2rem, 3.6vw, 3.2rem)/1 'Golos Text', sans-serif; color: var(--white); font-variant-numeric: tabular-nums; }
+.hero3__stats span { display: block; margin-top: 0.4rem; font: 700 0.72rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+@media (max-width: 700px) { .hero3__stats { left: 1.25rem; bottom: calc(100% - var(--base) + var(--cw) * 0.289 + 1.4rem); gap: 2.5rem; } .hero3__stats b { font-size: 2.1rem; } .hero3__stats span { font-size: 0.64rem; letter-spacing: 0.16em; } }
+@media (min-width: 701px) and (max-width: 1100px) { .hero3__stats { bottom: 6.4rem; } }

@@ -213,7 +213,8 @@ function heroCar(hero, stage) {
     sm = reduce ? p : sm + (p - sm) * Math.min(1, dt * 7);
     const W = stage.clientWidth, cw = car.offsetWidth, ch = car.offsetHeight, sr = stage.getBoundingClientRect();
     // it stops with its nose just before the last word (on phones: parked under the words)
-    const x0 = phone.matches ? -cw : W * 0.04, gap = W * 0.02;   // on phones it drives in from the left edge
+    const statsEl = stage.querySelector('.hero3__stats'), padL = statsEl ? statsEl.getBoundingClientRect().left - sr.left : W * 0.04;
+    const x0 = phone.matches ? -cw : padL, gap = W * 0.02;   // the car starts right under the numbers   // on phones it drives in from the left edge
     let xStop = lastLeft - gap - cw;
     if (phone.matches || xStop < x0 + W * 0.1) xStop = W - cw - 20;
     const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
