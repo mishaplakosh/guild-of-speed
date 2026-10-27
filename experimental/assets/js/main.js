@@ -193,3 +193,25 @@ if (lb) {
   document.querySelectorAll('[data-to]').forEach(el => { el.textContent = '0' + el.dataset.suf; io.observe(el); });
 
 })();
+
+// ---- bottom of page: reveal on arrival, right-side rail, call button ----
+(function () {
+  const io2 = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io2.unobserve(e.target); }
+  }), { threshold: 0.2 });
+  document.querySelectorAll('.cta2, .foot2').forEach(el => io2.observe(el));
+
+  const fill = document.getElementById('railfill'), dot = document.getElementById('raildot');
+  const fab = document.querySelector('.floating-cta'), foot = document.getElementById('foot');
+  function onScroll() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? scrollY / max : 0;
+    if (fill) { fill.style.height = (p * 100) + '%'; dot.style.top = (p * 100) + '%'; }
+    if (fab) {
+      const nearFoot = foot && foot.getBoundingClientRect().top < innerHeight * 0.6;
+      fab.classList.toggle('on', scrollY > innerHeight * 0.5 && !nearFoot);
+    }
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
