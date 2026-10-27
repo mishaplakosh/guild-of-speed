@@ -241,7 +241,7 @@ function heroCar(hero, stage) {
 
     // how far the light has reached: kept once it got there, rolls back when you scroll up
     const tip = nx + W * (0.04 + 0.5 * smooth(0, 0.3, sm));
-    if (lampOn > 0.5 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
+    if (hold > 0 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
     if (sm < 0.005) reach = -1e5;
     letters.forEach((c, i) => {
       const base = c.dataset.b ? 0.3 : 0.24, b = smooth(0, 170, reach - pos[i]);
