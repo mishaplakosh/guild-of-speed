@@ -430,8 +430,8 @@ a.contact__value:hover { color: var(--accent); }
 .rpm i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, #b0721a, var(--accent), var(--accent-light)); }
 
 .hero2 { position: relative; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding: 6.5rem 0 3rem; overflow: hidden; }
-.hero2__runs { margin-bottom: 2rem; }
-.run { white-space: nowrap; font: 700 clamp(4.5rem, 12.5vw, 12rem)/0.9 'Golos Text', sans-serif; text-transform: uppercase; will-change: transform; }
+.hero2__runs { margin-bottom: 2rem; font-size: inherit; }
+.run { display: block; white-space: nowrap; font: 700 clamp(4.5rem, 12.5vw, 12rem)/0.9 'Golos Text', sans-serif; text-transform: uppercase; will-change: transform; }
 .run--a { color: var(--white); }
 .run--b { color: transparent; -webkit-text-stroke: 2px var(--accent); }
 .run--c { color: var(--accent); }
