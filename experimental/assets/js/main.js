@@ -200,19 +200,22 @@ function heroCar(hero, stage) {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
   measure();
 
+  // phones: the drive plays by itself on load (no scroll-jacking); desktop: follows the scroll
+  const phone = matchMedia('(max-width: 700px)'), tStart = performance.now();
   let sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
+  if (phone.matches && reduce) reach = 1e5;
   function frame(now) {
     requestAnimationFrame(frame);
     const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
     const r = hero.getBoundingClientRect();
     if (r.bottom < -50 || r.top > innerHeight + 50) return;
-    const p = clamp(-r.top / (r.height - innerHeight));
+    const p = phone.matches ? (reduce ? 1 : clamp((now - tStart - 700) / 3600)) : clamp(-r.top / (r.height - innerHeight));
     sm = reduce ? p : sm + (p - sm) * Math.min(1, dt * 7);
     const W = stage.clientWidth, cw = car.offsetWidth, ch = car.offsetHeight, sr = stage.getBoundingClientRect();
     // it stops with its nose just before the last word (on phones: parked under the words)
-    const x0 = W * 0.04, gap = W * 0.02;
+    const x0 = phone.matches ? -cw : W * 0.04, gap = W * 0.02;   // on phones it drives in from the left edge
     let xStop = lastLeft - gap - cw;
-    if (xStop < x0 + W * 0.1) xStop = W - cw - 20;
+    if (phone.matches || xStop < x0 + W * 0.1) xStop = W - cw - 20;
     const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
     if (lastX === null) lastX = x;
     const dx = x - lastX; lastX = x;
