@@ -447,7 +447,7 @@ a.contact__value:hover { color: var(--accent); }
 .hero3__wh { position: absolute; width: 11.35%; height: auto; will-change: transform; }
 .hero3__wh[data-w="f"] { left: 75.4%; top: 56%; }
 .hero3__wh[data-w="r"] { left: 15.6%; top: 56%; }
-.hero3__lamp { --g: 0; position: absolute; left: 92.9%; top: 60.2%; width: calc(var(--cw) * 0.008); height: calc(var(--cw) * 0.015); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; opacity: 1; box-shadow: 0 0 calc(var(--cw) * (0.005 + 0.016 * var(--g))) calc(var(--cw) * (0.0015 + 0.005 * var(--g))) rgba(255, 205, 120, calc(0.55 + 0.35 * var(--g))); }
+.hero3__lamp { --g: 0; position: absolute; left: 90%; top: 59.7%; width: calc(var(--cw) * 0.007); height: calc(var(--cw) * 0.012); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; opacity: 1; box-shadow: 0 0 calc(var(--cw) * (0.003 + 0.013 * var(--g))) calc(var(--cw) * (0.0008 + 0.004 * var(--g))) rgba(255, 205, 120, calc(0.32 + 0.4 * var(--g))); }
 .hero3__tail { position: absolute; left: 1.1%; top: 50.8%; width: 4%; height: 7.1%; border-radius: 38% 22% 22% 38%; background: rgba(255,45,40,0.9); box-shadow: 0 0 calc(var(--cw) * 0.018) calc(var(--cw) * 0.004) rgba(255,40,40,0.8); mix-blend-mode: screen; opacity: 0; }
 .hero3__beam { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 56% 50% at var(--nx, 0) var(--ny, 0), rgba(255,205,120,0.4), transparent 72%); }
 .hero3__stage .marq { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; }
