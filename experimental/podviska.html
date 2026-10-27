@@ -70,7 +70,7 @@
   <div class="mobile-overlay" id="mobileOverlay"></div>
 
   <main>
-  <section class="cat">
+  <section class="cat" id="hero">
     <div class="cat__in">
       <a class="cat__back link-arrow" href="index.html#services"><svg class="icon icon--flip" aria-hidden="true"><use href="#i-arrow"/></svg> Усі послуги</a>
       <h1 class="cat__title">Підвіска</h1>
@@ -137,16 +137,11 @@
 
   <footer class="foot2" id="foot">
     <div class="foot2__top">
-      <div class="foot2__main">
-        <h4>Телефон</h4>
+      <div class="foot2__brand">
+        <a class="foot2__logo" href="#hero" aria-label="На початок"><img src="/assets/img/logo.webp" alt="" width="48" height="48"><span>GUILD <i>OF</i> SPEED</span></a>
         <a class="foot2__num" href="tel:+380636000505">+380 63 600 0505</a>
-        <div class="foot2__soc">
-          <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener">YouTube</a>
-          <a href="https://www.tiktok.com/@guild.ofspeed" target="_blank" rel="noopener">TikTok</a>
-        </div>
       </div>
-      <div class="foot2__list">
+      <div class="foot2__col">
         <h4>Послуги</h4>
         <a href="podviska.html">Двигуни</a>
         <a href="podviska.html">Підвіска</a>
@@ -154,9 +149,18 @@
         <a href="podviska.html">Електроніка</a>
         <a href="podviska.html">Детейлінг</a>
       </div>
+      <div class="foot2__col">
+        <h4>Соцмережі</h4>
+        <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@guild.ofspeed" target="_blank" rel="noopener">TikTok</a>
+      </div>
     </div>
     <div class="foot2__word" aria-hidden="true">GUILD OF SPEED</div>
-    <p class="foot2__bar">© <span id="year"></span> Guild of Speed</p>
+    <div class="foot2__bar">
+      <span>© <span id="year"></span> Guild of Speed</span>
+      <a class="foot2__up" href="#hero">Нагору <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
   </footer>
 
   <!-- FLOATING PHONE CTA -->
