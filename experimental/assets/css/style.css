@@ -575,7 +575,7 @@ a.contact__value:hover { color: var(--accent); }
 /* phones: no scroll-jacking. One screen, the car drives in by itself and lights the words */
 @media (max-width: 700px) {
   .hero3 { height: auto; }
-  .hero3__stage { position: relative; height: 100vh; height: 100svh; min-height: 34rem; --ty: 38%; --base: 69%; --cw: 90vw; }
+  .hero3__stage { position: relative; height: 100vh; height: 100svh; min-height: 34rem; --ty: 33%; --base: 69%; --cw: 90vw; }
   .hero3__t { font-size: 19vw; right: 1.25rem; }
 }
 @media (min-width: 701px) and (max-height: 780px) { .hero3__stage { --base: 66%; } }
@@ -583,8 +583,13 @@ a.contact__value:hover { color: var(--accent); }
 .foot2__p { color: var(--silver); line-height: 1.7; }
 
 /* first-screen numbers */
-.hero3__stats { position: absolute; z-index: 6; left: max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem)); bottom: calc(100% - var(--base) + var(--cw) * 0.289 + 2.4rem); display: flex; gap: clamp(2rem, 6vw, 4.5rem); }
+.hero3__stats { position: absolute; z-index: 6; left: max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem)); bottom: calc(100% - var(--base) + var(--cw) * 0.289 + 4.6rem); display: flex; gap: clamp(2rem, 6vw, 4.5rem); }
 .hero3__stats b { display: block; font: 700 clamp(2rem, 3.6vw, 3.2rem)/1 'Golos Text', sans-serif; color: var(--white); font-variant-numeric: tabular-nums; }
 .hero3__stats span { display: block; margin-top: 0.4rem; font: 700 0.72rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
-@media (max-width: 700px) { .hero3__stats { left: 1.25rem; bottom: calc(100% - var(--base) + var(--cw) * 0.289 + 1.4rem); gap: 2.5rem; } .hero3__stats b { font-size: 2.1rem; } .hero3__stats span { font-size: 0.64rem; letter-spacing: 0.16em; } }
+@media (max-width: 700px) { .hero3__stats { left: 1.25rem; bottom: calc(100% - var(--base) + var(--cw) * 0.289 + 2.2rem); gap: 2.5rem; } .hero3__stats b { font-size: 2.1rem; } .hero3__stats span { font-size: 0.64rem; letter-spacing: 0.16em; } }
 @media (min-width: 701px) and (max-width: 1100px) { .hero3__stats { bottom: 6.4rem; } }
+
+/* caption under the road */
+.hero3__under { position: absolute; z-index: 6; left: max(1.5rem, calc((100% - 75rem) / 2 + 1.5rem)); top: calc(var(--base) + 1.6rem); font: 500 clamp(1.15rem, 1.7vw, 1.5rem)/1.2 'Golos Text', sans-serif; letter-spacing: 0.02em; color: var(--silver); }
+.hero3__under b { font-weight: 500; color: var(--accent); }
+@media (max-width: 700px) { .hero3__under { left: 1.25rem; top: calc(var(--base) + 1.3rem); font-size: 1.1rem; } }
