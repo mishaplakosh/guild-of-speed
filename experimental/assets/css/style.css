@@ -214,7 +214,7 @@ img { display: block; max-width: 100%; }
 .floating-cta {
   transform: translateY(6rem) scale(0.8); opacity: 0;
   position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
-  width: 3.5rem; height: 3.5rem; border-radius: 50%;
+  width: 3.5rem; height: 3.5rem; border-radius: 0;
   background: var(--accent); color: var(--midnight);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.4rem;
@@ -432,7 +432,7 @@ a.contact__value:hover { color: var(--accent); }
 
 /* first screen: the E46 drives across; its headlights light up the words */
 .hero3 { position: relative; height: 180vh; height: 180svh; }
-.hero3__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; --ty: 44%; --base: 67%; --cw: min(44.2vw, 646px); }
+.hero3__stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; --ty: 40%; --base: 66%; --cw: min(44.2vw, 646px); }
 .hero3__t { position: absolute; z-index: 1; right: 1.5rem; top: var(--ty); transform: translateY(-50%); text-align: right; font: 700 clamp(3rem, 8.4vw, 8.8rem)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
 .hero3__t > span, .hero3__t > b { display: block; font-weight: 700; }
 .hero3__t > b { color: var(--accent); }
@@ -448,7 +448,6 @@ a.contact__value:hover { color: var(--accent); }
 .hero3__lamp { position: absolute; left: 92.9%; top: 60.2%; width: calc(var(--cw) * 0.011); height: calc(var(--cw) * 0.021); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; box-shadow: 0 0 calc(var(--cw) * 0.02) calc(var(--cw) * 0.006) rgba(255,205,120,0.85); opacity: 0; }
 .hero3__tail { position: absolute; left: 1.1%; top: 50.8%; width: 4%; height: 7.1%; border-radius: 38% 22% 22% 38%; background: rgba(255,45,40,0.9); box-shadow: 0 0 calc(var(--cw) * 0.018) calc(var(--cw) * 0.004) rgba(255,40,40,0.8); mix-blend-mode: screen; opacity: 0; }
 .hero3__beam { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 56% 50% at var(--nx, 0) var(--ny, 0), rgba(255,205,120,0.4), transparent 72%); }
-.hero3__in { position: absolute; z-index: 6; left: 0; right: 0; bottom: 6.2rem; margin: 0 auto; }
 .hero3__stage .marq { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; }
 .hero2__in { width: 100%; max-width: 75rem; margin: 0 auto; padding: 0 1.5rem; }
 .hero2__title { font-size: clamp(1.5rem, 3.2vw, 2.4rem); line-height: 1.1; color: var(--white); margin-bottom: 0.75rem; }
@@ -551,11 +550,13 @@ a.contact__value:hover { color: var(--accent); }
 .tiles { display: flex; min-height: clamp(11rem, 26vh, 16rem); }
 .tiles a { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(1.3rem, 3.5vw, 2.2rem); transition: flex 0.6s cubic-bezier(.2,.8,.2,1), background 0.3s; }
 .tiles a:nth-child(1) { background: var(--accent); color: var(--midnight); }
-.tiles a:nth-child(2) { background: var(--charcoal); color: var(--white); }
+.tiles a:nth-child(2) { background: #22364d; color: var(--white); }
+.tiles a:nth-child(3) { background: var(--charcoal); color: var(--white); }
+.tiles b.nw { white-space: nowrap; }
 .tiles small { font: 700 0.72rem 'Golos Text', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.75; }
-.tiles b { display: block; font: 700 clamp(1.4rem, 4vw, 3.2rem)/1.05 'Golos Text', sans-serif; text-transform: uppercase; }
+.tiles b { display: block; font: 700 clamp(1.3rem, 2.7vw, 2.6rem)/1.05 'Golos Text', sans-serif; text-transform: uppercase; }
 .tiles .icon { width: 2.2rem; height: 2.2rem; align-self: flex-end; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
-@media (hover: hover) { .tiles a:hover { flex: 1.5; } .tiles a:nth-child(2):hover { background: #22364d; } .tiles a:hover .icon { transform: translate(0.3rem, -0.3rem) scale(1.15); } }
+@media (hover: hover) { .tiles a:hover { flex: 1.5; } .tiles a:nth-child(2):hover { background: #2a4260; } .tiles a:nth-child(3):hover { background: #22364d; } .tiles a:hover .icon { transform: translate(0.3rem, -0.3rem) scale(1.15); } }
 @media (max-width: 700px) { .tiles { flex-direction: column; } .tiles a { min-height: 8.5rem; } }
 
 .foot2 { position: relative; background: #070d15; padding: 4rem 0 0; overflow: hidden; }
@@ -592,11 +593,9 @@ a.contact__value:hover { color: var(--accent); }
 /* phones: no scroll-jacking. One screen, the car drives in by itself and lights the words */
 @media (max-width: 700px) {
   .hero3 { height: auto; }
-  .hero3__stage { position: relative; height: 100vh; height: 100svh; min-height: 34rem; --ty: 29%; --base: 58%; --cw: 88vw; }
+  .hero3__stage { position: relative; height: 100vh; height: 100svh; min-height: 34rem; --ty: 38%; --base: 69%; --cw: 90vw; }
   .hero3__t { font-size: 19vw; right: 1.25rem; }
-  .hero3__in { top: calc(var(--base) + 1.6rem); bottom: auto; padding: 0 1.25rem; }
-  .hero3__in .hero2__addr { margin: 0 0 0.9rem; font-size: 0.9rem; }
-  .hero3__in .hero2__buttons { flex-direction: column; gap: 0.6rem; }
-  .hero3__in .btn { width: 100%; min-height: 3.1rem; justify-content: center; }
 }
-@media (min-width: 701px) and (max-height: 780px) { .hero3__stage { --base: 66%; } .hero3__in { bottom: 5.4rem; } .hero3__in .hero2__addr { margin: 0 0 0.7rem; } }
+@media (min-width: 701px) and (max-height: 780px) { .hero3__stage { --base: 66%; } }
+.foot2__k { display: block; font: 700 0.72rem 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; }
+.foot2__p { color: var(--silver); line-height: 1.7; }

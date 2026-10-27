@@ -281,7 +281,7 @@ function heroCar(hero, stage) {
   function onScroll() {
     if (fab) {
       const nearFoot = foot && foot.getBoundingClientRect().top < innerHeight * 0.6;
-      fab.classList.toggle('on', scrollY > innerHeight * 0.5 && !nearFoot);
+      fab.classList.toggle('on', !nearFoot);
     }
   }
   addEventListener('scroll', onScroll, { passive: true });
