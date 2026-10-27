@@ -428,6 +428,8 @@ a.contact__value:hover { color: var(--accent); }
   clip-path: polygon(0 var(--cut), 100% 0, 100% calc(100% - var(--cut)), 0 100%);
 }
 /* the last band sits right above the map: straight bottom edge so the map is not cut */
+/* services sit on the lighter blue so the first screen and the list do not melt together (straight edges: the amber ticker above must stay visible) */
+#services { background: #132439; }
 #faq { margin-bottom: 0; clip-path: polygon(0 var(--cut), 100% 0, 100% 100%, 0 100%); }
 @media (max-width: 767px) {
   :root { --cut: 1.5rem; }
