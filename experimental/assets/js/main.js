@@ -202,7 +202,7 @@ function heroCar(hero, stage) {
   measure();
 
   // phones: the drive plays by itself on load (no scroll-jacking); desktop: follows the scroll
-  const phone = matchMedia('(max-width: 700px)'), tStart = performance.now();
+  const phone = matchMedia('(max-aspect-ratio: 1/1)'), tStart = performance.now();
   let glow = 0, sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
   if (phone.matches && reduce) reach = 1e5;
   function frame(now) {
@@ -217,7 +217,7 @@ function heroCar(hero, stage) {
     const statsEl = stage.querySelector('.hero3__stats'), padL = statsEl ? statsEl.getBoundingClientRect().left - sr.left : W * 0.04;
     const x0 = phone.matches ? -cw : padL, gap = W * 0.02;   // the car starts right under the numbers   // on phones it drives in from the left edge
     let xStop = lastLeft - gap - cw;
-    if (phone.matches || xStop < x0 + W * 0.1) xStop = W - cw - 20;
+    if (phone.matches || xStop < x0 + W * 0.1) xStop = W - cw - padL;
     const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
     if (lastX === null) lastX = x;
     const dx = x - lastX; lastX = x;
@@ -239,7 +239,7 @@ function heroCar(hero, stage) {
 
     // the beam starts at the headlight (so it shakes and tilts with the car)
     const mr = src.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
-    const L = W * 0.62, hT = ch * (0.5 + (phone.matches ? 4.2 : 1.7) * smooth(0.02, 0.26, phone.matches ? 0.26 : sm));   // phone: the words are high above the car, so the beam fans out steeper
+    const L = W * 0.62, hT = ch * (0.5 + 1.7 * smooth(0.02, 0.26, sm));
     const op = (lampOn * fl).toFixed(3);
     lamp.style.setProperty('--g', op); src.style.opacity = op; beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
     beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
@@ -253,7 +253,7 @@ function heroCar(hero, stage) {
     letters.forEach((c, i) => {
       const base = c.dataset.b ? 0.3 : 0.24;
       let b = 0;
-      if (phone.matches && reduce) b = 1;
+      if (phone.matches) b = 1;   // phone: the words are always bright (the car is below them, the beam does not reach)
       else {
         const d = pos[i] - nx;
         const top = ny - Math.max(d, 0) * (hT / L), bot = ny + Math.max(d, 0) * (hT * 0.45 / L), soft = 26;
