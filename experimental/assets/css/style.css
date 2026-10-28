@@ -791,3 +791,7 @@ a.contact__value:hover { color: var(--accent); }
 /* SERVICE TILES: 8 tiles = 4 columns on wide screens, 2 on narrow ones */
 .sq-grid { grid-template-columns: repeat(4, 1fr); }
 @media (max-width: 900px) { .sq-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* SERVICE TILES: the whole tile grows 5% on hover */
+.sq { transition: transform 0.3s cubic-bezier(.2,.8,.2,1); }
+@media (hover: hover) { .sq:hover { transform: scale(1.05); z-index: 2; } }
