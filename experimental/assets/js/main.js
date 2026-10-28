@@ -205,7 +205,10 @@ function heroScene(stage) {
     const far = x0 + cw * 0.93 + cw * (tall.matches ? 2.1 : 1.7) + 20;   // starts so far away that even its beam is off screen
     const carX = tt => x0 - far * (1 - eo(tt / DRIVE));           // the beam shows first, then the car drives in and brakes
     const x = carX(t), vel = (carX(t + 0.016) - x) / 0.016, moving = Math.abs(vel) > 30;
-    car.style.transform = 'translate3d(' + x + 'px,' + (moving && !reduce ? Math.sin(now / 45) * 0.8 : 0) + 'px,0) rotate(' + (reduce ? 0 : -Math.min(1.5, Math.abs(vel) / 700)) + 'deg)';
+    // no shaking: the nose lifts a little while it drives, dips as it brakes to a stop, then settles back
+    const u = clamp(t / DRIVE), tau = Math.max(0, t - DRIVE);
+    const lean = reduce ? 0 : u < 1 ? -0.9 * (1 - u) * (1 - u) + 1.1 * Math.pow(clamp((u - 0.6) / 0.4), 2) : 1.1 * Math.exp(-3.2 * tau) * Math.cos(5 * tau);
+    car.style.transform = 'translate3d(' + x + 'px,0,0) rotate(' + lean.toFixed(3) + 'deg)';
     const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
     wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
     tail.style.opacity = moving ? 0 : 1;                        // brake light: on when it stands still
