@@ -597,8 +597,8 @@ a.contact__value:hover { color: var(--accent); }
 
 /* the booking button: same language as the service squares (dark tile, turns amber with dark text).
    It floats in front of the beam; the part the light touches turns amber. */
-.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 27.8); height: calc(var(--u) * 4.4); min-height: 3rem; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: #1b2838; color: var(--white); font: 700 max(0.9rem, calc(var(--u) * 1.25))/1 'Golos Text', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; overflow: hidden; }
-.hero3__cta .icon { width: 1.5em; height: 1.5em; flex: none; color: var(--accent); transition: transform 0.35s cubic-bezier(.2,.8,.2,1); }
+.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: #1b2838; color: var(--white); font: 700 max(0.95rem, calc(var(--u) * 1.5))/1 'Golos Text', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; overflow: hidden; }
+.hero3__cta .icon { width: 1.7em; height: 1.7em; flex: none; color: var(--accent); transition: transform 0.35s cubic-bezier(.2,.8,.2,1); }
 .hero3__cta > span { position: relative; z-index: 2; }
 .hero3__cta > .icon { position: relative; z-index: 2; }
 .hero3__cta .ov { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: var(--accent); color: var(--midnight); clip-path: inset(0 100% 0 0); pointer-events: none; font-style: normal; }
@@ -610,7 +610,8 @@ a.contact__value:hover { color: var(--accent); }
 
 /* fill for the empty space: ?fill=speed or ?fill=city (body class set in main.js) */
 .hero3__fill { position: absolute; z-index: 0; left: 0; right: 0; top: 0; bottom: 0; pointer-events: none; display: none; }
-.fill-speed .hero3__fill--speed, .fill-city .hero3__fill--city { display: block; }
+.hero3__fill--city, .fill-speed .hero3__fill--speed { display: block; }
+.fill-speed .hero3__fill--city { display: none; }
 .hero3__fill--speed { background: repeating-linear-gradient(180deg, transparent 0 calc(var(--u) * 2.6), rgba(245,246,248,0.16) calc(var(--u) * 2.6) calc(var(--u) * 2.6 + 1px)); -webkit-mask: linear-gradient(90deg, transparent 25%, #000 80%); mask: linear-gradient(90deg, transparent 25%, #000 80%); top: calc(var(--base) - var(--u) * 14); bottom: calc(100% - var(--base)); }
 .hero3__fill--city { top: auto; bottom: calc(100% - var(--base)); height: calc(var(--u) * 12); background: #1a3048; clip-path: polygon(0 62%,8% 62%,8% 30%,20% 30%,20% 75%,38% 75%,38% 15%,52% 15%,52% 50%,70% 50%,70% 85%,86% 85%,86% 40%,100% 40%,100% 100%,0 100%); opacity: 1; }
 
