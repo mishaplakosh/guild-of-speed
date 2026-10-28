@@ -87,7 +87,7 @@ img { display: block; max-width: 100%; }
 .burger.open span:nth-child(3) { top: 1.35rem; transform: rotate(-45deg); }
 @media (min-width: 1025px) {
   .nav__logo { height: 3.9rem; }
-  .nav__name { font-size: 1.35rem; }
+  .nav__name { font-size: 1.6rem; }
   .nav__links { margin-left: auto; margin-right: 1.5rem; }
   .nav__links a { font-size: 1rem; }
 }
@@ -97,7 +97,7 @@ img { display: block; max-width: 100%; }
 }
 @media (max-width: 767px) {
   .nav__inner { padding: 0.6rem var(--gut); }
-  .nav__name { font-size: 1rem; }
+  .nav__name { font-size: 1.15rem; }
 }
 
 /* mobile menu: a drawer of flat tiles, amber call tile */
