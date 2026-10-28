@@ -249,7 +249,7 @@ function heroScene(stage) {
       else { const pts = [[0, 0], [xt, 0]]; for (let i = 0; i <= 8; i++) { const px = xt * (1 - i / 8); pts.push([px, yb(px)]); } poly = 'polygon(' + pts.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')'; }
     }
     ov.style.clipPath = poly;
-    if (!tall.matches) cta.style.setProperty('--glow', clamp(xt / BW).toFixed(3));
+    cta.style.setProperty('--glow', (tall.matches ? (poly === 'inset(0 100% 0 0)' ? 0 : 0.6) * (1 - clamp((t - 2) / 0.8)) : clamp(xt / BW)).toFixed(3));
     if (tall.matches) {                                          // fade like the light on the road: full near the car, soft to the far end
       const xl = clamp(xhit - BX, 0, BW), m = 'linear-gradient(90deg, transparent ' + xl + 'px, #000 ' + (xl + 10) + 'px, rgba(0,0,0,0.5) ' + (xl + (xt - xl) * 0.6) + 'px, transparent ' + xt + 'px)';
       ov.style.webkitMaskImage = ov.style.maskImage = m;
