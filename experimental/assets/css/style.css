@@ -761,3 +761,6 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__stats li::before { top: calc(var(--v) * -2.6); left: calc(var(--v) * 3); width: calc(var(--v) * 5); }
   .hero3__stats li:first-child::before { left: 0; }
 }
+
+/* HERO BUTTON (phone): full width, edge to edge */
+@media (max-aspect-ratio: 1/1) { .hero3__cta { left: 0; right: 0; } }
