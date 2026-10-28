@@ -245,7 +245,7 @@ function heroScene(stage) {
     const xt = clamp(xEnd - BX, 0, BW), yb = px => clamp(AY + 3 + (BX + px - AX) * SLOPE - BY, 0, BH);
     let poly = 'inset(0 100% 0 0)';
     if (xt > 0) {
-      if (tall.matches) poly = 'inset(0 ' + ((1 - xt / BW) * 100) + '% 0 0)';
+      if (tall.matches) { const xl = clamp(xhit - BX, 0, BW); poly = xl < xt ? 'inset(0 ' + ((1 - xt / BW) * 100) + '% 0 ' + (xl / BW * 100) + '%)' : 'inset(0 100% 0 0)'; }   // only under the light lying on the road
       else { const pts = [[0, 0], [xt, 0]]; for (let i = 0; i <= 8; i++) { const px = xt * (1 - i / 8); pts.push([px, yb(px)]); } poly = 'polygon(' + pts.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')'; }
     }
     ov.style.clipPath = poly;
