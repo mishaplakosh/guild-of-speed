@@ -694,3 +694,10 @@ a.contact__value:hover { color: var(--accent); }
 .bk__go .icon { position: absolute; right: 1.2rem; width: 1.4rem; height: 1.4rem; }
 .bk__err { margin: 1rem 0 0; color: #ff9d8a; }
 .bk__legal { margin: 1rem 0 0; font-size: 0.8rem; color: var(--silver-dim); line-height: 1.5; }
+
+/* ================= SERVICE TILES WITH PHOTOS ================= */
+.sq { justify-content: flex-end; padding: 0; overflow: hidden; isolation: isolate; }
+.sq img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
+.sq h3 { position: relative; z-index: 1; align-self: flex-start; margin: 0; padding: 0.7rem 1rem; background: var(--midnight); color: var(--white); transition: background 0.3s, color 0.3s; }
+@media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover img { transform: scale(1.06); } .sq:hover h3 { background: var(--accent); color: var(--midnight); } }
+.sq:active h3 { background: var(--accent); color: var(--midnight); }
