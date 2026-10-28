@@ -59,6 +59,7 @@ function heroScene(stage) {
   const SLOPE = Math.tan(0.155);                              // the lower edge of the beam falls about 9 degrees onto the road
   const DRIVE = 3.4;                                          // seconds the car drives in for
 
+  let stopT = null;
   let beamKey = '', prevBox = null;   // the beam is only redrawn when it actually changed (the canvas is blurred, so every redraw costs)
   function size() {
     const W = stage.clientWidth, H = stage.clientHeight, dpr = Math.min(2, devicePixelRatio || 1), dd = dpr;
@@ -91,7 +92,8 @@ function heroScene(stage) {
     car.style.transform = 'translate3d(' + x + 'px,0,0) rotate(' + lean.toFixed(3) + 'deg)';
     const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
     wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
-    if (t > 0.5 && speed < 150) stage.classList.add('stopped');   // the moment the car has practically stopped the call button lights up
+    if (stopT === null && t > 0.5 && speed < 150) stopT = t;   // the car has practically stopped...
+    if (stopT !== null && t > stopT + 0.5) stage.classList.add('stopped');   // ...half a second later the call button lights up
     tail.style.opacity = moving ? 0 : 1;                      // brake light: on when it stands still
 
     // the headlight follows the car's lean; the road line
