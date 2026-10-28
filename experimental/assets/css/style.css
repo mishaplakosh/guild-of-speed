@@ -573,7 +573,7 @@ a.contact__value:hover { color: var(--accent); }
 @supports (height: 100svh) { .hero3__stage { --sh: calc(100svh - 1.75rem); } }
 
 .hero3__t { position: absolute; z-index: 2; left: var(--edge); top: calc(var(--u) * 11.7); font: 700 calc(var(--u) * 7.2)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
-.hero3__t > b { color: var(--accent); font-weight: 700; }
+.hero3__t b { color: var(--accent); font-weight: 700; }
 .hero3__sub { position: absolute; z-index: 3; left: var(--edge); top: calc(var(--u) * 20.3); margin: 0; font: 500 calc(var(--u) * 2.08)/1.2 'Golos Text', sans-serif; color: var(--silver); }
 .hero3__sub b { color: var(--accent); font-weight: 600; }
 .hero3__stats { position: absolute; z-index: 3; left: var(--edge); top: calc(var(--u) * 25); display: flex; list-style: none; margin: 0; padding: 0; }
@@ -702,3 +702,14 @@ a.contact__value:hover { color: var(--accent); }
 @media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover img { transform: scale(1.06); } .sq:hover h3 { background: var(--accent); color: var(--midnight); } }
 .sq:active h3 { background: var(--accent); color: var(--midnight); }
 .sq::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(0deg, rgba(13,27,42,0.55), rgba(13,27,42,0.1) 60%); pointer-events: none; }
+/* tall screens: headline fits on three lines; hero ends right under the button */
+@media (max-aspect-ratio: 1/1) {
+  .hero3__t { font-size: min(calc(var(--v) * 20), 15vw); white-space: nowrap; }
+  .hero3__stage { min-height: 0; height: calc(var(--base) + var(--v) * 24.4 + 4.5rem); }
+}
+@media (max-aspect-ratio: 1/1) {
+  .hero3__t b { color: var(--accent); }
+  .hero3__stage { --fh: min(calc(var(--v) * 20), 15vw); --d: calc(var(--v) * 60 - var(--fh) * 2.95 - var(--v) * 3); --base: calc(var(--top) + var(--v) * 117 - var(--d)); }
+  .hero3__sub { top: calc(var(--top) + var(--fh) * 2.95 + var(--v) * 3); }
+  .hero3__stats { top: calc(var(--top) + var(--fh) * 2.95 + var(--v) * 13); }
+}
