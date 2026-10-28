@@ -564,13 +564,13 @@ a.contact__value:hover { color: var(--accent); }
    --edge is the side margin the menu, sections and footer use. */
 .hero3 { position: relative; }
 .hero3__stage {
-  position: relative; --sh: calc(100vh - 3.5rem); height: var(--sh); min-height: 30rem; overflow: hidden;
+  position: relative; --sh: calc(100vh - 1.75rem); height: var(--sh); min-height: 30rem; overflow: hidden;
   --edge: max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut)));
   --u: min(1.1vw, calc(var(--sh) * 0.016), 14.4px);
   --cw: calc(var(--u) * 44.17);
   --base: calc(100% - var(--u) * 6.94);
 }
-@supports (height: 100svh) { .hero3__stage { --sh: calc(100svh - 3.5rem); } }
+@supports (height: 100svh) { .hero3__stage { --sh: calc(100svh - 1.75rem); } }
 
 .hero3__t { position: absolute; z-index: 2; left: var(--edge); top: calc(var(--u) * 11.7); font: 700 calc(var(--u) * 7.2)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
 .hero3__t > b { color: var(--accent); font-weight: 700; }
