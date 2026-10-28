@@ -12,7 +12,6 @@
   --accent: #e8a020;
   --accent-light: #f0b840;
   --amber-75: rgba(232, 160, 32, 0.75);   /* the main button colour: amber at 25% transparency */
-  --amber-flat: #b07b1d;                  /* the same colour as a solid, for the hero call button so the light behind it can't change it */
   --silver: #c8cdd6;
   --silver-dim: #8b95a5;
   --white: #f5f6f8;
@@ -168,7 +167,8 @@ img { display: block; max-width: 100%; }
 .hero3__dust { z-index: 6; }
 
 /* call button: translucent amber with centred text and the phone icon pinned right (same on laptop and phone). */
-.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: var(--amber-flat); color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
+.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: var(--amber-75); transition: background 0.6s ease; color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
+.hero3__stage.stopped .hero3__cta { background: var(--accent); }   /* the car has stopped: the button turns bright and solid */
 .hero3__cta > span { position: relative; z-index: 2; }
 .hero3__cta .icon { position: absolute; z-index: 2; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; color: var(--midnight); transition: transform 0.35s var(--ease); }
 

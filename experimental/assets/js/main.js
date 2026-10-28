@@ -89,6 +89,7 @@ function heroScene(stage) {
     car.style.transform = 'translate3d(' + x + 'px,0,0) rotate(' + lean.toFixed(3) + 'deg)';
     const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
     wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
+    if (t > DRIVE + 0.4) stage.classList.add('stopped');   // once it has fully stopped the call button turns solid
     tail.style.opacity = moving ? 0 : 1;                      // brake light: on when it stands still
 
     // the headlight follows the car's lean; the road line
