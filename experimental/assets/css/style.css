@@ -559,66 +559,75 @@ a.contact__value:hover { color: var(--accent); }
 .foot2__p { color: var(--silver); line-height: 1.7; }
 
 /* ================= FIRST SCREEN =================
-   One scene, two shapes. Everything in it is sized in one unit (--u on wide screens, --v on tall
-   ones), so the scene scales as one piece and never depends on the width alone.
-   --edge is the same side margin the menu, sections and footer use. */
-.hero3 { position: relative; height: 180vh; height: 180svh; }
+   One scene on one screen: the car drives in, its headlights light the booking button.
+   Everything is sized in one unit (--u wide screens, --v tall screens) so it scales as one piece.
+   --edge is the side margin the menu, sections and footer use. */
+.hero3 { position: relative; }
 .hero3__stage {
-  position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 24rem; overflow: hidden;
+  position: relative; height: 100vh; height: 100svh; min-height: 30rem; overflow: hidden;
   --edge: max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut)));
   --u: min(1.1vw, 1.6vh, 14.4px);
-  --cw: calc(var(--u) * 44);
-  --ty: 40%; --base: 66%;
+  --cw: calc(var(--u) * 44.17);
+  --base: calc(100% - var(--u) * 6.94);
 }
 @supports (height: 100svh) { .hero3__stage { --u: min(1.1vw, 1.6svh, 14.4px); } }
 
-.hero3__t { position: absolute; z-index: 1; right: var(--edge); top: var(--ty); transform: translateY(-50%); text-align: right; font: 700 calc(var(--u) * 8.4)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
-.hero3__t > span, .hero3__t > b { display: block; font-weight: 700; }
-.hero3__t > b { color: var(--accent); }
-.hero3__ch { display: inline-block; }
-.hero3--fx .hero3__ch { opacity: 0.24; }
-.hero3--fx .hero3__t > b .hero3__ch { opacity: 0.3; }
+.hero3__t { position: absolute; z-index: 2; left: var(--edge); top: calc(var(--u) * 11.7); font: 700 calc(var(--u) * 7.2)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
+.hero3__t > b { color: var(--accent); font-weight: 700; }
+.hero3__sub { position: absolute; z-index: 3; left: var(--edge); top: calc(var(--u) * 20.3); margin: 0; font: 500 calc(var(--u) * 2.08)/1.2 'Golos Text', sans-serif; color: var(--silver); }
+.hero3__sub b { color: var(--accent); font-weight: 600; }
+.hero3__stats { position: absolute; z-index: 3; left: var(--edge); top: calc(var(--u) * 25); display: flex; list-style: none; margin: 0; padding: 0; }
+.hero3__stats li { padding: 0 calc(var(--u) * 2.2); border-left: 1px solid rgba(245,246,248,0.2); }
+.hero3__stats li:first-child { padding-left: 0; border-left: 0; }
+.hero3__stats b { display: block; font: 700 calc(var(--u) * 3.05)/1 'Golos Text', sans-serif; color: var(--white); text-transform: uppercase; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.hero3__stats span { display: block; margin-top: calc(var(--u) * 0.7); font: 700 max(0.75rem, calc(var(--u) * 0.85)) 'Golos Text', sans-serif; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
 
-.hero3__road { position: absolute; z-index: 1; left: 0; right: 0; top: var(--base); height: 1px; background: linear-gradient(90deg, transparent, rgba(245,246,248,0.28) 12%, rgba(245,246,248,0.28) 88%, transparent); }
-.hero3__car { position: absolute; z-index: 4; left: 0; width: var(--cw); bottom: calc(100% - var(--base) - var(--cw) * 0.004); transform-origin: 50% 100%; will-change: transform; pointer-events: none; }
+.hero3__road { position: absolute; z-index: 1; left: 0; right: 0; top: var(--base); height: 1px; background: linear-gradient(90deg, transparent, rgba(245,246,248,0.3) 10%, rgba(245,246,248,0.3) 90%, transparent); }
+.hero3__car { position: absolute; z-index: 4; left: 0; width: var(--cw); bottom: calc(100% - var(--base) - var(--cw) * 0.004); transform-origin: 50% 100%; will-change: transform; pointer-events: none; transform: translateX(-120%); }
 .hero3__body { display: block; width: 100%; height: auto; }
 .hero3__wh { position: absolute; width: 11.35%; height: auto; will-change: transform; }
 .hero3__wh[data-w="f"] { left: 75.4%; top: 56%; }
 .hero3__wh[data-w="r"] { left: 15.6%; top: 56%; }
-.hero3__lamp { --g: 0; position: absolute; left: 90%; top: 59.7%; width: calc(var(--cw) * 0.007); height: calc(var(--cw) * 0.012); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; opacity: 1; box-shadow: 0 0 calc(var(--cw) * (0.003 + 0.013 * var(--g))) calc(var(--cw) * (0.0008 + 0.004 * var(--g))) rgba(255, 205, 120, calc(0.32 + 0.4 * var(--g))); }
+.hero3__lamp { --g: 1; position: absolute; left: 90%; top: 59.7%; width: calc(var(--cw) * 0.007); height: calc(var(--cw) * 0.012); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; box-shadow: 0 0 calc(var(--cw) * 0.016) calc(var(--cw) * 0.005) rgba(255, 205, 120, 0.72); }
 .hero3__src { position: absolute; left: 92.9%; top: 60.2%; width: calc(var(--cw) * 0.011); height: calc(var(--cw) * 0.021); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; box-shadow: 0 0 calc(var(--cw) * 0.02) calc(var(--cw) * 0.006) rgba(255, 205, 120, 0.85); opacity: 0; }
-.hero3__tail { position: absolute; left: 1.1%; top: 50.8%; width: 4%; height: 7.1%; border-radius: 38% 22% 22% 38%; background: rgba(255,45,40,0.9); box-shadow: 0 0 calc(var(--cw) * 0.018) calc(var(--cw) * 0.004) rgba(255,40,40,0.8); mix-blend-mode: screen; opacity: 0; }
-.hero3__beam { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0; background: radial-gradient(ellipse 56% 50% at var(--nx, 0) var(--ny, 0), rgba(255,205,120,0.4), transparent 72%); }
-.hero3__stage .marq { position: absolute; z-index: 6; left: 0; right: 0; bottom: 0; }
+.hero3__tail { position: absolute; left: 1.1%; top: 50.8%; width: 4%; height: 7.1%; border-radius: 38% 22% 22% 38%; background: rgba(255,45,40,0.9); box-shadow: 0 0 calc(var(--cw) * 0.018) calc(var(--cw) * 0.004) rgba(255,40,40,0.8); mix-blend-mode: screen; opacity: 0; transition: opacity 0.25s; }
+.hero3__beam, .hero3__dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.hero3__beam { z-index: 5; filter: blur(4px); }
+.hero3__dust { z-index: 6; }
+
+/* the booking button: floats in front of the beam; the light reaches it the moment the lamps are on */
+.hero3__bloom { position: absolute; z-index: 6; background: var(--accent-light); filter: blur(34px); opacity: 0; pointer-events: none; }
+.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 27.8); height: calc(var(--u) * 4.4); min-height: 3rem; display: flex; align-items: center; justify-content: center; gap: calc(var(--u) * 0.85); background: var(--accent); color: var(--midnight); font: 700 max(0.9rem, calc(var(--u) * 1.25))/1 'Golos Text', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; overflow: hidden; }
+.hero3__cta .icon { width: 1.4em; height: 1.4em; flex: none; }
+.hero3__cta > .icon, .hero3__cta > span { position: relative; z-index: 2; }
+.hero3__cta .ov, .hero3__cta .hot, .hero3__cta .edge, .hero3__cta .gloss { position: absolute; pointer-events: none; }
+.hero3__cta .ov { inset: 0; clip-path: inset(0 100% 0 0); background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,248,225,0.55) 45%, rgba(255,255,255,0)); }
+.hero3__cta .hot { inset: 0; background: radial-gradient(circle at 0 50%, rgba(255,244,214,0.9), rgba(255,205,120,0.3) 38%, transparent 66%); opacity: 0; }
+.hero3__cta .edge { top: 0; width: 60px; margin-left: -60px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7)); opacity: 0; mix-blend-mode: screen; }
+.hero3__cta .gloss { top: -10px; bottom: -10px; width: 80px; left: -120px; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-18deg); opacity: 0; }
+@media (hover: hover) { .hero3__cta:hover .gloss { animation: ctaGloss 0.9s ease forwards; } }
+@keyframes ctaGloss { 0% { left: -120px; opacity: 0.9; } 100% { left: 100%; opacity: 0; } }
+
+.hero3__stage .marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; }
 .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--u) * 2.4)); padding: 0; height: calc(1em + var(--u) * 1.8); }
 
-/* numbers: big white, thin line under each, small amber label */
-.hero3__stats { position: absolute; z-index: 6; left: var(--edge); bottom: calc(100% - var(--base) + var(--cw) * 0.289 + var(--u) * 2.6); display: flex; gap: calc(var(--u) * 5.6); }
-.hero3__stats b { display: block; font: 700 calc(var(--u) * 7.2)/1 'Golos Text', sans-serif; color: var(--white); font-variant-numeric: tabular-nums; padding-bottom: calc(var(--u) * 0.35); border-bottom: 1px solid rgba(245,246,248,0.22); }
-.hero3__stats span { display: block; margin-top: calc(var(--u) * 0.55); font: 700 max(0.75rem, calc(var(--u) * 0.6)) 'Golos Text', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
-
-/* caption under the road */
-.hero3__under { position: absolute; z-index: 6; left: var(--edge); top: calc(var(--base) + var(--u) * 1.3); margin: 0; }
-.hero3__under small { display: block; font: 500 max(1rem, calc(var(--u) * 1.95))/1.2 'Golos Text', sans-serif; letter-spacing: 0.04em; color: var(--silver); margin-bottom: calc(var(--u) * 0.3); }
-.hero3__under b { display: block; font: 700 calc(var(--u) * 6.4)/1 'Golos Text', sans-serif; text-transform: uppercase; color: var(--accent); }
-
-/* tall screens (phones, tablets held upright): no scroll-jacking; top to bottom: words, car, numbers, caption */
+/* tall screens (phones, tablets held upright): words, subtitle, numbers, car, button under the road */
 @media (max-aspect-ratio: 1/1) {
-  .hero3 { height: auto; }
   .hero3__stage {
-    position: relative; min-height: 34rem;
+    min-height: 34rem;
     --v: min(1vw, 0.55vh, 6.5px);
-    --top: calc(var(--v) * 18 + max(var(--v) * 4, (100vh - var(--v) * 175) * 0.4));
-    --cw: calc(var(--v) * 90);
-    --base: calc(var(--top) + var(--v) * 89);
+    --top: calc(var(--v) * 24 + max(0px, (100vh - var(--v) * 182) * 0.45));
+    --cw: calc(var(--v) * 80);
+    --base: calc(var(--top) + var(--v) * 117);
   }
-  @supports (height: 100svh) { .hero3__stage { --v: min(1vw, 0.55svh, 6.5px); --top: calc(var(--v) * 18 + max(var(--v) * 4, (100svh - var(--v) * 175) * 0.4)); } }
-  .hero3__t { left: var(--edge); right: auto; top: var(--top); transform: none; text-align: left; font-size: calc(var(--v) * 20); }
-  .hero3__stats { top: calc(var(--base) + var(--v) * 5.2); bottom: auto; gap: calc(var(--v) * 8.6); }
-  .hero3__stats b { font-size: calc(var(--v) * 14.4); padding-bottom: var(--v); }
-  .hero3__stats span { font-size: max(0.75rem, calc(var(--v) * 3)); margin-top: calc(var(--v) * 1.6); letter-spacing: 0.16em; }
-  .hero3__under { top: calc(var(--base) + var(--v) * 35); }
-  .hero3__under small { font-size: max(1rem, calc(var(--v) * 4.1)); margin-bottom: calc(var(--v) * 1); }
-  .hero3__under b { font-size: calc(var(--v) * 11.5); }
-  .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--v) * 6)); padding: 0; height: calc(1em + var(--v) * 4.8); }
+  @supports (height: 100svh) { .hero3__stage { --v: min(1vw, 0.55svh, 6.5px); --top: calc(var(--v) * 24 + max(0px, (100svh - var(--v) * 182) * 0.45)); } }
+  .hero3__t { top: var(--top); font-size: calc(var(--v) * 20); white-space: normal; }
+  .hero3__t > span, .hero3__t > b { display: block; }
+  .hero3__sub { top: calc(var(--top) + var(--v) * 60); font-size: calc(var(--v) * 5.4); }
+  .hero3__stats { top: calc(var(--top) + var(--v) * 70); }
+  .hero3__stats li { padding: 0 calc(var(--v) * 3); }
+  .hero3__stats b { font-size: calc(var(--v) * 6.4); }
+  .hero3__stats span { font-size: max(0.7rem, calc(var(--v) * 2.6)); margin-top: calc(var(--v) * 1.4); letter-spacing: 0.12em; white-space: normal; }
+  .hero3__cta { left: var(--edge); right: var(--edge); width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 5); height: calc(var(--v) * 14.4); font-size: max(0.9rem, calc(var(--v) * 4)); gap: calc(var(--v) * 3); }
+  .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--v) * 6)); height: calc(1em + var(--v) * 4.8); }
 }
