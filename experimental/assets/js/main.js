@@ -213,13 +213,13 @@ function heroScene(stage) {
     const mr = src.getBoundingClientRect(), AX = (mr.left + mr.right) / 2 - sr.left, AY = (mr.top + mr.bottom) / 2 - sr.top;
     const roadY = road.getBoundingClientRect().top - sr.top;
     src.style.opacity = 1;
-    const L = cw * (tall.matches ? 2.1 : 1.195), top = AY - cw * 0.0047, xhit = AX + (roadY - AY) / SLOPE, xEnd = AX + L;
+    const L = cw * (tall.matches ? 2.1 : 1.7), top = AY - cw * 0.0047, xhit = AX + (roadY - AY) / SLOPE, xEnd = AX + L;
 
     // beam: light has no travel time, so the whole beam exists at once and moves with the car.
     // Flat upper edge (cut-off line), lower edge falls onto the road.
     bc.clearRect(0, 0, W, H);
     const g = bc.createLinearGradient(AX, 0, xEnd, 0);
-    g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, tall.matches ? 'rgba(255,230,175,0.42)' : 'rgba(255,230,175,0.3)'); g.addColorStop(1, tall.matches ? 'rgba(255,222,150,0)' : 'rgba(255,222,150,0.05)');
+    g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, 'rgba(255,230,175,0.42)'); g.addColorStop(1, 'rgba(255,222,150,0)');
     bc.fillStyle = g; bc.beginPath(); bc.moveTo(AX, top); bc.lineTo(xEnd, top); bc.lineTo(xEnd, roadY);
     if (xhit < xEnd) bc.lineTo(xhit, roadY); else bc.lineTo(xEnd, AY + 3 + L * SLOPE);
     bc.lineTo(AX, AY + 3); bc.closePath(); bc.fill();
@@ -249,11 +249,14 @@ function heroScene(stage) {
       else { const pts = [[0, 0], [xt, 0]]; for (let i = 0; i <= 8; i++) { const px = xt * (1 - i / 8); pts.push([px, yb(px)]); } poly = 'polygon(' + pts.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')'; }
     }
     ov.style.clipPath = poly;
-    if (tall.matches) {                                          // fade like the light on the road: full near the car, soft to the far end
+    if (!tall.matches) {                                         // wide: the beam's own fade, strong near the car, gone at its tip
+      const m = 'linear-gradient(90deg, #000 ' + (AX - BX) + 'px, rgba(0,0,0,0.5) ' + (AX - BX + L * 0.5) + 'px, transparent ' + (xEnd - BX) + 'px)';
+      ov.style.webkitMaskImage = ov.style.maskImage = m;
+    } else {                                                     // fade like the light on the road: full near the car, soft to the far end
       const xl = clamp(xhit - BX, 0, BW), m = 'linear-gradient(90deg, transparent ' + xl + 'px, #000 ' + (xl + 10) + 'px, rgba(0,0,0,0.5) ' + (xl + (xt - xl) * 0.6) + 'px, transparent ' + xt + 'px)';
       ov.style.webkitMaskImage = ov.style.maskImage = m;
     }
-    ov.style.opacity = tall.matches ? 1 - clamp((t - 2) / 0.8) : 1;   // phone: a soft yellow tint where the beam reaches, gone once the car stands
+    ov.style.opacity = 1 - clamp((t - 2) / 0.8);   // phone: a soft yellow tint where the beam reaches, gone once the car stands
   }
   requestAnimationFrame(frame);
 }
