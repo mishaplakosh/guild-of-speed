@@ -57,7 +57,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
     more.target = '_blank';
     more.rel = 'noopener';
     more.className = 'short-card short-card--more';
-    more.innerHTML = '<span class="short-more__ring"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="short-more__title">Більше на YouTube</span><span class="short-more__text">Ще багато робіт на нашому каналі</span>';
+    more.innerHTML = '<span class="short-more__ring"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span><span class="short-more__title">Більше на YouTube</span>';
     grid.append(more);
     initCarousel(grid);
   } catch (e) {
@@ -70,8 +70,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(fals
 document.getElementById('year').textContent = new Date().getFullYear();
 
 function initCarousel(grid) {
-  const counter = document.getElementById('shortsCounter');
-  const cur = document.getElementById('shortsCur');
   const track = document.getElementById('shortsProgress');
   const thumb = document.getElementById('shortsThumb');
   const pad = n => String(n).padStart(2, '0');
@@ -81,12 +79,10 @@ function initCarousel(grid) {
   function update() {
     const max = grid.scrollWidth - grid.clientWidth;
     const scrollable = max > 2;
-    counter.hidden = !scrollable;
     track.hidden = !scrollable;
     if (!scrollable) return;
     const atEnd = grid.scrollLeft >= max - 2;
     const idx = atEnd ? cards.length : Math.min(cards.length, Math.round(grid.scrollLeft / step()) + 1);
-    cur.textContent = pad(idx);
     grid.classList.toggle('at-end', grid.scrollLeft >= max - 2);
     thumb.style.width = (grid.clientWidth / grid.scrollWidth * 100) + '%';
     thumb.style.left = (grid.scrollLeft / grid.scrollWidth * 100) + '%';
