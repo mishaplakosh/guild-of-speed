@@ -837,3 +837,6 @@ a.contact__value:hover { color: var(--accent); }
 .copy__i { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: square; }
 @media (hover: hover) { .copy:hover { color: var(--white); } }
 .copy.done .copy__i { stroke-width: 2.4; }
+
+/* FOOTER: thin separator between address/number and the working hours */
+.copy + .foot2__p { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px solid rgba(245, 246, 248, 0.14); max-width: 16rem; }
