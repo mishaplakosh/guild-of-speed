@@ -289,3 +289,6 @@ function heroScene(stage) {
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
+
+/* preview of two fill options for the hero: ?fill=speed or ?fill=city */
+{ const f = new URLSearchParams(location.search).get('fill'); if (f) document.body.classList.add('fill-' + f); }

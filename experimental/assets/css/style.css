@@ -603,8 +603,16 @@ a.contact__value:hover { color: var(--accent); }
 .hero3__cta > .icon { position: relative; z-index: 2; }
 .hero3__cta .ov { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: var(--accent); color: var(--midnight); clip-path: inset(0 100% 0 0); pointer-events: none; font-style: normal; }
 .hero3__cta .ov .icon { color: var(--midnight); }
-@media (hover: hover) { .hero3__cta:hover .ov { clip-path: inset(0 0 0 0) !important; } .hero3__cta:hover .icon { transform: translateX(0.3rem); } }
-.hero3__cta:active .ov { clip-path: inset(0 0 0 0) !important; }
+/* hover: the light stays as it is; a white line grows along the bottom */
+.hero3__cta::after { content: ""; position: absolute; z-index: 4; left: 0; bottom: 0; height: 3px; width: 0; background: var(--white); transition: width 0.35s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+@media (hover: hover) { .hero3__cta:hover::after { width: 100%; } }
+.hero3__cta:active::after { width: 100%; }
+
+/* fill for the empty space: ?fill=speed or ?fill=city (body class set in main.js) */
+.hero3__fill { position: absolute; z-index: 0; left: 0; right: 0; top: 0; bottom: 0; pointer-events: none; display: none; }
+.fill-speed .hero3__fill--speed, .fill-city .hero3__fill--city { display: block; }
+.hero3__fill--speed { background: repeating-linear-gradient(180deg, transparent 0 calc(var(--u) * 2.6), rgba(245,246,248,0.16) calc(var(--u) * 2.6) calc(var(--u) * 2.6 + 1px)); -webkit-mask: linear-gradient(90deg, transparent 25%, #000 80%); mask: linear-gradient(90deg, transparent 25%, #000 80%); top: calc(var(--base) - var(--u) * 14); bottom: calc(100% - var(--base)); }
+.hero3__fill--city { top: auto; bottom: calc(100% - var(--base)); height: calc(var(--u) * 12); background: #1a3048; clip-path: polygon(0 62%,8% 62%,8% 30%,20% 30%,20% 75%,38% 75%,38% 15%,52% 15%,52% 50%,70% 50%,70% 85%,86% 85%,86% 40%,100% 40%,100% 100%,0 100%); opacity: 1; }
 
 .hero3__stage .marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; }
 .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--u) * 2.4)); padding: 0; height: calc(1em + var(--u) * 1.8); }
