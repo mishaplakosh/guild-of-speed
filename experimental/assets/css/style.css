@@ -777,8 +777,9 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__cta .ov .icon { color: var(--white); }
 }
 
-/* HERO BUTTON (wide): flat warm yellow where the beam reaches, text stays white */
+/* HERO BUTTON (wide): lit amber, brighter on the car side, with a glow */
 @media (min-aspect-ratio: 1/1) {
-  .hero3__cta .ov { background: rgba(236, 184, 56, 0.72); color: var(--white); }
-  .hero3__cta .ov .icon { color: var(--white); }
+  .hero3__cta { --glow: 0; filter: drop-shadow(0 0 calc(var(--u) * 2.2) rgba(232, 160, 32, calc(var(--glow) * 0.5))); }
+  .hero3__cta .ov { background: linear-gradient(90deg, #f0b840, #e8a020 60%, #c98a1a); color: var(--midnight); }
+  .hero3__cta .ov .icon { color: var(--midnight); }
 }
