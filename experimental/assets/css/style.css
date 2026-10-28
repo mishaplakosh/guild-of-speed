@@ -701,3 +701,4 @@ a.contact__value:hover { color: var(--accent); }
 .sq h3 { position: relative; z-index: 1; align-self: flex-start; margin: 0; padding: 0.7rem 1rem; background: var(--midnight); color: var(--white); transition: background 0.3s, color 0.3s; }
 @media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover img { transform: scale(1.06); } .sq:hover h3 { background: var(--accent); color: var(--midnight); } }
 .sq:active h3 { background: var(--accent); color: var(--midnight); }
+.sq::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(0deg, rgba(13,27,42,0.55), rgba(13,27,42,0.1) 60%); pointer-events: none; }
