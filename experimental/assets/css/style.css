@@ -441,10 +441,10 @@ a.contact__value:hover { color: var(--accent); }
 .marq { background: var(--accent); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
 .marq__t { display: inline-flex; animation: marq 50s linear infinite; }
 .marq span { font: 700 clamp(1.4rem, 3.2vw, 2.4rem)/1 'Golos Text', sans-serif; text-transform: uppercase; padding: 1rem 0; }
-.marq span { display: inline-flex; align-items: center; height: calc(1em + 2rem); }
-/* brand logos: one flat colour, sized by visual weight (compact marks taller, long wordmarks lower) */
-.marq .lg { display: block; height: calc(0.95em * var(--k)); aspect-ratio: var(--ar); background: currentColor; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
-.marq span::after { content: ''; display: inline-block; width: 0.6em; height: 0.6em; margin: 0 1.2em; border: 2px solid var(--midnight); border-radius: 50%; vertical-align: 0.05em; }
+.marq span { display: inline-flex; align-items: center; height: calc(1em + 2rem); margin-right: 3.2em; }
+/* brand logos: one flat colour, each with its own height so they weigh the same; thin ones get a little thicker */
+.marq .lg { display: block; height: calc(var(--h) * 1em); aspect-ratio: var(--ar); background: currentColor; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
+.marq .lg--b { filter: url(#bold); }
 @keyframes marq { to { transform: translateX(-50%); } }
 
 /* service rows (each one will be a category page) */
