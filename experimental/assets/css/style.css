@@ -770,3 +770,9 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__stage { --cw: calc(var(--v) * 66); }
   .hero3__cta { background: #22364d; }
 }
+
+/* HERO BUTTON (phone): the beam only tints it yellow, text stays white */
+@media (max-aspect-ratio: 1/1) {
+  .hero3__cta .ov { background: rgba(232, 160, 32, 0.38); color: var(--white); }
+  .hero3__cta .ov .icon { color: var(--white); }
+}
