@@ -513,15 +513,15 @@ a.contact__value:hover { color: var(--accent); }
 /* ================= bottom of page: address + actions, footer ================= */
 .cta2 { scroll-margin-top: 4.5rem; background: #132439; border-bottom: 1px solid var(--hairline); }
 .tiles { display: flex; min-height: clamp(11rem, 26vh, 16rem); }
-.tiles a { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(1.3rem, 3.5vw, 2.2rem); transition: flex 0.6s cubic-bezier(.2,.8,.2,1), background 0.3s; }
+.tiles a { flex: 1; display: grid; grid-template-rows: auto auto 1fr; align-content: start; row-gap: clamp(0.6rem, 1.2vw, 0.9rem); padding: clamp(1.3rem, 3.5vw, 2.2rem); transition: flex 0.6s cubic-bezier(.2,.8,.2,1), background 0.3s; }
 .tiles a:nth-child(1) { background: var(--accent); color: var(--midnight); }
 .tiles a:nth-child(2) { background: #22364d; color: var(--white); }
 .tiles a:nth-child(3) { background: var(--charcoal); color: var(--white); }
 .tiles b.nw { white-space: nowrap; }
 .tiles small { font: 700 var(--fs-label) 'Golos Text', sans-serif; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.75; }
 .tiles b { display: block; font: 700 var(--fs-h3)/1.05 'Golos Text', sans-serif; text-transform: uppercase; }
-.tiles .icon { width: 2.2rem; height: 2.2rem; align-self: flex-end; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
-@media (hover: hover) { .tiles a:hover { flex: 1.5; } .tiles a:nth-child(2):hover { background: #2a4260; } .tiles a:nth-child(3):hover { background: #22364d; } .tiles a:hover .icon { transform: translate(0.3rem, -0.3rem) scale(1.15); } }
+.tiles .icon { width: 2.2rem; height: 2.2rem; align-self: end; justify-self: end; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
+@media (hover: hover) { .tiles a:hover { flex: 1.5; } .tiles a:nth-child(2):hover, .tiles a:nth-child(3):hover { background: #2f4866; } .tiles a:hover .icon { transform: translate(0.3rem, -0.3rem) scale(1.15); } }
 @media (max-width: 700px) { .tiles { flex-direction: column; } .tiles a { min-height: 8.5rem; } }
 
 .foot2 { position: relative; background: #070d15; padding: 4rem 0 0; overflow: hidden; }
