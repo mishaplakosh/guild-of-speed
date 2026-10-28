@@ -421,6 +421,7 @@ a.contact__value:hover { color: var(--accent); }
 /* ---- section bands: flat, alternating (first screen dark, services light, videos dark, FAQ light) ---- */
 .band { position: relative; }
 .band--alt { background: #132439; }
+#services { background: linear-gradient(#0d1b2a 0 1.75rem, #132439 1.75rem); }
 .band > .section { padding-top: var(--s-section); padding-bottom: var(--s-section); }
 
 /* services: a compact grid of squares (grows to 10+ without turning into a long list) */
