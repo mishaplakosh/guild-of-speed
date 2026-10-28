@@ -213,13 +213,13 @@ function heroScene(stage) {
     const mr = src.getBoundingClientRect(), AX = (mr.left + mr.right) / 2 - sr.left, AY = (mr.top + mr.bottom) / 2 - sr.top;
     const roadY = road.getBoundingClientRect().top - sr.top;
     src.style.opacity = 1;
-    const L = cw * 1.195, top = AY - cw * 0.0047, xhit = AX + (roadY - AY) / SLOPE, xEnd = AX + L;
+    const L = cw * (tall.matches ? 2.1 : 1.195), top = AY - cw * 0.0047, xhit = AX + (roadY - AY) / SLOPE, xEnd = AX + L;
 
     // beam: light has no travel time, so the whole beam exists at once and moves with the car.
     // Flat upper edge (cut-off line), lower edge falls onto the road.
     bc.clearRect(0, 0, W, H);
     const g = bc.createLinearGradient(AX, 0, xEnd, 0);
-    g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, 'rgba(255,230,175,0.3)'); g.addColorStop(1, 'rgba(255,222,150,0.05)');
+    g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, tall.matches ? 'rgba(255,230,175,0.42)' : 'rgba(255,230,175,0.3)'); g.addColorStop(1, tall.matches ? 'rgba(255,222,150,0)' : 'rgba(255,222,150,0.05)');
     bc.fillStyle = g; bc.beginPath(); bc.moveTo(AX, top); bc.lineTo(xEnd, top); bc.lineTo(xEnd, roadY);
     if (xhit < xEnd) bc.lineTo(xhit, roadY); else bc.lineTo(xEnd, AY + 3 + L * SLOPE);
     bc.lineTo(AX, AY + 3); bc.closePath(); bc.fill();
