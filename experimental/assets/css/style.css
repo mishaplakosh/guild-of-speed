@@ -12,6 +12,7 @@
   --accent: #e8a020;
   --accent-light: #f0b840;
   --amber-75: rgba(232, 160, 32, 0.75);   /* the main button colour: amber at 25% transparency */
+  --amber-flat: #b07b1d;                  /* the same colour as a solid, for the hero call button so the light behind it can't change it */
   --silver: #c8cdd6;
   --silver-dim: #8b95a5;
   --white: #f5f6f8;
@@ -167,12 +168,12 @@ img { display: block; max-width: 100%; }
 .hero3__dust { z-index: 6; }
 
 /* call button: translucent amber with centred text and the phone icon pinned right (same on laptop and phone). */
-.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: rgba(232, 160, 32, 0.75); color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
+.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: var(--amber-flat); color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
 .hero3__cta > span { position: relative; z-index: 2; }
 .hero3__cta .icon { position: absolute; z-index: 2; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; color: var(--midnight); transition: transform 0.35s var(--ease); }
 
 /* brand strip: flat logos with thin separators, running along the bottom of the first screen */
-.marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; background: var(--accent); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
+.marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; background: var(--amber-75); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
 .marq__t { display: inline-flex; animation: marq 50s linear infinite; }
 .marq span { position: relative; display: inline-flex; align-items: center; height: calc(var(--u) * 6.4); margin-right: 3.2em; font: 700 max(1.3rem, calc(var(--u) * 2.9))/1 var(--fh); text-transform: uppercase; }
 .marq span::after { content: ""; position: absolute; right: -1.6em; top: 50%; width: 1px; height: 1.1em; transform: translate(50%, -50%); background: currentColor; opacity: 0.35; }
