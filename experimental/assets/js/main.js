@@ -224,10 +224,11 @@ function heroScene(stage) {
     bc.fillStyle = g; bc.beginPath(); bc.moveTo(AX, top); bc.lineTo(xEnd, top); bc.lineTo(xEnd, roadY);
     if (xhit < xEnd) bc.lineTo(xhit, roadY); else bc.lineTo(xEnd, AY + 3 + L * SLOPE);
     bc.lineTo(AX, AY + 3); bc.closePath(); bc.fill();
-    if (xhit < xEnd) {                                          // the light lying on the road
-      const w = xEnd - xhit, rg = bc.createLinearGradient(xhit, 0, xEnd, 0);
-      rg.addColorStop(0, 'rgba(255,244,215,1)'); rg.addColorStop(0.6, 'rgba(255,230,170,0.5)'); rg.addColorStop(1, 'rgba(255,222,150,0)');
-      bc.fillStyle = rg; bc.beginPath(); bc.ellipse(xhit + w / 2, roadY + 5, w / 2, 9, 0, 0, 6.283); bc.fill(); bc.fillRect(xhit, roadY - 2, w, 3);
+    if (xhit < xEnd) {                                          // the light lying on the road, starting right in front of the car
+      bc.globalAlpha = 0.55; bc.fillStyle = g; bc.beginPath(); bc.moveTo(AX, AY + 3); bc.lineTo(xhit, roadY); bc.lineTo(AX, roadY); bc.closePath(); bc.fill(); bc.globalAlpha = 1;   // the air under the beam is not black
+      const x0r = AX + 4, w = xEnd - x0r, k = clamp((xhit - x0r) / w), rg = bc.createLinearGradient(x0r, 0, xEnd, 0);
+      rg.addColorStop(0, 'rgba(255,244,215,0.55)'); rg.addColorStop(k, 'rgba(255,244,215,1)'); rg.addColorStop(k + (1 - k) * 0.6, 'rgba(255,230,170,0.5)'); rg.addColorStop(1, 'rgba(255,222,150,0)');
+      bc.fillStyle = rg; bc.beginPath(); bc.ellipse(x0r + w / 2, roadY + 5, w / 2, 9, 0, 0, 6.283); bc.fill(); bc.fillRect(x0r, roadY - 2, w, 3);
     }
 
     // dust: tiny grains wandering in random directions inside the lit wedge
