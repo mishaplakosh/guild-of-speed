@@ -190,7 +190,7 @@ img { display: block; max-width: 100%; }
     height: auto; min-height: 0;
     --v: min(1vw, calc(var(--sh) * 0.0055), 6.5px);
     --top: calc(var(--v) * 24 + max(0px, (var(--sh) - var(--v) * 182) * 0.45));
-    --hs: min(calc(var(--v) * 20), 15vw);   /* headline size */
+    --hs: min(calc(var(--v) * 17), 12.75vw);   /* headline size */
     --d: calc(var(--v) * 60 - var(--hs) * 2.95 - var(--v) * 3);
     --base: calc(var(--top) + var(--v) * 126 - var(--d));
     --cw: calc(var(--v) * 66);
