@@ -420,7 +420,8 @@ a.contact__value:hover { color: var(--accent); }
 
 /* ---- section bands: flat, alternating (first screen dark, services light, videos dark, FAQ light) ---- */
 .band { position: relative; }
-.band--alt, #services { background: #132439; }
+.band--alt { background: #132439; }
+#services { background: linear-gradient(#0d1b2a 0 1.75rem, #132439 1.75rem); }
 .band > .section { padding-top: var(--s-section); padding-bottom: var(--s-section); }
 
 /* services: a compact grid of squares (grows to 10+ without turning into a long list) */
@@ -604,9 +605,11 @@ a.contact__value:hover { color: var(--accent); }
 .hero3__cta .ov { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: var(--accent); color: var(--midnight); clip-path: inset(0 100% 0 0); pointer-events: none; font-style: normal; }
 .hero3__cta .ov .icon { color: var(--midnight); }
 /* hover: the light stays as it is; a white line grows along the bottom */
-.hero3__cta::after { content: ""; position: absolute; z-index: 4; left: 0; bottom: 0; height: 3px; width: 0; background: var(--white); transition: width 0.35s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
-@media (hover: hover) { .hero3__cta:hover::after { width: 100%; } }
+.hero3__cta::after { content: ""; position: absolute; z-index: 4; left: 0; bottom: 0; height: 3px; width: 0; background: var(--accent); transition: width 0.3s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.hero3__cta::before { content: ""; position: absolute; z-index: 4; right: 0; bottom: 0; width: 3px; height: 0; background: var(--accent); transition: height 0.25s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+@media (hover: hover) { .hero3__cta:hover::after { width: 100%; } .hero3__cta:hover::before { height: 100%; transition-delay: 0.3s; } }
 .hero3__cta:active::after { width: 100%; }
+.hero3__cta:active::before { height: 100%; transition-delay: 0.3s; }
 
 /* fill for the empty space: ?fill=speed or ?fill=city (body class set in main.js) */
 .hero3__fill { position: absolute; z-index: 0; left: 0; right: 0; top: 0; bottom: 0; pointer-events: none; display: none; }
@@ -739,3 +742,25 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__stage { height: auto; }
   .hero3__stage .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 28.4); }
 }
+
+/* BRAND STRIP: thin separators between brands */
+.marq span { position: relative; }
+.marq span::after { content: ""; position: absolute; right: -1.6em; top: 50%; width: 1px; height: 1.1em; transform: translate(50%, -50%); background: currentColor; opacity: 0.35; }
+
+/* HERO BUTTON (wide screens): smaller text, nudged left away from the icon */
+@media (min-aspect-ratio: 1/1) {
+  .hero3__cta { font-size: max(0.85rem, calc(var(--u) * 1.3)); }
+  .hero3__cta, .hero3__cta .ov { padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em + var(--u) * 2) 0 calc(var(--u) * 1.6); }
+}
+
+/* HERO STATS: small amber tick above each item, softer dividers */
+.hero3__stats li { position: relative; border-left-color: rgba(245,246,248,0.12); }
+.hero3__stats li::before { content: ""; position: absolute; top: calc(var(--u) * -1.3); left: calc(var(--u) * 2.2); width: calc(var(--u) * 2.2); height: 2px; background: var(--accent); }
+.hero3__stats li:first-child::before { left: 0; }
+@media (max-aspect-ratio: 1/1) {
+  .hero3__stats li::before { top: calc(var(--v) * -2.6); left: calc(var(--v) * 3); width: calc(var(--v) * 5); }
+  .hero3__stats li:first-child::before { left: 0; }
+}
+
+/* HERO BUTTON (phone): full width, edge to edge */
+@media (max-aspect-ratio: 1/1) { .hero3__cta { left: 0; right: 0; } }
