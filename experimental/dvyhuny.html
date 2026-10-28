@@ -13,11 +13,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/experimental/assets/css/style.css?v=119">
+  <link rel="stylesheet" href="/experimental/assets/css/style.css?v=120">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <filter id="bold" x="-5%" y="-5%" width="110%" height="110%"><feMorphology operator="dilate" radius="1"/></filter>
     <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
     <symbol id="i-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></symbol>
     <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
@@ -36,6 +37,7 @@
     <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
     <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="16"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
   </svg>
   <header class="nav" id="nav">
@@ -103,7 +105,8 @@
   <section class="cta2" id="contacts">
     <div class="cta2__map"><iframe src="https://maps.google.com/maps?q=49.8444869,23.9954202&z=17&ie=UTF8&output=embed" title="Карта: Guild of Speed, вул. Залізнична, 7, Львів" loading="lazy" allowfullscreen></iframe></div>
     <div class="tiles">
-      <a href="https://maps.app.goo.gl/MFkGtPc2WMFkr57UA" target="_blank" rel="noopener"><small>Маршрут</small><b>Прокласти маршрут</b><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></a>
+      <a href="https://maps.app.goo.gl/MFkGtPc2WMFkr57UA" target="_blank" rel="noopener"><small>Маршрут</small><b>Прокласти<br>маршрут</b><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></a>
+      <a href="tel:+380636000505"><small>Телефон</small><b class="nw">+380 63 600 0505</b><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></a>
       <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener"><small>Написати</small><b>Telegram</b><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg></a>
     </div>
   </section>
@@ -126,8 +129,8 @@
   <footer class="foot2" id="foot">
     <div class="foot2__top">
       <div class="foot2__brand">
-        <a class="foot2__logo" href="#hero" aria-label="Guild of Speed — на початок"><img src="/assets/img/logo.webp" alt="" width="48" height="48"></a>
-        <a class="foot2__num" href="tel:+380636000505">+380 63 600 0505</a>
+        <span class="foot2__k">Працюємо</span>
+        <p class="foot2__p">Пн–Пт 10:00–19:00<br>Сб 10:00–15:00<br>вул. Залізнична, 7, Львів</p>
       </div>
       <div class="foot2__col">
         <h4>Послуги</h4>
@@ -150,11 +153,11 @@
     <div class="foot2__word" aria-hidden="true">GUILD OF SPEED</div>
     <div class="foot2__bar">
       <span>© <span id="year"></span> Guild of Speed</span>
-      <a class="foot2__up" href="#hero">Нагору <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="foot2__up" href="#hero">Нагору <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg></a>
     </div>
   </footer>
 
 
-  <script src="/experimental/assets/js/main.js?v=119" defer></script>
+  <script src="/experimental/assets/js/main.js?v=120" defer></script>
 </body>
 </html>
