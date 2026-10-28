@@ -129,9 +129,9 @@ img { display: block; max-width: 100%; }
 .hero3__stats span { display: block; margin-top: calc(var(--u) * 0.7); font: 700 max(0.75rem, calc(var(--u) * 0.85)) var(--fh); letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); white-space: nowrap; }
 
 /* giant outlined name drifting slowly behind everything */
-.hero3__ghost { position: absolute; z-index: 0; left: 0; right: 0; top: calc(var(--u) * 28); overflow: hidden; pointer-events: none; font: 900 calc(var(--u) * 17)/1 var(--fh); text-transform: uppercase; }
+.hero3__ghost { position: absolute; z-index: 1; left: 0; right: 0; top: calc(var(--u) * 28); overflow: hidden; pointer-events: none; font: 900 calc(var(--u) * 17)/1 var(--fh); text-transform: uppercase; }
 .hero3__ghost svg { display: block; width: 14000px; height: 1.15em; overflow: visible; animation: ghost 80s linear infinite; }
-.hero3__ghost text { white-space: pre; dominant-baseline: text-before-edge; fill: none; stroke: rgba(232,160,32,0.28); stroke-width: 4px; stroke-linejoin: round; }   /* outline only: the mask removes the inner half of the stroke, so overlapping letter shapes leave no seams (Windows) */
+.hero3__ghost text { white-space: pre; dominant-baseline: text-before-edge; fill: none; stroke: rgba(232,160,32,0.4); stroke-width: 4px; stroke-linejoin: round; }   /* outline only: the mask removes the inner half of the stroke, so overlapping letter shapes leave no seams (Windows) */
 .hero3__ghost mask text { fill: #000; stroke: none; }
 @keyframes ghost { to { transform: translateX(-50%); } }
 
