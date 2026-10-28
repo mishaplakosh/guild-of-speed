@@ -179,7 +179,7 @@ function heroScene(stage) {
   const tall = matchMedia('(max-aspect-ratio: 1/1)');
   const $ = s => stage.querySelector(s);
   const car = $('.hero3__car'), road = $('.hero3__road'), tail = $('.hero3__tail'), src = $('.hero3__src');
-  const cta = $('.hero3__cta'), bloom = $('.hero3__bloom'), ov = $('.ov'), hot = $('.hot'), edgeEl = $('.edge'), gloss = $('.gloss');
+  const cta = $('.hero3__cta'), ov = $('.ov');
   const stats = $('.hero3__stats'), wheels = [...stage.querySelectorAll('.hero3__wh')];
   const bcv = $('.hero3__beam'), dcv = $('.hero3__dust'), bc = bcv.getContext('2d'), dc = dcv.getContext('2d');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), eo = v => 1 - Math.pow(1 - clamp(v), 3);
@@ -223,13 +223,13 @@ function heroScene(stage) {
     // Flat upper edge (cut-off line), lower edge falls onto the road.
     bc.clearRect(0, 0, W, H);
     const g = bc.createLinearGradient(AX, 0, xEnd, 0);
-    g.addColorStop(0, 'rgba(255,214,140,0.85)'); g.addColorStop(0.5, 'rgba(255,196,110,0.36)'); g.addColorStop(1, 'rgba(255,190,100,0.08)');
+    g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, 'rgba(255,230,175,0.3)'); g.addColorStop(1, 'rgba(255,222,150,0.05)');
     bc.fillStyle = g; bc.beginPath(); bc.moveTo(AX, top); bc.lineTo(xEnd, top); bc.lineTo(xEnd, roadY);
     if (xhit < xEnd) bc.lineTo(xhit, roadY); else bc.lineTo(xEnd, AY + 3 + L * SLOPE);
     bc.lineTo(AX, AY + 3); bc.closePath(); bc.fill();
     if (xhit < xEnd) {                                          // the light lying on the road
       const w = xEnd - xhit, rg = bc.createLinearGradient(xhit, 0, xEnd, 0);
-      rg.addColorStop(0, 'rgba(255,224,170,1)'); rg.addColorStop(0.6, 'rgba(255,196,120,0.5)'); rg.addColorStop(1, 'rgba(255,190,110,0)');
+      rg.addColorStop(0, 'rgba(255,244,215,1)'); rg.addColorStop(0.6, 'rgba(255,230,170,0.5)'); rg.addColorStop(1, 'rgba(255,222,150,0)');
       bc.fillStyle = rg; bc.beginPath(); bc.ellipse(xhit + w / 2, roadY + 5, w / 2, 9, 0, 0, 6.283); bc.fill(); bc.fillRect(xhit, roadY - 2, w, 3);
     }
 
@@ -252,12 +252,7 @@ function heroScene(stage) {
       if (tall.matches) poly = 'inset(0 ' + ((1 - xt / BW) * 100) + '% 0 0)';
       else { const pts = [[0, 0], [xt, 0]]; for (let i = 0; i <= 8; i++) { const px = xt * (1 - i / 8); pts.push([px, yb(px)]); } poly = 'polygon(' + pts.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')'; }
     }
-    const lit = xt / BW, breathe = lit > 0.98 && !reduce ? 1 + 0.12 * Math.sin(now / 380) : 1;
     ov.style.clipPath = poly;
-    edgeEl.style.left = xt + 'px'; edgeEl.style.height = (tall.matches ? BH : yb(xt)) + 'px'; edgeEl.style.opacity = lit > 0.01 && lit < 0.99 ? 0.9 : 0;
-    hot.style.opacity = clamp(lit / 0.1) * (1 - clamp((lit - 0.45) / 0.55));
-    cta.style.boxShadow = '0 0 ' + (60 * lit * breathe) + 'px rgba(255,177,61,' + (0.6 * lit) + ')';
-    bloom.style.cssText += ';left:' + (BX - 10) + 'px;top:' + (BY - 10) + 'px;width:' + (BW + 20) + 'px;height:' + (BH + 20) + 'px;opacity:' + (0.55 * lit * breathe).toFixed(3);
   }
   requestAnimationFrame(frame);
 }

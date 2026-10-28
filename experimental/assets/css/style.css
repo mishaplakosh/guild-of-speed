@@ -592,21 +592,19 @@ a.contact__value:hover { color: var(--accent); }
 .hero3__src { position: absolute; left: 92.9%; top: 60.2%; width: calc(var(--cw) * 0.011); height: calc(var(--cw) * 0.021); transform: translate(-50%, -50%); border-radius: 50%; background: #fff4d6; box-shadow: 0 0 calc(var(--cw) * 0.02) calc(var(--cw) * 0.006) rgba(255, 205, 120, 0.85); opacity: 0; }
 .hero3__tail { position: absolute; left: 1.1%; top: 50.8%; width: 4%; height: 7.1%; border-radius: 38% 22% 22% 38%; background: rgba(255,45,40,0.9); box-shadow: 0 0 calc(var(--cw) * 0.018) calc(var(--cw) * 0.004) rgba(255,40,40,0.8); mix-blend-mode: screen; opacity: 0; transition: opacity 0.25s; }
 .hero3__beam, .hero3__dust { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.hero3__beam { z-index: 5; filter: blur(4px); }
+.hero3__beam { z-index: 5; filter: blur(1.4px); }
 .hero3__dust { z-index: 6; }
 
-/* the booking button: floats in front of the beam; the light reaches it the moment the lamps are on */
-.hero3__bloom { position: absolute; z-index: 6; background: var(--accent-light); filter: blur(34px); opacity: 0; pointer-events: none; }
-.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 27.8); height: calc(var(--u) * 4.4); min-height: 3rem; display: flex; align-items: center; justify-content: center; gap: calc(var(--u) * 0.85); background: var(--accent); color: var(--midnight); font: 700 max(0.9rem, calc(var(--u) * 1.25))/1 'Golos Text', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; overflow: hidden; }
-.hero3__cta .icon { width: 1.4em; height: 1.4em; flex: none; }
-.hero3__cta > .icon, .hero3__cta > span { position: relative; z-index: 2; }
-.hero3__cta .ov, .hero3__cta .hot, .hero3__cta .edge, .hero3__cta .gloss { position: absolute; pointer-events: none; }
-.hero3__cta .ov { inset: 0; clip-path: inset(0 100% 0 0); background: linear-gradient(100deg, rgba(255,255,255,0), rgba(255,248,225,0.55) 45%, rgba(255,255,255,0)); }
-.hero3__cta .hot { inset: 0; background: radial-gradient(circle at 0 50%, rgba(255,244,214,0.9), rgba(255,205,120,0.3) 38%, transparent 66%); opacity: 0; }
-.hero3__cta .edge { top: 0; width: 60px; margin-left: -60px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7)); opacity: 0; mix-blend-mode: screen; }
-.hero3__cta .gloss { top: -10px; bottom: -10px; width: 80px; left: -120px; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.6), transparent); transform: skewX(-18deg); opacity: 0; }
-@media (hover: hover) { .hero3__cta:hover .gloss { animation: ctaGloss 0.9s ease forwards; } }
-@keyframes ctaGloss { 0% { left: -120px; opacity: 0.9; } 100% { left: 100%; opacity: 0; } }
+/* the booking button: same language as the service squares (dark tile, turns amber with dark text).
+   It floats in front of the beam; the part the light touches turns amber. */
+.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 27.8); height: calc(var(--u) * 4.4); min-height: 3rem; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: #1b2838; color: var(--white); font: 700 max(0.9rem, calc(var(--u) * 1.25))/1 'Golos Text', sans-serif; letter-spacing: 0.06em; text-transform: uppercase; overflow: hidden; }
+.hero3__cta .icon { width: 1.5em; height: 1.5em; flex: none; color: var(--accent); transition: transform 0.35s cubic-bezier(.2,.8,.2,1); }
+.hero3__cta > span { position: relative; z-index: 2; }
+.hero3__cta > .icon { position: relative; z-index: 2; }
+.hero3__cta .ov { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: var(--accent); color: var(--midnight); clip-path: inset(0 100% 0 0); pointer-events: none; font-style: normal; }
+.hero3__cta .ov .icon { color: var(--midnight); }
+@media (hover: hover) { .hero3__cta:hover .ov { clip-path: inset(0 0 0 0) !important; } .hero3__cta:hover .icon { transform: translateX(0.3rem); } }
+.hero3__cta:active .ov { clip-path: inset(0 0 0 0) !important; }
 
 .hero3__stage .marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; }
 .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--u) * 2.4)); padding: 0; height: calc(1em + var(--u) * 1.8); }
@@ -628,6 +626,7 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__stats li { padding: 0 calc(var(--v) * 3); }
   .hero3__stats b { font-size: calc(var(--v) * 6.4); }
   .hero3__stats span { font-size: max(0.7rem, calc(var(--v) * 2.6)); margin-top: calc(var(--v) * 1.4); letter-spacing: 0.12em; white-space: normal; }
-  .hero3__cta { left: var(--edge); right: var(--edge); width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 5); height: calc(var(--v) * 14.4); font-size: max(0.9rem, calc(var(--v) * 4)); gap: calc(var(--v) * 3); }
+  .hero3__cta { left: var(--edge); right: var(--edge); width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 5); height: calc(var(--v) * 14.4); font-size: max(0.9rem, calc(var(--v) * 4)); padding: 0 calc(var(--v) * 4); }
+  .hero3__cta .ov { padding: 0 calc(var(--v) * 4); }
   .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--v) * 6)); height: calc(1em + var(--v) * 4.8); }
 }
