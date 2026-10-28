@@ -360,3 +360,12 @@ document.querySelectorAll('a[href="#contacts"]:not([data-book])').forEach(a => a
   el.addEventListener('click', e => { if (e.target === el || e.target.closest('.rt__x') || e.target.closest('.rt__o')) close(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) close(); });
 })();
+
+/* tap the address to copy it */
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => {
+  const txt = b.dataset.copy, t = b.querySelector('.copy__t'), orig = t.textContent;
+  const done = () => { b.classList.add('done'); t.textContent = 'Скопійовано'; setTimeout(() => { b.classList.remove('done'); t.textContent = orig; }, 1600); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(done, () => fallback());
+  else fallback();
+  function fallback() { const a = document.createElement('textarea'); a.value = txt; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); done(); } catch (e) {} a.remove(); }
+}));
