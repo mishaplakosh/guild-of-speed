@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experimental — Діагностика | Guild of Speed</title>
+  <meta name="description" content="Hidden preview of the new service page. Not indexed.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#0d1b2a">
+  <link rel="icon" type="image/png" href="/assets/icons/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="/assets/img/hero-bg.webp" as="image" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/experimental/assets/css/style.css?v=119">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-navigation" viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="i-gauge" viewBox="0 0 24 24"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></symbol>
+    <symbol id="i-spring" viewBox="0 0 24 24"><path d="M12 2v3"/><path d="m7 7 10 2.5L7 12l10 2.5L7 17"/><path d="M12 19v3"/></symbol>
+    <symbol id="i-droplets" viewBox="0 0 24 24"><path d="M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05z"/><path d="M12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+    <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4M22 5h-4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></symbol>
+    <symbol id="i-infinity" viewBox="0 0 24 24"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12"/><path d="M18 6 6 18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  </svg>
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#hero" class="nav__brand" aria-label="Guild of Speed — на початок">
+        <img src="/assets/img/logo.webp" alt="Guild of Speed" class="nav__logo" width="52" height="52">
+        <span class="nav__name">GUILD <span class="nav__of">OF</span> SPEED</span>
+      </a>
+      <nav class="nav__links" aria-label="Головне меню">
+        <a href="index.html#services">Послуги</a>
+        <a href="index.html#video">Відео</a>
+        <a href="index.html#faq">Питання</a>
+        <a href="#contacts">Контакти</a>
+      </nav>
+      <a href="tel:+380636000505" class="btn btn--primary nav__cta">Зателефонувати</a>
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mobileMenu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <aside class="mobile-menu" id="mobileMenu" aria-label="Меню">
+    <nav class="mobile-menu__links">
+      <a href="index.html#services">Послуги</a>
+      <a href="index.html#video">Відео</a>
+      <a href="index.html#faq">Питання</a>
+      <a href="#contacts">Контакти</a>
+      <a href="tel:+380636000505" class="btn btn--primary">Зателефонувати</a>
+      <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener" class="btn btn--ghost">Telegram</a>
+    </nav>
+  </aside>
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
+  <main>
+  <section class="cat" id="hero">
+    <div class="cat__in">
+      <a class="cat__back link-arrow" href="index.html#services"><svg class="icon icon--flip" aria-hidden="true"><use href="#i-arrow"/></svg> Усі послуги</a>
+      <h1 class="cat__title">Діагностика</h1>
+      <p class="cat__lead">Точний діагноз до початку ремонту.</p>
+    </div>
+  </section>
+  <section class="band" id="works">
+    <div class="section">
+      <h2 class="section__title">Що робимо</h2>
+      <div class="cat__split">
+        <ol class="works">
+<li><span class="work__n">01</span><span>Комп'ютерна діагностика всіх систем</span></li>
+<li><span class="work__n">02</span><span>Датчики та блоки управління</span></li>
+<li><span class="work__n">03</span><span>Діагностика двигуна</span></li>
+<li><span class="work__n">04</span><span>Діагностика ходової</span></li>
+        </ol>
+        <img class="cat__img" src="/experimental/assets/img/services/diagnostics-wide.webp" alt="Комп'ютерна діагностика BMW у Львові" width="800" height="523">
+      </div>
+    </div>
+  </section>
+  <section class="band band--alt" id="steps">
+    <div class="section">
+      <h2 class="section__title">Три кроки</h2>
+      <div class="steps">
+<div class="step"><b>01</b><h3>Дзвінок</h3></div>
+<div class="step"><b>02</b><h3>Діагностика</h3></div>
+<div class="step"><b>03</b><h3>Ремонт і гарантія</h3></div>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- CTA BAND -->
+  <section class="cta2" id="contacts">
+    <div class="cta2__map"><iframe src="https://maps.google.com/maps?q=49.8444869,23.9954202&z=17&ie=UTF8&output=embed" title="Карта: Guild of Speed, вул. Залізнична, 7, Львів" loading="lazy" allowfullscreen></iframe></div>
+    <div class="tiles">
+      <a href="https://maps.app.goo.gl/MFkGtPc2WMFkr57UA" target="_blank" rel="noopener"><small>Маршрут</small><b>Прокласти маршрут</b><svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg></a>
+      <a href="https://t.me/Guildofspeed" target="_blank" rel="noopener"><small>Написати</small><b>Telegram</b><svg class="icon" aria-hidden="true"><use href="#i-send"/></svg></a>
+    </div>
+  </section>
+
+  <section class="band" id="more">
+    <div class="section">
+      <h2 class="section__title">Інші послуги</h2>
+      <div class="rows">
+<a class="row" href="ohlyad.html" data-img="/experimental/assets/img/services/inspection-wide.webp"><span class="row__n">01</span><span class="row__t"><h3>Огляд перед купівлею</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+<a class="row" href="dvyhuny.html" data-img="/assets/img/services/engine.webp"><span class="row__n">02</span><span class="row__t"><h3>Двигуни</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+<a class="row" href="lantsyug-hrm.html" data-img="/experimental/assets/img/services/timing-wide.webp"><span class="row__n">03</span><span class="row__t"><h3>Заміна ланцюга ГРМ</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+<a class="row" href="ridyny.html" data-img="/assets/img/services/fluids.webp"><span class="row__n">04</span><span class="row__t"><h3>Рідини й фільтри</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+<a class="row" href="podviska.html" data-img="/assets/img/services/suspension.webp"><span class="row__n">05</span><span class="row__t"><h3>Підвіска</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+<a class="row" href="elektronika.html" data-img="/experimental/assets/img/services/electronics-wide.webp"><span class="row__n">06</span><span class="row__t"><h3>Електроніка</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+<a class="row" href="detejling.html" data-img="/assets/img/services/detailing.webp"><span class="row__n">07</span><span class="row__t"><h3>Детейлінг</h3></span><span class="row__go"><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot2" id="foot">
+    <div class="foot2__top">
+      <div class="foot2__brand">
+        <a class="foot2__logo" href="#hero" aria-label="Guild of Speed — на початок"><img src="/assets/img/logo.webp" alt="" width="48" height="48"></a>
+        <a class="foot2__num" href="tel:+380636000505">+380 63 600 0505</a>
+      </div>
+      <div class="foot2__col">
+        <h4>Послуги</h4>
+        <a href="diagnostyka.html">Діагностика</a>
+        <a href="ohlyad.html">Огляд перед купівлею</a>
+        <a href="dvyhuny.html">Двигуни</a>
+        <a href="lantsyug-hrm.html">Заміна ланцюга ГРМ</a>
+        <a href="ridyny.html">Рідини й фільтри</a>
+        <a href="podviska.html">Підвіска</a>
+        <a href="elektronika.html">Електроніка</a>
+        <a href="detejling.html">Детейлінг</a>
+      </div>
+      <div class="foot2__col">
+        <h4>Соцмережі</h4>
+        <a href="https://www.instagram.com/guild.ofspeed/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@guildofspeed" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.tiktok.com/@guild.ofspeed" target="_blank" rel="noopener">TikTok</a>
+      </div>
+    </div>
+    <div class="foot2__word" aria-hidden="true">GUILD OF SPEED</div>
+    <div class="foot2__bar">
+      <span>© <span id="year"></span> Guild of Speed</span>
+      <a class="foot2__up" href="#hero">Нагору <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+  </footer>
+
+
+  <script src="/experimental/assets/js/main.js?v=119" defer></script>
+</body>
+</html>

@@ -421,7 +421,7 @@ a.contact__value:hover { color: var(--accent); }
 /* ---- section bands: flat, alternating (first screen dark, services light, videos dark, FAQ light) ---- */
 .band { position: relative; }
 .band--alt { background: #132439; }
-#services { background: linear-gradient(#0d1b2a 0 1.75rem, #132439 1.75rem); }
+#services { background: linear-gradient(#070d15 0 1.75rem, #132439 1.75rem); }
 .band > .section { padding-top: var(--s-section); padding-bottom: var(--s-section); }
 
 /* services: a compact grid of squares (grows to 10+ without turning into a long list) */
@@ -701,10 +701,10 @@ a.contact__value:hover { color: var(--accent); }
 /* ================= SERVICE TILES WITH PHOTOS ================= */
 .sq { justify-content: flex-end; padding: 0; overflow: hidden; isolation: isolate; }
 .sq img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
-.sq h3 { position: relative; z-index: 1; align-self: flex-start; margin: 0; padding: 0.7rem 1rem; background: var(--midnight); color: var(--white); transition: background 0.3s, color 0.3s; }
-@media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover img { transform: scale(1.06); } .sq:hover h3 { background: var(--accent); color: var(--midnight); } }
-.sq:active h3 { background: var(--accent); color: var(--midnight); }
-.sq::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(0deg, rgba(13,27,42,0.55), rgba(13,27,42,0.1) 60%); pointer-events: none; }
+.sq h3 { position: relative; z-index: 1; align-self: flex-start; margin: 0; padding: 0.9rem 1rem; background: none; color: var(--white); text-shadow: 0 1px 12px rgba(7,13,21,0.7); transition: color 0.3s; }
+@media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover h3 { color: var(--accent); } }
+.sq:active h3 { color: var(--accent); }
+.sq::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(0deg, rgba(7,13,21,0.85), rgba(7,13,21,0.35) 40%, rgba(7,13,21,0) 70%); pointer-events: none; }
 /* tall screens: headline fits on three lines; hero ends right under the button */
 @media (max-aspect-ratio: 1/1) {
   .hero3__t { font-size: min(calc(var(--v) * 20), 15vw); white-space: nowrap; }
@@ -784,3 +784,23 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__cta .ov { background: linear-gradient(90deg, #f0b840, #e8a020 60%, #c98a1a); color: var(--midnight); }
   .hero3__cta .ov .icon { color: var(--midnight); }
 }
+
+/* HERO: same dark colour as the footer */
+.hero3__stage { background: #070d15; }
+
+/* SERVICE TILES: 8 tiles = 4 columns on wide screens, 2 on narrow ones */
+.sq-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .sq-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* SERVICE TILES: the whole tile grows 5% on hover */
+.sq { transition: transform 0.3s cubic-bezier(.2,.8,.2,1); }
+@media (hover: hover) { .sq:hover { transform: scale(1.05); z-index: 2; } }
+
+/* ANCHORS (phone): the amber dash above each section title stays clear of the fixed header */
+@media (max-width: 900px) { .band { scroll-margin-top: 2rem; } }
+
+/* SERVICE PAGES: "all services" back link as a dark tile, same language as the header button */
+.cat__back { gap: 0.7rem; min-height: 3rem; padding: 0 1.3rem; background: #1b2838; color: var(--accent); font: 700 0.85rem 'Golos Text', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
+.cat__back .icon { color: var(--accent); }
+.cat__back:hover { background: var(--accent); color: var(--midnight); }
+.cat__back:hover .icon { color: var(--midnight); transform: scaleX(-1) translateX(0.25rem); }
