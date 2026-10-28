@@ -53,8 +53,7 @@ function heroScene(stage) {
   const tall = matchMedia('(max-aspect-ratio: 1/1)');
   const $ = s => stage.querySelector(s);
   const car = $('.hero3__car'), road = $('.hero3__road'), tail = $('.hero3__tail'), src = $('.hero3__src');
-  const cta = $('.hero3__cta'), ov = $('.ov');
-  const stats = $('.hero3__stats'), wheels = [...stage.querySelectorAll('.hero3__wh')];
+    const stats = $('.hero3__stats'), wheels = [...stage.querySelectorAll('.hero3__wh')];
   const bcv = $('.hero3__beam'), dcv = $('.hero3__dust'), bc = bcv.getContext('2d'), dc = dcv.getContext('2d');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), eo = v => 1 - Math.pow(1 - clamp(v), 3);
   const SLOPE = Math.tan(0.155);                              // the lower edge of the beam falls about 9 degrees onto the road
@@ -122,18 +121,6 @@ function heroScene(stage) {
       dc.fillStyle = 'rgba(255,214,150,' + (al * 0.3).toFixed(3) + ')'; dc.beginPath(); dc.arc(p.x, p.y, p.r * 3, 0, 6.283); dc.fill();
     });
 
-    // the button lights up on phones only: the stretch under the light on the road, fading towards the far end; dark once the car stands.
-    // (On laptops it is a plain translucent amber button; the light passes behind it.)
-    if (isTall) {
-      const cr = cta.getBoundingClientRect(), BX = cr.left - sr.left, BW = cr.width;
-      const xt = clamp(xEnd - BX, 0, BW), xl = clamp(xhit - BX, 0, BW), off = 'inset(0 100% 0 0)';
-      const poly = xt > 0 && xl < xt ? 'inset(0 ' + ((1 - xt / BW) * 100) + '% 0 ' + (xl / BW * 100) + '%)' : off;
-      const fade = 1 - clamp((t - DRIVE) / 0.8);
-      ov.style.clipPath = poly;
-      ov.style.webkitMaskImage = ov.style.maskImage = 'linear-gradient(90deg, transparent ' + xl + 'px, #000 ' + (xl + 10) + 'px, rgba(0,0,0,0.5) ' + (xl + (xt - xl) * 0.6) + 'px, transparent ' + xt + 'px)';
-      ov.style.opacity = fade;
-      cta.style.setProperty('--glow', ((poly === off ? 0 : 0.6) * fade).toFixed(3));
-    }
   }
   requestAnimationFrame(frame);
 }
