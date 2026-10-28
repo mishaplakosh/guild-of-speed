@@ -779,6 +779,6 @@ a.contact__value:hover { color: var(--accent); }
 
 /* HERO BUTTON (wide): flat warm yellow where the beam reaches, text stays white */
 @media (min-aspect-ratio: 1/1) {
-  .hero3__cta .ov { background: rgba(232, 160, 32, 0.55); color: var(--white); }
+  .hero3__cta .ov { background: rgba(236, 184, 56, 0.72); color: var(--white); }
   .hero3__cta .ov .icon { color: var(--white); }
 }
