@@ -337,3 +337,26 @@ document.querySelectorAll('a[href="#contacts"]:not([data-book])').forEach(a => a
   if (m) { m.classList.remove('open'); b && b.classList.remove('open'); o && o.classList.remove('open'); b && b.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
   scrollTo({ top: t.getBoundingClientRect().bottom + scrollY - innerHeight, behavior: 'smooth' });
 }));
+
+/* "Прокласти маршрут" on phones: choose Google Maps / Apple Maps (Apple devices only) / Waze */
+(function () {
+  const tile = document.querySelector('.tiles a[href*="maps.app.goo.gl"]');
+  if (!tile) return;
+  const phone = matchMedia('(max-width: 900px), (pointer: coarse)');
+  const ll = '49.8444869,23.9954202';
+  const apple = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  const opts = [['Google Maps', tile.href], apple ? ['Apple Maps', 'https://maps.apple.com/?daddr=' + ll + '&dirflg=d&q=Guild%20of%20Speed'] : null, ['Waze', 'https://waze.com/ul?ll=' + ll + '&navigate=yes']].filter(Boolean);
+  const el = document.createElement('div');
+  el.className = 'rt'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Прокласти маршрут');
+  el.innerHTML = '<div class="rt__sheet"><p class="rt__k">Прокласти маршрут</p>' + opts.map(o => '<a class="rt__o" href="' + o[1] + '" target="_blank" rel="noopener">' + o[0] + '</a>').join('') + '<button class="rt__x" type="button">Закрити</button></div>';
+  document.body.appendChild(el);
+  const close = () => { el.classList.remove('open'); document.body.style.overflow = ''; setTimeout(() => { if (!el.classList.contains('open')) el.hidden = true; }, 300); };
+  tile.addEventListener('click', e => {
+    if (!phone.matches) return;
+    e.preventDefault();
+    el.hidden = false; document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => el.classList.add('open'));
+  });
+  el.addEventListener('click', e => { if (e.target === el || e.target.closest('.rt__x') || e.target.closest('.rt__o')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) close(); });
+})();
