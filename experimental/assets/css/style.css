@@ -168,7 +168,13 @@ img { display: block; max-width: 100%; }
 
 /* call button: translucent amber with centred text and the phone icon pinned right (same on laptop and phone). */
 .hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: var(--amber-75); transition: background 0.6s ease; color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
-.hero3__stage.stopped .hero3__cta { background: var(--accent); }   /* the car has stopped: the button turns bright and solid */
+.hero3__stage.stopped .hero3__cta { background-color: var(--accent); background-image: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.7) 50%, transparent 62%); background-size: 300% 100%; background-repeat: no-repeat; animation: ctaPop 0.8s var(--ease), ctaGlow 1.3s ease-out, ctaShine 1s ease-in-out 0.1s; }
+.hero3__stage.stopped .hero3__cta .icon { animation: ctaRing 0.8s ease-in-out 0.45s; }
+/* the car has stopped: the button turns bright and solid, pops, sends out a pulse of light, a gleam runs across and the phone rings */
+@keyframes ctaPop { 0% { transform: scale(1); } 35% { transform: scale(1.05); } 100% { transform: scale(1); } }
+@keyframes ctaGlow { 0% { filter: drop-shadow(0 0 0 rgba(232, 160, 32, 0.9)); } 100% { filter: drop-shadow(0 0 2.2rem rgba(232, 160, 32, 0)); } }
+@keyframes ctaShine { from { background-position: 85% 0; } to { background-position: 15% 0; } }
+@keyframes ctaRing { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-16deg); } 40% { transform: rotate(14deg); } 60% { transform: rotate(-9deg); } 80% { transform: rotate(5deg); } }
 .hero3__cta > span { position: relative; z-index: 2; }
 .hero3__cta .icon { position: absolute; z-index: 2; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; color: var(--midnight); transition: transform 0.35s var(--ease); }
 
@@ -429,6 +435,6 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .marq__t, .hero3__ghost svg, .lightbox, .faq-list details p { animation: none; }
+  .marq__t, .hero3__ghost svg, .lightbox, .faq-list details p, .hero3__stage.stopped .hero3__cta, .hero3__stage.stopped .hero3__cta .icon { animation: none; }
   .foot2 a { opacity: 1; transform: none; }
 }
