@@ -764,3 +764,23 @@ a.contact__value:hover { color: var(--accent); }
 
 /* HERO BUTTON (phone): full width, edge to edge */
 @media (max-aspect-ratio: 1/1) { .hero3__cta { left: 0; right: 0; } }
+
+/* HERO BUTTON + CAR (phone): smaller car, a visible dark button */
+@media (max-aspect-ratio: 1/1) {
+  .hero3__stage { --cw: calc(var(--v) * 66); }
+  .hero3__cta { background: #22364d; }
+}
+
+/* HERO BUTTON (phone): amber where the light on the road reaches, with a glow; dark at rest */
+@media (max-aspect-ratio: 1/1) {
+  .hero3__cta { --glow: 0; filter: drop-shadow(0 0 calc(var(--v) * 4) rgba(232, 160, 32, calc(var(--glow) * 0.5))); }
+  .hero3__cta .ov { background: linear-gradient(90deg, #f0b840, #e8a020 60%, #c98a1a); color: var(--midnight); }
+  .hero3__cta .ov .icon { color: var(--midnight); }
+}
+
+/* HERO BUTTON (wide): lit amber, brighter on the car side, with a glow */
+@media (min-aspect-ratio: 1/1) {
+  .hero3__cta { --glow: 0; filter: drop-shadow(0 0 calc(var(--u) * 2.2) rgba(232, 160, 32, calc(var(--glow) * 0.5))); }
+  .hero3__cta .ov { background: linear-gradient(90deg, #f0b840, #e8a020 60%, #c98a1a); color: var(--midnight); }
+  .hero3__cta .ov .icon { color: var(--midnight); }
+}
