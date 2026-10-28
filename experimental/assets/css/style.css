@@ -420,7 +420,7 @@ a.contact__value:hover { color: var(--accent); }
 
 /* ---- section bands: flat, alternating (first screen dark, services light, videos dark, FAQ light) ---- */
 .band { position: relative; }
-.band--alt, #services { background: #132439; }
+.band--alt { background: #132439; }
 .band > .section { padding-top: var(--s-section); padding-bottom: var(--s-section); }
 
 /* services: a compact grid of squares (grows to 10+ without turning into a long list) */
