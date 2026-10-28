@@ -213,7 +213,7 @@ img { display: block; max-width: 100%; }
   .hero3__stats li::before { top: calc(var(--v) * -2.6); left: calc(var(--v) * 2.4); width: calc(var(--v) * 5); }
   .hero3__stats b { font-size: calc(var(--v) * 5.6); }
   .hero3__stats span { font-size: max(0.7rem, calc(var(--v) * 2.6)); margin-top: calc(var(--v) * 1.4); letter-spacing: 0.12em; white-space: normal; }
-  .hero3__cta { left: 0; right: 0; width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 7); height: calc(var(--v) * 14.4); padding: 0 calc(var(--v) * 4 * 2 + 1.7em); font-size: max(0.9rem, calc(var(--v) * 4)); }
+  .hero3__cta { left: var(--edge); right: var(--edge); width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 7); height: calc(var(--v) * 14.4); padding: 0 calc(var(--v) * 4 * 2 + 1.7em); font-size: max(0.9rem, calc(var(--v) * 4)); }
   .hero3__cta .icon, .hero3__rips b { right: calc(var(--v) * 4); }
   .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 28.4); }
   .marq span { font-size: max(1.3rem, calc(var(--v) * 7.2)); height: calc(var(--v) * 14.4); }
