@@ -123,7 +123,7 @@ img { display: block; max-width: 100%; }
   --edge: max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut)));
   --u: min(1.1vw, calc(var(--sh) * 0.016), 14.4px);
   --cw: calc(var(--u) * 44.17);
-  --base: calc(100% - var(--u) * 6.94);
+  --base: calc(100% - var(--u) * 9.2);
 }
 @supports (height: 100svh) { .hero3__stage { --sh: calc(100svh - 1.75rem); } }
 
@@ -174,7 +174,7 @@ img { display: block; max-width: 100%; }
 /* brand strip: flat logos with thin separators, running along the bottom of the first screen */
 .marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; background: var(--accent); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
 .marq__t { display: inline-flex; animation: marq 50s linear infinite; }
-.marq span { position: relative; display: inline-flex; align-items: center; height: calc(1em + var(--u) * 1.8); margin-right: 3.2em; font: 700 max(1.15rem, calc(var(--u) * 2.4))/1 var(--fh); text-transform: uppercase; }
+.marq span { position: relative; display: inline-flex; align-items: center; height: calc(var(--u) * 6.4); margin-right: 3.2em; font: 700 max(1.3rem, calc(var(--u) * 2.9))/1 var(--fh); text-transform: uppercase; }
 .marq span::after { content: ""; position: absolute; right: -1.6em; top: 50%; width: 1px; height: 1.1em; transform: translate(50%, -50%); background: currentColor; opacity: 0.35; }
 .marq .lg { display: block; height: calc(var(--h) * 1em); aspect-ratio: var(--ar); background: currentColor; -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; }
 .marq .lg--b { filter: url(#bold); }
@@ -188,7 +188,7 @@ img { display: block; max-width: 100%; }
     --top: calc(var(--v) * 24 + max(0px, (var(--sh) - var(--v) * 182) * 0.45));
     --hs: min(calc(var(--v) * 17), 12.75vw);   /* headline size */
     --d: calc(var(--v) * 60 - var(--hs) * 1.95 - var(--v) * 3);   /* the headline is two lines: BMW СЕРВІС / у ЛЬВОВІ */
-    --g: max(0px, calc(var(--sh) - (var(--top) + var(--v) * 97.4 + var(--hs) * 1.95 + 2.78rem)));   /* spare height: pushes everything under the headline down so the first screen is filled */
+    --g: max(0px, calc(var(--sh) - (var(--top) + var(--v) * 97.4 + var(--hs) * 1.95 + var(--v) * 14.4 + 2px)));   /* spare height: pushes everything under the headline down so the first screen is filled */
     --base: calc(var(--top) + var(--v) * 126 - var(--d) + var(--g));
     --cw: calc(var(--v) * 66);
   }
@@ -205,7 +205,7 @@ img { display: block; max-width: 100%; }
   .hero3__cta { left: 0; right: 0; width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 7); height: calc(var(--v) * 14.4); padding: 0 calc(var(--v) * 4 * 2 + 1.7em); font-size: max(0.9rem, calc(var(--v) * 4)); }
   .hero3__cta .icon { right: calc(var(--v) * 4); }
   .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 28.4); }
-  .marq span { font-size: max(1.15rem, calc(var(--v) * 6)); height: calc(1em + var(--v) * 4.8); }
+  .marq span { font-size: max(1.3rem, calc(var(--v) * 7.2)); height: calc(var(--v) * 14.4); }
 }
 
 /* ================= SECTIONS ================= */
