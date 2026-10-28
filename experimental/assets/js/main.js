@@ -296,7 +296,7 @@ function heroScene(stage) {
 /* booking pop-up: name, phone, BMW model; sent to Netlify Forms */
 {
   const $ = s => document.querySelector(s);
-  const bk = $('#bk'), form = $('#bkForm'), chips = $('#bkChips'), model = $('#bkM'), err = $('#bkE'), ok = $('#bkOk');
+  const bk = $('#bk'), form = $('#bkForm'), phone = $('#bkP'), err = $('#bkE'), ok = $('#bkOk');
   if (bk && form) {
     let last = null;
     const open = (e) => { if (e) e.preventDefault(); last = document.activeElement; form.hidden = false; ok.hidden = true; err.hidden = true; $('#bkT').hidden = false; bk.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('#bkN').focus(), 50); };
@@ -306,9 +306,15 @@ function heroScene(stage) {
     $('#bkDone').addEventListener('click', close);
     bk.addEventListener('click', e => { if (e.target === bk) close(); });
     addEventListener('keydown', e => { if (e.key === 'Escape' && !bk.hidden) close(); });
-    chips.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; chips.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); model.value = b.textContent; });
+    // Ukrainian numbers: 0XXXXXXXXX, 380XXXXXXXXX or +380XXXXXXXXX (spaces, dashes, brackets allowed)
+    const norm = v => { const d = v.replace(/\D/g, ''); if (/^0\d{9}$/.test(d)) return '+38' + d; if (/^380\d{9}$/.test(d)) return '+' + d; return null; };
+    phone.addEventListener('input', () => phone.setCustomValidity(''));
+    phone.addEventListener('blur', () => { const n = norm(phone.value); if (n) phone.value = n.replace(/^(\+380)(\d{2})(\d{3})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5'); });
     form.addEventListener('submit', e => {
       e.preventDefault(); err.hidden = true;
+      const n = norm(phone.value);
+      if (!n) { phone.setCustomValidity('Введіть номер у форматі +380 XX XXX XX XX'); phone.reportValidity(); return; }
+      phone.value = n;
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
         .then(r => { if (!r.ok) throw 0; form.hidden = true; $('#bkT').hidden = true; document.querySelector('.bk__sub').hidden = true; ok.hidden = false; })
         .catch(() => { err.hidden = false; });
