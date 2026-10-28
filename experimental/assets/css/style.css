@@ -765,8 +765,8 @@ a.contact__value:hover { color: var(--accent); }
 /* HERO BUTTON (phone): full width, edge to edge */
 @media (max-aspect-ratio: 1/1) { .hero3__cta { left: 0; right: 0; } }
 
-/* HERO BUTTON (phone): two thirds of the size */
+/* HERO BUTTON + CAR (phone): smaller car, a visible dark button */
 @media (max-aspect-ratio: 1/1) {
-  .hero3__cta { min-height: 0; height: calc(var(--v) * 9.6); font-size: max(0.9rem, calc(var(--v) * 2.7)); }
-  .hero3__stage .marq { margin-top: calc(var(--base) + var(--v) * 23.6); }
+  .hero3__stage { --cw: calc(var(--v) * 66); }
+  .hero3__cta { background: #22364d; }
 }
