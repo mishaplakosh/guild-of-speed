@@ -361,10 +361,10 @@ document.querySelectorAll('a[href="#contacts"]:not([data-book])').forEach(a => a
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) close(); });
 })();
 
-/* tap the address to copy it */
+/* tap an address / number to copy it: no words, the icon just turns into a tick for a moment */
 document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => {
-  const txt = b.dataset.copy, t = b.querySelector('.copy__t'), orig = t.textContent;
-  const done = () => { b.classList.add('done'); t.textContent = 'Скопійовано'; setTimeout(() => { b.classList.remove('done'); t.textContent = orig; }, 1600); };
+  const txt = b.dataset.copy, ic = b.querySelector('.copy__i'), orig = ic.innerHTML;
+  const done = () => { ic.innerHTML = '<path d="M4 12.5l5 5L20 6.5"/>'; b.classList.add('done'); setTimeout(() => { ic.innerHTML = orig; b.classList.remove('done'); }, 1200); };
   if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(done, () => fallback());
   else fallback();
   function fallback() { const a = document.createElement('textarea'); a.value = txt; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); done(); } catch (e) {} a.remove(); }

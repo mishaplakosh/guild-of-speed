@@ -833,7 +833,7 @@ a.contact__value:hover { color: var(--accent); }
 .bk__ta { height: auto; min-height: 6.5rem; padding: 0.9rem 1rem; resize: none; line-height: 1.45; }
 
 /* COPYABLE ADDRESS */
-.copy { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0; margin: 0; background: none; border: 0; color: var(--silver); font: inherit; line-height: 1.7; text-align: left; cursor: pointer; user-select: text; -webkit-user-select: text; transition: color 0.2s; }
+.copy { display: flex; align-items: center; gap: 0.6rem; padding: 0; margin: 0; background: none; border: 0; color: var(--silver); font: inherit; line-height: 1.7; text-align: left; cursor: pointer; user-select: text; -webkit-user-select: text; transition: color 0.2s; }
 .copy__i { flex: none; width: 1.05em; height: 1.05em; fill: none; stroke: var(--accent); stroke-width: 1.8; stroke-linecap: square; }
 @media (hover: hover) { .copy:hover { color: var(--white); } }
-.copy.done { color: var(--accent); }
+.copy.done .copy__i { stroke-width: 2.4; }
