@@ -191,7 +191,7 @@ function heroScene(stage) {
   size(); addEventListener('resize', size);
 
   const grains = [...Array(420)].map(() => ({ a: Math.random() * 6.28, sp: 6 + Math.random() * 14, r: 0.1 + Math.random() * 0.16, t: Math.random() * 6.28, b: 0.4 + Math.random() * 0.6 }));
-  const start = performance.now() + 1500;                 // the car waits a moment before driving in
+  const start = performance.now() + 300, DRIVE = 3.4;   // seconds the car drives in for
   let last = performance.now();
 
   function frame(now) {
@@ -202,7 +202,8 @@ function heroScene(stage) {
     const t = reduce ? 9 : Math.max(0, (now - start) / 1000);
     const W = stage.clientWidth, H = stage.clientHeight;
     const cw = car.offsetWidth, ch = car.offsetHeight, x0 = stats.getBoundingClientRect().left - sr.left;
-    const carX = tt => x0 - (cw + x0 + 30) * (1 - eo(tt / 2));  // drives in from the left edge and brakes
+    const far = x0 + cw * 0.93 + cw * (tall.matches ? 2.1 : 1.7) + 20;   // starts so far away that even its beam is off screen
+    const carX = tt => x0 - far * (1 - eo(tt / DRIVE));           // the beam shows first, then the car drives in and brakes
     const x = carX(t), vel = (carX(t + 0.016) - x) / 0.016, moving = Math.abs(vel) > 30;
     car.style.transform = 'translate3d(' + x + 'px,' + (moving && !reduce ? Math.sin(now / 45) * 0.8 : 0) + 'px,0) rotate(' + (reduce ? 0 : -Math.min(1.5, Math.abs(vel) / 700)) + 'deg)';
     const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
@@ -249,12 +250,12 @@ function heroScene(stage) {
       else { const pts = [[0, 0], [xt, 0]]; for (let i = 0; i <= 8; i++) { const px = xt * (1 - i / 8); pts.push([px, yb(px)]); } poly = 'polygon(' + pts.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')'; }
     }
     ov.style.clipPath = poly;
-    cta.style.setProperty('--glow', (tall.matches ? (poly === 'inset(0 100% 0 0)' ? 0 : 0.6) * (1 - clamp((t - 2) / 0.8)) : clamp(xt / BW)).toFixed(3));
+    cta.style.setProperty('--glow', (tall.matches ? (poly === 'inset(0 100% 0 0)' ? 0 : 0.6) * (1 - clamp((t - DRIVE) / 0.8)) : clamp(xt / BW)).toFixed(3));
     if (tall.matches) {                                          // fade like the light on the road: full near the car, soft to the far end
       const xl = clamp(xhit - BX, 0, BW), m = 'linear-gradient(90deg, transparent ' + xl + 'px, #000 ' + (xl + 10) + 'px, rgba(0,0,0,0.5) ' + (xl + (xt - xl) * 0.6) + 'px, transparent ' + xt + 'px)';
       ov.style.webkitMaskImage = ov.style.maskImage = m;
     }
-    ov.style.opacity = tall.matches ? 1 - clamp((t - 2) / 0.8) : 1;   // phone: dark once the car stands; laptop: the light still points at the button   // phone: a soft yellow tint where the beam reaches, gone once the car stands
+    ov.style.opacity = tall.matches ? 1 - clamp((t - DRIVE) / 0.8) : 1;   // phone: dark once the car stands; laptop: the light still points at the button   // phone: a soft yellow tint where the beam reaches, gone once the car stands
   }
   requestAnimationFrame(frame);
 }
