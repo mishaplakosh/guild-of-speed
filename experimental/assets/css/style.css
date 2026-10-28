@@ -543,8 +543,8 @@ a.contact__value:hover { color: var(--accent); }
 .foot2.in .foot2__word { background-size: 100% 100%; }
 .foot2__bar { position: relative; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.1rem max(1.5rem, calc((100% - var(--wrap)) / 2 + var(--gut))); background: #070d15; border-top: 1px solid var(--hairline); color: var(--silver-dim); font-size: 0.82rem; }
 .foot2 .foot2__up { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); opacity: 1; transform: none; }
-.foot2__up .icon { width: 1rem; height: 1rem; transform: rotate(-90deg); transition: transform 0.3s cubic-bezier(.2,.8,.2,1); }
-@media (hover: hover) { .foot2__up:hover .icon { transform: rotate(-90deg) translateX(0.25rem); } }
+.foot2__up .icon { width: 1rem; height: 1rem; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: square; transition: transform 0.3s cubic-bezier(.2,.8,.2,1), color 0.2s; }
+@media (hover: hover) { .foot2 .foot2__up:hover { color: var(--accent); } .foot2__up:hover .icon { transform: translateY(-0.3rem); } }
 @media (max-width: 800px) { .foot2__top { grid-template-columns: 1fr 1fr; gap: 2rem; } .foot2__brand { grid-column: 1 / -1; } .foot2 { padding-top: 3rem; } }
 
 /* call button that slides in */
