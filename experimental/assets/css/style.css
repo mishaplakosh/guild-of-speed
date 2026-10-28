@@ -639,3 +639,17 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__cta .ov { padding: 0 calc(var(--v) * 4); }
   .hero3__stage .marq span { font-size: max(1.15rem, calc(var(--v) * 6)); height: calc(1em + var(--v) * 4.8); }
 }
+
+/* ================= HEADER =================
+   Same language as the tiles: flat, square, dark; amber only for emphasis. Side margin = --edge. */
+.nav { background: var(--midnight); backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 1px solid rgba(245,246,248,0.08); }
+.nav__inner { max-width: none; padding: 0.7rem max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut))); }
+.nav__logo { border-radius: 0; width: 3rem; height: 3rem; }
+.nav__links { gap: 0; }
+.nav__links a { position: relative; padding: 0.5rem 1.1rem; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em; }
+.nav__links a::after { content: ""; position: absolute; left: 1.1rem; right: 1.1rem; bottom: 0.1rem; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.3s cubic-bezier(.2,.8,.2,1); }
+.nav__links a:hover::after { transform: scaleX(1); }
+.nav__cta.btn--primary { background: #1b2838; color: var(--accent); border: 0; display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.4rem; font-size: 0.9rem; letter-spacing: 0.08em; transform: none; transition: background 0.2s, color 0.2s; }
+.nav__cta.btn--primary:hover { background: var(--accent); color: var(--midnight); transform: none; }
+@media (max-width: 767px) { .nav__inner { padding: 0.6rem var(--edge-m, var(--gut)); } }
+@media (max-width: 1024px) { .nav__cta.btn--primary { display: none; } }
