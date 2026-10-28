@@ -53,20 +53,22 @@ function heroScene(stage) {
   const tall = matchMedia('(max-aspect-ratio: 1/1)');
   const $ = s => stage.querySelector(s);
   const car = $('.hero3__car'), road = $('.hero3__road'), tail = $('.hero3__tail'), src = $('.hero3__src');
-    const stats = $('.hero3__stats'), wheels = [...stage.querySelectorAll('.hero3__wh')];
+  const stats = $('.hero3__stats'), wheels = [...stage.querySelectorAll('.hero3__wh')];
   const bcv = $('.hero3__beam'), dcv = $('.hero3__dust'), bc = bcv.getContext('2d'), dc = dcv.getContext('2d');
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), eo = v => 1 - Math.pow(1 - clamp(v), 3);
   const SLOPE = Math.tan(0.155);                              // the lower edge of the beam falls about 9 degrees onto the road
   const DRIVE = 3.4;                                          // seconds the car drives in for
 
+  let beamKey = '', prevBox = null;   // the beam is only redrawn when it actually changed (the canvas is blurred, so every redraw costs)
   function size() {
-    const W = stage.clientWidth, H = stage.clientHeight, dpr = Math.min(2, devicePixelRatio || 1), dd = dpr * 1.5;   // dust is drawn finer than the screen
+    const W = stage.clientWidth, H = stage.clientHeight, dpr = Math.min(2, devicePixelRatio || 1), dd = dpr;
     bcv.width = W * dpr; bcv.height = H * dpr; bc.setTransform(dpr, 0, 0, dpr, 0, 0);
     dcv.width = W * dd; dcv.height = H * dd; dc.setTransform(dd, 0, 0, dd, 0, 0);
+    beamKey = '';   // the canvas was cleared: draw the beam again
   }
   size(); addEventListener('resize', size);
 
-  const grains = [...Array(420)].map(() => ({ a: Math.random() * 6.28, sp: 6 + Math.random() * 14, r: 0.1 + Math.random() * 0.16, t: Math.random() * 6.28, b: 0.4 + Math.random() * 0.6 }));
+  const grains = [...Array(320)].map(() => ({ a: Math.random() * 6.28, sp: 6 + Math.random() * 14, r: 0.1 + Math.random() * 0.16, t: Math.random() * 6.28, b: 0.4 + Math.random() * 0.6 }));
   const start = performance.now() + 300;
   let last = performance.now();
 
@@ -81,7 +83,7 @@ function heroScene(stage) {
     const L = cw * (isTall ? 2.1 : 1.7);                     // beam length
     const far = x0 + cw * 0.93 + L + 20;                     // starts so far away that even its beam is off screen
     const carX = tt => x0 - far * (1 - eo(tt / DRIVE));      // the beam shows first, then the car drives in and brakes
-    const x = carX(t), moving = Math.abs((carX(t + 0.016) - x) / 0.016) > 30;
+    const x = carX(t), speed = Math.abs((carX(t + 0.016) - x) / 0.016), moving = speed > 30;
 
     // no shaking: the nose lifts a little while it drives, dips as it brakes, then settles
     const u = clamp(t / DRIVE), tau = Math.max(0, t - DRIVE);
@@ -89,7 +91,7 @@ function heroScene(stage) {
     car.style.transform = 'translate3d(' + x + 'px,0,0) rotate(' + lean.toFixed(3) + 'deg)';
     const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
     wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
-    if (t > DRIVE + 0.4) stage.classList.add('stopped');   // once it has fully stopped the call button turns solid
+    if (t > 0.5 && speed < 150) stage.classList.add('stopped');   // the moment the car has practically stopped the call button lights up
     tail.style.opacity = moving ? 0 : 1;                      // brake light: on when it stands still
 
     // the headlight follows the car's lean; the road line
@@ -99,6 +101,9 @@ function heroScene(stage) {
     const top = AY - cw * 0.0047, xhit = AX + (roadY - AY) / SLOPE, xEnd = AX + L;
 
     // beam: flat upper edge (cut-off line), lower edge falls onto the road
+    const key = [AX, AY, roadY, xEnd].map(v => v.toFixed(1)).join();
+    if (key !== beamKey) {
+      beamKey = key;
     bc.clearRect(0, 0, W, H);
     const g = bc.createLinearGradient(AX, 0, xEnd, 0);
     g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, 'rgba(255,230,175,0.42)'); g.addColorStop(1, 'rgba(255,222,150,0)');
@@ -110,9 +115,11 @@ function heroScene(stage) {
       rg.addColorStop(0, 'rgba(255,244,215,1)'); rg.addColorStop(0.6, 'rgba(255,230,170,0.5)'); rg.addColorStop(1, 'rgba(255,222,150,0)');
       bc.fillStyle = rg; bc.beginPath(); bc.ellipse(xhit + w / 2, roadY + 5, w / 2, 9, 0, 0, 6.283); bc.fill(); bc.fillRect(xhit, roadY - 2, w, 3);
     }
+    }
 
     // dust: tiny grains wandering inside the lit wedge
-    dc.clearRect(0, 0, W, H);
+    const box = [AX - 8, top - 8, xEnd + 8, roadY + 24], u0 = prevBox ? [Math.min(box[0], prevBox[0]), Math.min(box[1], prevBox[1]), Math.max(box[2], prevBox[2]), Math.max(box[3], prevBox[3])] : [0, 0, W, H];
+    dc.clearRect(u0[0], u0[1], u0[2] - u0[0], u0[3] - u0[1]); prevBox = box;
     if (!reduce) grains.forEach(p => {
       if (p.x === undefined || p.x > xEnd || p.x < AX - 4) { p.x = AX + Math.pow(Math.random(), 1.2) * L; p.y = top + Math.random() * (Math.min(roadY, AY + 3 + (p.x - AX) * SLOPE) - top); }
       p.a += (Math.random() - 0.5) * dt * 5; p.x += Math.cos(p.a) * p.sp * dt; p.y += Math.sin(p.a) * p.sp * dt; p.t += dt * (1.5 + p.b * 2);
