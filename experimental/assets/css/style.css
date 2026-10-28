@@ -57,7 +57,7 @@ img { display: block; max-width: 100%; }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 0.7rem max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut))); }
 .nav__brand { display: flex; align-items: center; gap: 1rem; }
 .nav__logo { width: auto; height: 3.2rem; }
-.nav__name { font-weight: 900; font-size: 1.05rem; line-height: 1; color: var(--white); text-transform: uppercase; letter-spacing: 0.08em; }
+.nav__name { display: inline-block; font-weight: 900; font-size: 1.05rem; line-height: 1; color: var(--white); text-transform: uppercase; letter-spacing: 0.05em; transform: skewX(-14deg); }   /* leaned like the sliding name in the hero */
 .nav__of { color: var(--accent); }
 .nav__links { display: flex; }
 .nav__links a { position: relative; padding: 0.5rem 1.1rem; color: var(--silver); font-family: var(--fh); font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.08em; transition: color 0.2s; }
