@@ -192,13 +192,14 @@ img { display: block; max-width: 100%; }
     --top: calc(var(--v) * 24 + max(0px, (var(--sh) - var(--v) * 182) * 0.45));
     --hs: min(calc(var(--v) * 17), 12.75vw);   /* headline size */
     --d: calc(var(--v) * 60 - var(--hs) * 1.95 - var(--v) * 3);   /* the headline is two lines: BMW СЕРВІС / у ЛЬВОВІ */
-    --base: calc(var(--top) + var(--v) * 126 - var(--d));
+    --g: max(0px, calc(var(--sh) - (var(--top) + var(--v) * 97.4 + var(--hs) * 1.95 + 2.78rem)));   /* spare height: pushes everything under the headline down so the first screen is filled */
+    --base: calc(var(--top) + var(--v) * 126 - var(--d) + var(--g));
     --cw: calc(var(--v) * 66);
   }
   .hero3__ghost { top: calc(var(--base) - var(--v) * 47); font-size: calc(var(--v) * 22); }
   .hero3__t { top: var(--top); font-size: var(--hs); }
   .hero3__t > span:last-child { display: block; }
-  .hero3__stats { top: calc(var(--top) + var(--hs) * 1.95 + var(--v) * 10); }
+  .hero3__stats { top: calc(var(--top) + var(--hs) * 1.95 + var(--v) * 10 + var(--g) * 0.4); }
   .hero3__stats li { padding: 0 calc(var(--v) * 2.4); }
   .hero3__stats li:first-child { padding-left: 0; }
   .hero3__stats { right: var(--edge); }
