@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/experimental/assets/css/style.css?v=129">
+  <link rel="stylesheet" href="/experimental/assets/css/style.css?v=131">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
@@ -204,12 +204,11 @@
     <div class="lightbox__frame" id="lbFrame"></div>
     <a class="lightbox__yt link-arrow" id="lbYt" href="https://www.youtube.com/@guildofspeed/shorts" target="_blank" rel="noopener">Відкрити на YouTube <svg class="icon icon--arrow" aria-hidden="true"><use href="#i-calendar"/></svg></a>
   </div>
-  <script src="/experimental/assets/js/main.js?v=129" defer></script>
+  <script src="/experimental/assets/js/main.js?v=131" defer></script>
   <div class="bk" id="bk" role="dialog" aria-modal="true" aria-labelledby="bkT" hidden>
     <div class="bk__box" id="bkBox">
       <button class="bk__x" id="bkX" type="button" aria-label="Закрити"><svg class="icon" aria-hidden="true"><use href="#i-close"/></svg></button>
       <h2 id="bkT">Замовити дзвінок</h2>
-      <p class="bk__sub">Залиште контакти. Передзвонимо і узгодимо час.</p>
       <form name="booking" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" id="bkForm">
         <input type="hidden" name="form-name" value="booking">
         <p class="bk__hp"><label>Не заповнювати <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
@@ -219,9 +218,11 @@
         <input class="bk__i" id="bkP" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="+380 XX XXX XX XX" maxlength="20">
         <label class="bk__l" for="bkM">Яка у вас BMW?</label>
         <input class="bk__i" id="bkM" name="model" type="text" autocomplete="off" maxlength="60" placeholder="Наприклад: E46 320d, F30, X5">
+        <label class="bk__l" for="bkT2">Що потрібно зробити?</label>
+        <textarea class="bk__i bk__ta" id="bkT2" name="task" rows="3" maxlength="400" placeholder="Коротко: що стукає, яка помилка на панелі, що треба замінити…"></textarea>
         <button class="bk__go" type="submit"><span>Замовити</span><svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg></button>
         <p class="bk__err" id="bkE" hidden>Не вдалося надіслати. Зателефонуйте: +380 63 600 0505</p>
-        <p class="bk__legal">Натискаючи кнопку, ви погоджуєтесь на обробку контактних даних для зворотного зв’язку.</p>
+        <p class="bk__legal">Надсилаючи заявку, ви погоджуєтесь, що ми зв’яжемося з вами за цим номером.</p>
       </form>
       <div class="bk__ok" id="bkOk" hidden>
         <h2>Дякуємо!</h2>

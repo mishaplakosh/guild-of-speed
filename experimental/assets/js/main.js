@@ -322,7 +322,7 @@ function heroScene(stage) {
       if (!n) { phone.setCustomValidity('Введіть номер у форматі +380 XX XXX XX XX'); phone.reportValidity(); return; }
       phone.value = n;
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
-        .then(r => { if (!r.ok) throw 0; form.hidden = true; $('#bkT').hidden = true; document.querySelector('.bk__sub').hidden = true; ok.hidden = false; })
+        .then(r => { if (!r.ok) throw 0; form.hidden = true; $('#bkT').hidden = true; ok.hidden = false; })
         .catch(() => { err.hidden = false; });
     });
   }
