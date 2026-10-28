@@ -168,102 +168,91 @@ if (lb) {
   });
 }
 
-// ---- homepage: the E46 drives across, its headlights light up the words ----
+// ---- first screen: the E46 drives in, its headlights light the booking button ----
 (function () {
-  const hero = document.getElementById('hero');
-  const stage = hero && hero.querySelector('.hero3__stage');
-  if (stage) heroCar(hero, stage);
+  const stage = document.querySelector('.hero3__stage');
+  if (stage) heroScene(stage);
 })();
 
-function heroCar(hero, stage) {
+function heroScene(stage) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const car = stage.querySelector('.hero3__car'), lamp = stage.querySelector('.hero3__lamp'), src = stage.querySelector('.hero3__src'), tail = stage.querySelector('.hero3__tail');
-  const beam = stage.querySelector('.hero3__beam'), wheels = [...stage.querySelectorAll('.hero3__wh')];
-  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
-  const smooth = (a, b, v) => { v = clamp((v - a) / (b - a)); return v * v * (3 - 2 * v); };
+  const tall = matchMedia('(max-aspect-ratio: 1/1)');
+  const $ = s => stage.querySelector(s);
+  const car = $('.hero3__car'), road = $('.hero3__road'), tail = $('.hero3__tail'), src = $('.hero3__src');
+  const cta = $('.hero3__cta'), ov = $('.ov');
+  const stats = $('.hero3__stats'), wheels = [...stage.querySelectorAll('.hero3__wh')];
+  const bcv = $('.hero3__beam'), dcv = $('.hero3__dust'), bc = bcv.getContext('2d'), dc = dcv.getContext('2d');
+  const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v)), eo = v => 1 - Math.pow(1 - clamp(v), 3);
+  const SLOPE = Math.tan(0.155);                               // the lower edge of the beam falls about 9 degrees onto the road
 
-  // split the words into letters so each one can light up on its own
-  const letters = [];
-  stage.querySelectorAll('.hero3__t > *').forEach(line => {
-    const text = line.textContent; line.textContent = '';
-    [...text].forEach(c => { const sp = document.createElement('span'); sp.className = 'hero3__ch'; sp.textContent = c; sp.dataset.b = line.tagName === 'B' ? '1' : ''; line.append(sp); letters.push(sp); });
-  });
-  hero.classList.add('hero3--fx');
-  let pos = [], posY = [], lastLeft = 0;
-  function measure() {
-    const sr = stage.getBoundingClientRect();
-    pos = letters.map(c => { const r = c.getBoundingClientRect(); return (r.left + r.right) / 2 - sr.left; });
-    posY = letters.map(c => { const r = c.getBoundingClientRect(); return (r.top + r.bottom) / 2 - sr.top; });
-    const first = letters.find(c => c.dataset.b);   // where the last word (ЛЬВІВ) starts
-    lastLeft = first ? first.getBoundingClientRect().left - sr.left : 0;
+  let dd = 1;
+  function size() {
+    const W = stage.clientWidth, H = stage.clientHeight, dpr = Math.min(2, devicePixelRatio || 1);
+    bcv.width = W * dpr; bcv.height = H * dpr; bc.setTransform(dpr, 0, 0, dpr, 0, 0);
+    dd = dpr * 1.5;                                            // dust is drawn finer than the screen
+    dcv.width = W * dd; dcv.height = H * dd; dc.setTransform(dd, 0, 0, dd, 0, 0);
   }
-  addEventListener('resize', measure);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
-  measure();
+  size(); addEventListener('resize', size);
 
-  // phones: the drive plays by itself on load (no scroll-jacking); desktop: follows the scroll
-  const phone = matchMedia('(max-aspect-ratio: 1/1)'), tStart = performance.now();
-  let glow = 0, sm = 0, lastX = null, rot = 0, tilt = 0, rev = 0, lampOn = 0, hold = 0, flick = 9, reach = -1e5, t0 = performance.now();
-  if (phone.matches && reduce) reach = 1e5;
+  const grains = [...Array(420)].map(() => ({ a: Math.random() * 6.28, sp: 6 + Math.random() * 14, r: 0.1 + Math.random() * 0.16, t: Math.random() * 6.28, b: 0.4 + Math.random() * 0.6 }));
+  const start = performance.now() + 250;
+  let last = performance.now();
+
   function frame(now) {
     requestAnimationFrame(frame);
-    const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
-    const r = hero.getBoundingClientRect();
-    if (r.bottom < -50 || r.top > innerHeight + 50) return;
-    const p = phone.matches ? (reduce ? 1 : clamp((now - tStart - 700) / 3600)) : clamp(-r.top / (r.height - innerHeight));
-    sm = reduce ? p : sm + (p - sm) * Math.min(1, dt * 7);
-    const W = stage.clientWidth, cw = car.offsetWidth, ch = car.offsetHeight, sr = stage.getBoundingClientRect();
-    // it stops with its nose just before the last word (on phones: parked under the words)
-    const statsEl = stage.querySelector('.hero3__stats'), padL = statsEl ? statsEl.getBoundingClientRect().left - sr.left : W * 0.04;
-    const x0 = phone.matches ? -cw : padL, gap = W * 0.02;   // the car starts right under the numbers   // on phones it drives in from the left edge
-    let xStop = lastLeft - gap - cw;
-    if (phone.matches || xStop < x0 + W * 0.1) xStop = W - cw - padL;
-    const x = x0 + (xStop - x0) * (sm * sm * (3 - 2 * sm));
-    if (lastX === null) lastX = x;
-    const dx = x - lastX; lastX = x;
-
-    // headlights stay on while it moves, and for a moment after
-    if (Math.abs(dx) > 0.3) { if (hold <= 0) flick = 0; hold = 1.4; } else hold -= dt;
-    flick += dt;
-    lampOn += ((hold > 0 ? 1 : 0) - lampOn) * Math.min(1, dt * 14);
-    glow += ((hold > 0 ? 1 : 0) - glow) * Math.min(1, dt * 3);   // the words fade out a bit slower than the beam
-    const fl = (flick < 0.4 && !reduce) ? (Math.floor(flick * 28) % 2 === 0 ? 1 : 0.12) : 1;
-    rev += ((Math.abs(dx) < 0.3 ? 1 : 0) - rev) * Math.min(1, dt * 6);   // brake light: on when it stands still
-    tail.style.opacity = rev.toFixed(3);
-
-    rot += dx / (110 * cw / 1939) * 57.2958;
+    const sr = stage.getBoundingClientRect();
+    if (sr.bottom < -50 || sr.top > innerHeight + 50) { last = now; return; }
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    const t = reduce ? 9 : Math.max(0, (now - start) / 1000);
+    const W = stage.clientWidth, H = stage.clientHeight;
+    const cw = car.offsetWidth, ch = car.offsetHeight, x0 = stats.getBoundingClientRect().left - sr.left;
+    const carX = tt => x0 - (cw + x0 + 30) * (1 - eo(tt / 2));  // drives in from the left edge and brakes
+    const x = carX(t), vel = (carX(t + 0.016) - x) / 0.016, moving = Math.abs(vel) > 30;
+    car.style.transform = 'translate3d(' + x + 'px,' + (moving && !reduce ? Math.sin(now / 45) * 0.8 : 0) + 'px,0) rotate(' + (reduce ? 0 : -Math.min(1.5, Math.abs(vel) / 700)) + 'deg)';
+    const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
     wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
-    tilt += (-Math.min(1.6, Math.abs(dx) * 0.1) - tilt) * 0.2;
-    const mv = Math.min(1, Math.abs(dx) / 6), ty = reduce ? 0 : Math.sin(now / 45) * 0.9 * mv + Math.sin(now / 130) * 0.35;
-    car.style.transform = 'translate3d(' + x + 'px,' + ty + 'px,0) rotate(' + (reduce ? 0 : tilt) + 'deg)';
+    tail.style.opacity = moving ? 0 : 1;                        // brake light: on when it stands still
 
-    // the beam starts at the headlight (so it shakes and tilts with the car)
-    const mr = src.getBoundingClientRect(), nx = (mr.left + mr.right) / 2 - sr.left, ny = (mr.top + mr.bottom) / 2 - sr.top;
-    const L = W * 0.62, hT = ch * (0.5 + 1.7 * smooth(0.02, 0.26, sm));
-    const op = (lampOn * fl).toFixed(3);
-    lamp.style.setProperty('--g', op); src.style.opacity = op; beam.style.opacity = op;   // the small light is always on; the glow grows with the beam
-    beam.style.setProperty('--nx', nx + 'px'); beam.style.setProperty('--ny', ny + 'px');
-    beam.style.clipPath = 'polygon(' + nx + 'px ' + (ny - ch * 0.012) + 'px,' + (nx + L) + 'px ' + (ny - hT) + 'px,' + (nx + L) + 'px ' + (ny + hT * 0.45) + 'px,' + nx + 'px ' + (ny + ch * 0.012) + 'px)';
+    // the headlight (follows the car's tilt and shake) and the road
+    const mr = src.getBoundingClientRect(), AX = (mr.left + mr.right) / 2 - sr.left, AY = (mr.top + mr.bottom) / 2 - sr.top;
+    const roadY = road.getBoundingClientRect().top - sr.top;
+    src.style.opacity = 1;
+    const L = cw * 1.195, top = AY - cw * 0.0047, xhit = AX + (roadY - AY) / SLOPE, xEnd = AX + L;
 
-    // how far the light has reached: kept once it got there, rolls back when you scroll up
-    const tip = nx + W * (0.04 + 0.5 * smooth(0, 0.3, sm));
-    if (hold > 0 && dx > 0.3) reach = Math.max(reach, tip); else if (dx < -0.3) reach = Math.min(reach, tip);
-    if (sm < 0.005) reach = -1e5;
-    // each letter is lit by the real beam: only inside the cone, only while the lights are on
-    letters.forEach((c, i) => {
-      const base = c.dataset.b ? 0.3 : 0.24;
-      let b = 0;
-      if (phone.matches) b = 1;   // phone: the words are always bright (the car is below them, the beam does not reach)
-      else {
-        const d = pos[i] - nx;
-        const top = ny - Math.max(d, 0) * (hT / L), bot = ny + Math.max(d, 0) * (hT * 0.45 / L), soft = 26;
-        const inCone = smooth(top - soft, top + soft, posY[i]) * (1 - smooth(bot - soft, bot + soft, posY[i]));
-        const ahead = smooth(-20, 60, d) * (1 - smooth(L * 0.85, L * 1.15, d)) * (1 - 0.45 * smooth(0, L, d));
-        b = Math.min(1, glow * fl * inCone * ahead * 1.25);
-      }
-      c.style.opacity = (base + b * (1 - base)).toFixed(3);
-      c.style.textShadow = b > 0.02 ? '0 0 ' + (b * 26).toFixed(1) + 'px rgba(255,190,90,' + (b * 0.6).toFixed(2) + ')' : 'none';
+    // beam: light has no travel time, so the whole beam exists at once and moves with the car.
+    // Flat upper edge (cut-off line), lower edge falls onto the road.
+    bc.clearRect(0, 0, W, H);
+    const g = bc.createLinearGradient(AX, 0, xEnd, 0);
+    g.addColorStop(0, 'rgba(255,240,205,0.8)'); g.addColorStop(0.5, 'rgba(255,230,175,0.3)'); g.addColorStop(1, 'rgba(255,222,150,0.05)');
+    bc.fillStyle = g; bc.beginPath(); bc.moveTo(AX, top); bc.lineTo(xEnd, top); bc.lineTo(xEnd, roadY);
+    if (xhit < xEnd) bc.lineTo(xhit, roadY); else bc.lineTo(xEnd, AY + 3 + L * SLOPE);
+    bc.lineTo(AX, AY + 3); bc.closePath(); bc.fill();
+    if (xhit < xEnd) {                                          // the light lying on the road
+      const w = xEnd - xhit, rg = bc.createLinearGradient(xhit, 0, xEnd, 0);
+      rg.addColorStop(0, 'rgba(255,244,215,1)'); rg.addColorStop(0.6, 'rgba(255,230,170,0.5)'); rg.addColorStop(1, 'rgba(255,222,150,0)');
+      bc.fillStyle = rg; bc.beginPath(); bc.ellipse(xhit + w / 2, roadY + 5, w / 2, 9, 0, 0, 6.283); bc.fill(); bc.fillRect(xhit, roadY - 2, w, 3);
+    }
+
+    // dust: tiny grains wandering in random directions inside the lit wedge
+    dc.clearRect(0, 0, W, H);
+    if (!reduce) grains.forEach(p => {
+      if (p.x === undefined || p.x > xEnd || p.x < AX - 4) { p.x = AX + Math.pow(Math.random(), 1.2) * L; p.y = top + Math.random() * (Math.min(roadY, AY + 3 + (p.x - AX) * SLOPE) - top); }
+      p.a += (Math.random() - 0.5) * dt * 5; p.x += Math.cos(p.a) * p.sp * dt; p.y += Math.sin(p.a) * p.sp * dt; p.t += dt * (1.5 + p.b * 2);
+      const yb = Math.min(roadY - 1, AY + 3 + (p.x - AX) * SLOPE); if (p.y < top || p.y > yb) p.y = top + Math.random() * (yb - top);
+      const al = (p.b * (1 - Math.min(1, (p.x - AX) / L)) * (0.55 + 0.45 * Math.sin(p.t))).toFixed(3);
+      dc.fillStyle = 'rgba(255,238,205,' + al + ')'; dc.beginPath(); dc.arc(p.x, p.y, p.r, 0, 6.283); dc.fill();
+      dc.fillStyle = 'rgba(255,214,150,' + (al * 0.3).toFixed(3) + ')'; dc.beginPath(); dc.arc(p.x, p.y, p.r * 3, 0, 6.283); dc.fill();
     });
+
+    // the button: only the part inside the beam shines (wide screens); under the road it shines from the road glow (tall screens)
+    const cr = cta.getBoundingClientRect(), BX = cr.left - sr.left, BY = cr.top - sr.top, BW = cr.width, BH = cr.height;
+    const xt = clamp(xEnd - BX, 0, BW), yb = px => clamp(AY + 3 + (BX + px - AX) * SLOPE - BY, 0, BH);
+    let poly = 'inset(0 100% 0 0)';
+    if (xt > 0) {
+      if (tall.matches) poly = 'inset(0 ' + ((1 - xt / BW) * 100) + '% 0 0)';
+      else { const pts = [[0, 0], [xt, 0]]; for (let i = 0; i <= 8; i++) { const px = xt * (1 - i / 8); pts.push([px, yb(px)]); } poly = 'polygon(' + pts.map(q => q[0].toFixed(1) + 'px ' + q[1].toFixed(1) + 'px').join(',') + ')'; }
+    }
+    ov.style.clipPath = poly;
   }
   requestAnimationFrame(frame);
 }
@@ -300,3 +289,6 @@ function heroCar(hero, stage) {
   addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 })();
+
+/* preview of two fill options for the hero: ?fill=speed or ?fill=city */
+{ const f = new URLSearchParams(location.search).get('fill'); if (f) document.body.classList.add('fill-' + f); }
