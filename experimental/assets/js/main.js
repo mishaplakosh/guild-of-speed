@@ -317,3 +317,13 @@ function heroScene(stage) {
     });
   }
 }
+
+/* "Контакти": scroll so the bottom of the screen meets the bottom of the contact tiles */
+document.querySelectorAll('a[href="#contacts"]:not([data-book])').forEach(a => a.addEventListener('click', e => {
+  const t = document.querySelector('.tiles');
+  if (!t) return;
+  e.preventDefault();
+  const m = document.getElementById('mobileMenu'), b = document.getElementById('burger'), o = document.getElementById('mobileOverlay');
+  if (m) { m.classList.remove('open'); b && b.classList.remove('open'); o && o.classList.remove('open'); b && b.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  scrollTo({ top: t.getBoundingClientRect().bottom + scrollY - innerHeight, behavior: 'smooth' });
+}));
