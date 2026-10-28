@@ -661,3 +661,11 @@ a.contact__value:hover { color: var(--accent); }
   .nav__links a { font-size: 1rem; }
   .nav__cta.btn--primary { min-height: 3.4rem; font-size: 1rem; padding: 0 1.6rem; }
 }
+/* hero button: text centred, icon pinned right; equal side space keeps text off the icon */
+.hero3__cta, .hero3__cta .ov { justify-content: center; text-align: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); }
+.hero3__cta .icon { position: absolute; right: calc(var(--u) * 1.6); top: 50%; margin-top: -0.85em; }
+.hero3__cta > .icon { z-index: 2; }
+@media (max-aspect-ratio: 1/1) {
+  .hero3__cta, .hero3__cta .ov { padding: 0 calc(var(--v) * 4 * 2 + 1.7em); }
+  .hero3__cta .icon { right: calc(var(--v) * 4); }
+}
