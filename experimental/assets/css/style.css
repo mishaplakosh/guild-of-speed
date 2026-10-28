@@ -564,13 +564,13 @@ a.contact__value:hover { color: var(--accent); }
    --edge is the side margin the menu, sections and footer use. */
 .hero3 { position: relative; }
 .hero3__stage {
-  position: relative; height: 100vh; height: 100svh; min-height: 30rem; overflow: hidden;
+  position: relative; --sh: calc(100vh - 3.5rem); height: var(--sh); min-height: 30rem; overflow: hidden;
   --edge: max(var(--gut), calc((100% - var(--wrap)) / 2 + var(--gut)));
-  --u: min(1.1vw, 1.6vh, 14.4px);
+  --u: min(1.1vw, calc(var(--sh) * 0.016), 14.4px);
   --cw: calc(var(--u) * 44.17);
   --base: calc(100% - var(--u) * 6.94);
 }
-@supports (height: 100svh) { .hero3__stage { --u: min(1.1vw, 1.6svh, 14.4px); } }
+@supports (height: 100svh) { .hero3__stage { --sh: calc(100svh - 3.5rem); } }
 
 .hero3__t { position: absolute; z-index: 2; left: var(--edge); top: calc(var(--u) * 11.7); font: 700 calc(var(--u) * 7.2)/0.95 'Golos Text', sans-serif; text-transform: uppercase; letter-spacing: -0.01em; white-space: nowrap; color: var(--white); }
 .hero3__t > b { color: var(--accent); font-weight: 700; }
@@ -623,13 +623,12 @@ a.contact__value:hover { color: var(--accent); }
 @media (max-aspect-ratio: 1/1) {
   .hero3__stage {
     min-height: 34rem;
-    --v: min(1vw, 0.55vh, 6.5px);
-    --top: calc(var(--v) * 24 + max(0px, (100vh - var(--v) * 182) * 0.45));
+    --v: min(1vw, calc(var(--sh) * 0.0055), 6.5px);
+    --top: calc(var(--v) * 24 + max(0px, (var(--sh) - var(--v) * 182) * 0.45));
     --cw: calc(var(--v) * 80);
     --base: calc(var(--top) + var(--v) * 117);
   }
-  @supports (height: 100svh) { .hero3__stage { --v: min(1vw, 0.55svh, 6.5px); --top: calc(var(--v) * 24 + max(0px, (100svh - var(--v) * 182) * 0.45)); } }
-  .hero3__t { top: var(--top); font-size: calc(var(--v) * 20); white-space: normal; }
+    .hero3__t { top: var(--top); font-size: calc(var(--v) * 20); white-space: normal; }
   .hero3__t > span, .hero3__t > b { display: block; }
   .hero3__sub { top: calc(var(--top) + var(--v) * 60); font-size: calc(var(--v) * 5.4); }
   .hero3__stats { top: calc(var(--top) + var(--v) * 70); }
