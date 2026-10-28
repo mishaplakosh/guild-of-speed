@@ -167,12 +167,23 @@ img { display: block; max-width: 100%; }
 .hero3__dust { z-index: 6; }
 
 /* call button: translucent amber with centred text and the phone icon pinned right (same on laptop and phone). */
-.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: rgba(232, 160, 32, 0.75); color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
+.hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: var(--amber-75); transition: background 0.6s ease; color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
+.hero3__stage.stopped .hero3__cta { background: var(--accent); }
+.hero3__stage.stopped .hero3__cta .icon { animation: ctaRing 0.7s ease-in-out; }
+.hero3__stage.stopped .hero3__rips b { animation: ctaRipple 0.9s ease-out; }
+.hero3__stage.stopped .hero3__rips b:nth-child(2) { animation-delay: 0.18s; }
+.hero3__stage.stopped .hero3__rips b:nth-child(3) { animation-delay: 0.36s; }
+/* the car has stopped: the button turns bright and solid, the phone rings and ripples spread out from it.
+   Only transform and opacity are animated, so it stays smooth. */
+.hero3__rips { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
+.hero3__rips b { position: absolute; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; border: 2px solid var(--midnight); border-radius: 50%; opacity: 0; }
+@keyframes ctaRipple { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(4.2); } }
+@keyframes ctaRing { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-16deg); } 40% { transform: rotate(14deg); } 60% { transform: rotate(-9deg); } 80% { transform: rotate(5deg); } }
 .hero3__cta > span { position: relative; z-index: 2; }
 .hero3__cta .icon { position: absolute; z-index: 2; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; color: var(--midnight); transition: transform 0.35s var(--ease); }
 
 /* brand strip: flat logos with thin separators, running along the bottom of the first screen */
-.marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; background: var(--accent); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
+.marq { position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; background: var(--amber-75); color: var(--midnight); overflow: hidden; white-space: nowrap; border-block: 1px solid #000; }
 .marq__t { display: inline-flex; animation: marq 50s linear infinite; }
 .marq span { position: relative; display: inline-flex; align-items: center; height: calc(var(--u) * 6.4); margin-right: 3.2em; font: 700 max(1.3rem, calc(var(--u) * 2.9))/1 var(--fh); text-transform: uppercase; }
 .marq span::after { content: ""; position: absolute; right: -1.6em; top: 50%; width: 1px; height: 1.1em; transform: translate(50%, -50%); background: currentColor; opacity: 0.35; }
@@ -203,7 +214,7 @@ img { display: block; max-width: 100%; }
   .hero3__stats b { font-size: calc(var(--v) * 5.6); }
   .hero3__stats span { font-size: max(0.7rem, calc(var(--v) * 2.6)); margin-top: calc(var(--v) * 1.4); letter-spacing: 0.12em; white-space: normal; }
   .hero3__cta { left: 0; right: 0; width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 7); height: calc(var(--v) * 14.4); padding: 0 calc(var(--v) * 4 * 2 + 1.7em); font-size: max(0.9rem, calc(var(--v) * 4)); }
-  .hero3__cta .icon { right: calc(var(--v) * 4); }
+  .hero3__cta .icon, .hero3__rips b { right: calc(var(--v) * 4); }
   .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 28.4); }
   .marq span { font-size: max(1.3rem, calc(var(--v) * 7.2)); height: calc(var(--v) * 14.4); }
 }
@@ -428,6 +439,6 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .marq__t, .hero3__ghost svg, .lightbox, .faq-list details p { animation: none; }
+  .marq__t, .hero3__ghost svg, .lightbox, .faq-list details p, .hero3__stage.stopped .hero3__cta .icon, .hero3__stage.stopped .hero3__rips b { animation: none; }
   .foot2 a { opacity: 1; transform: none; }
 }
