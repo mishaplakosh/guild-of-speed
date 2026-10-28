@@ -785,6 +785,5 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__cta .ov .icon { color: var(--midnight); }
 }
 
-/* HERO + HEADER: same dark colour as the footer */
+/* HERO: same dark colour as the footer */
 .hero3__stage { background: #070d15; }
-.nav { background: #070d15; }
