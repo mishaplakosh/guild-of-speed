@@ -205,7 +205,10 @@ function heroScene(stage) {
     const far = x0 + cw * 0.93 + cw * (tall.matches ? 2.1 : 1.7) + 20;   // starts so far away that even its beam is off screen
     const carX = tt => x0 - far * (1 - eo(tt / DRIVE));           // the beam shows first, then the car drives in and brakes
     const x = carX(t), vel = (carX(t + 0.016) - x) / 0.016, moving = Math.abs(vel) > 30;
-    car.style.transform = 'translate3d(' + x + 'px,' + (moving && !reduce ? Math.sin(now / 45) * 0.8 : 0) + 'px,0) rotate(' + (reduce ? 0 : -Math.min(1.5, Math.abs(vel) / 700)) + 'deg)';
+    // no shaking: the nose lifts a little while it drives, dips as it brakes to a stop, then settles back
+    const u = clamp(t / DRIVE), tau = Math.max(0, t - DRIVE);
+    const lean = reduce ? 0 : u < 1 ? -0.9 * (1 - u) * (1 - u) + 1.1 * Math.pow(clamp((u - 0.6) / 0.4), 2) : 1.1 * Math.exp(-3.2 * tau) * Math.cos(5 * tau);
+    car.style.transform = 'translate3d(' + x + 'px,0,0) rotate(' + lean.toFixed(3) + 'deg)';
     const rot = ((x - x0) / (110 * cw / 1939)) * 57.2958;
     wheels.forEach(w => { w.style.transform = 'rotate(' + rot + 'deg)'; });
     tail.style.opacity = moving ? 0 : 1;                        // brake light: on when it stands still
@@ -319,7 +322,7 @@ function heroScene(stage) {
       if (!n) { phone.setCustomValidity('Введіть номер у форматі +380 XX XXX XX XX'); phone.reportValidity(); return; }
       phone.value = n;
       fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
-        .then(r => { if (!r.ok) throw 0; form.hidden = true; $('#bkT').hidden = true; document.querySelector('.bk__sub').hidden = true; ok.hidden = false; })
+        .then(r => { if (!r.ok) throw 0; form.hidden = true; $('#bkT').hidden = true; ok.hidden = false; })
         .catch(() => { err.hidden = false; });
     });
   }
@@ -333,4 +336,36 @@ document.querySelectorAll('a[href="#contacts"]:not([data-book])').forEach(a => a
   const m = document.getElementById('mobileMenu'), b = document.getElementById('burger'), o = document.getElementById('mobileOverlay');
   if (m) { m.classList.remove('open'); b && b.classList.remove('open'); o && o.classList.remove('open'); b && b.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
   scrollTo({ top: t.getBoundingClientRect().bottom + scrollY - innerHeight, behavior: 'smooth' });
+}));
+
+/* "Прокласти маршрут" on phones: choose Google Maps / Apple Maps (Apple devices only) / Waze */
+(function () {
+  const tile = document.querySelector('.tiles a[href*="maps.app.goo.gl"]');
+  if (!tile) return;
+  const phone = matchMedia('(max-width: 900px), (pointer: coarse)');
+  const ll = '49.8444869,23.9954202';
+  const apple = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  const opts = [['Google Maps', tile.href], apple ? ['Apple Maps', 'https://maps.apple.com/?daddr=' + ll + '&dirflg=d&q=Guild%20of%20Speed'] : null, ['Waze', 'https://waze.com/ul?ll=' + ll + '&navigate=yes']].filter(Boolean);
+  const el = document.createElement('div');
+  el.className = 'rt'; el.hidden = true; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Прокласти маршрут');
+  el.innerHTML = '<div class="rt__sheet"><p class="rt__k">Прокласти маршрут</p>' + opts.map(o => '<a class="rt__o" href="' + o[1] + '" target="_blank" rel="noopener">' + o[0] + '</a>').join('') + '<button class="rt__x" type="button">Закрити</button></div>';
+  document.body.appendChild(el);
+  const close = () => { el.classList.remove('open'); document.body.style.overflow = ''; setTimeout(() => { if (!el.classList.contains('open')) el.hidden = true; }, 300); };
+  tile.addEventListener('click', e => {
+    if (!phone.matches) return;
+    e.preventDefault();
+    el.hidden = false; document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => el.classList.add('open'));
+  });
+  el.addEventListener('click', e => { if (e.target === el || e.target.closest('.rt__x') || e.target.closest('.rt__o')) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !el.hidden) close(); });
+})();
+
+/* tap an address / number to copy it: no words, the icon just turns into a tick for a moment */
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', () => {
+  const txt = b.dataset.copy, ic = b.querySelector('.copy__i'), orig = ic.innerHTML;
+  const done = () => { ic.innerHTML = '<path d="M4 12.5l5 5L20 6.5"/>'; b.classList.add('done'); setTimeout(() => { ic.innerHTML = orig; b.classList.remove('done'); }, 1200); };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(txt).then(done, () => fallback());
+  else fallback();
+  function fallback() { const a = document.createElement('textarea'); a.value = txt; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select(); try { document.execCommand('copy'); done(); } catch (e) {} a.remove(); }
 }));
