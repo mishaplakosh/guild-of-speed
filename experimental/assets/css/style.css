@@ -741,3 +741,7 @@ a.contact__value:hover { color: var(--accent); }
   .hero3__stage { height: auto; }
   .hero3__stage .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 28.4); }
 }
+
+/* BRAND STRIP: thin separators between brands */
+.marq span { position: relative; }
+.marq span::after { content: ""; position: absolute; right: -1.6em; top: 50%; width: 1px; height: 1.1em; transform: translate(50%, -50%); background: currentColor; opacity: 0.35; }
