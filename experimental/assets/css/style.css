@@ -702,7 +702,7 @@ a.contact__value:hover { color: var(--accent); }
 .sq { justify-content: flex-end; padding: 0; overflow: hidden; isolation: isolate; }
 .sq img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; transition: transform 0.5s cubic-bezier(.2,.8,.2,1); }
 .sq h3 { position: relative; z-index: 1; align-self: flex-start; margin: 0; padding: 0.9rem 1rem; background: none; color: var(--white); text-shadow: 0 1px 12px rgba(7,13,21,0.7); transition: color 0.3s; }
-@media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover img { transform: scale(1.06); } .sq:hover h3 { color: var(--accent); } }
+@media (hover: hover) { .sq:hover { background: #1b2838; color: var(--white); } .sq:hover h3 { color: var(--accent); } }
 .sq:active h3 { color: var(--accent); }
 .sq::after { content: ""; position: absolute; inset: 0; z-index: 0; background: linear-gradient(0deg, rgba(7,13,21,0.85), rgba(7,13,21,0.35) 40%, rgba(7,13,21,0) 70%); pointer-events: none; }
 /* tall screens: headline fits on three lines; hero ends right under the button */
