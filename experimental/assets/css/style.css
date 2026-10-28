@@ -605,8 +605,8 @@ a.contact__value:hover { color: var(--accent); }
 .hero3__cta .ov { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 1.6); background: var(--accent); color: var(--midnight); clip-path: inset(0 100% 0 0); pointer-events: none; font-style: normal; }
 .hero3__cta .ov .icon { color: var(--midnight); }
 /* hover: the light stays as it is; a white line grows along the bottom */
-.hero3__cta::after { content: ""; position: absolute; z-index: 4; left: 0; bottom: 0; height: 3px; width: 0; background: var(--accent); transition: width 0.3s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
-.hero3__cta::before { content: ""; position: absolute; z-index: 4; right: 0; bottom: 0; width: 3px; height: 0; background: var(--accent); transition: height 0.25s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.hero3__cta::after { content: ""; position: absolute; z-index: 4; left: 0; bottom: 0; height: 3px; width: 0; background: var(--white); transition: width 0.3s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
+.hero3__cta::before { content: ""; position: absolute; z-index: 4; right: 0; bottom: 0; width: 3px; height: 0; background: var(--white); transition: height 0.25s cubic-bezier(.2,.8,.2,1); pointer-events: none; }
 @media (hover: hover) { .hero3__cta:hover::after { width: 100%; } .hero3__cta:hover::before { height: 100%; transition-delay: 0.3s; } }
 .hero3__cta:active::after { width: 100%; }
 .hero3__cta:active::before { height: 100%; transition-delay: 0.3s; }
