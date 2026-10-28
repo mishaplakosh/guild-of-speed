@@ -798,3 +798,9 @@ a.contact__value:hover { color: var(--accent); }
 
 /* ANCHORS (phone): the amber dash above each section title stays clear of the fixed header */
 @media (max-width: 900px) { .band { scroll-margin-top: 2rem; } }
+
+/* SERVICE PAGES: "all services" back link as a dark tile, same language as the header button */
+.cat__back { gap: 0.7rem; min-height: 3rem; padding: 0 1.3rem; background: #1b2838; color: var(--accent); font: 700 0.85rem 'Golos Text', sans-serif; letter-spacing: 0.08em; text-transform: uppercase; transition: background 0.2s, color 0.2s; }
+.cat__back .icon { color: var(--accent); }
+.cat__back:hover { background: var(--accent); color: var(--midnight); }
+.cat__back:hover .icon { color: var(--midnight); transform: scaleX(-1) translateX(0.25rem); }
