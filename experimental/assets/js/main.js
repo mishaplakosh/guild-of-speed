@@ -292,3 +292,26 @@ function heroScene(stage) {
 
 /* preview of two fill options for the hero: ?fill=speed or ?fill=city */
 { const f = new URLSearchParams(location.search).get('fill'); if (f) document.body.classList.add('fill-' + f); }
+
+/* booking pop-up: name, phone, BMW model; sent to Netlify Forms */
+{
+  const $ = s => document.querySelector(s);
+  const bk = $('#bk'), form = $('#bkForm'), chips = $('#bkChips'), model = $('#bkM'), err = $('#bkE'), ok = $('#bkOk');
+  if (bk && form) {
+    let last = null;
+    const open = (e) => { if (e) e.preventDefault(); last = document.activeElement; form.hidden = false; ok.hidden = true; err.hidden = true; $('#bkT').hidden = false; bk.hidden = false; document.body.style.overflow = 'hidden'; setTimeout(() => $('#bkN').focus(), 50); };
+    const close = () => { bk.hidden = true; document.body.style.overflow = ''; if (last) last.focus(); };
+    document.querySelectorAll('[data-book]').forEach(a => a.addEventListener('click', open));
+    $('#bkX').addEventListener('click', close);
+    $('#bkDone').addEventListener('click', close);
+    bk.addEventListener('click', e => { if (e.target === bk) close(); });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && !bk.hidden) close(); });
+    chips.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; chips.querySelectorAll('button').forEach(x => x.classList.toggle('on', x === b)); model.value = b.textContent; });
+    form.addEventListener('submit', e => {
+      e.preventDefault(); err.hidden = true;
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(form)).toString() })
+        .then(r => { if (!r.ok) throw 0; form.hidden = true; $('#bkT').hidden = true; document.querySelector('.bk__sub').hidden = true; ok.hidden = false; })
+        .catch(() => { err.hidden = false; });
+    });
+  }
+}
