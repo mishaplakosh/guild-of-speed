@@ -191,7 +191,7 @@ function heroScene(stage) {
   size(); addEventListener('resize', size);
 
   const grains = [...Array(420)].map(() => ({ a: Math.random() * 6.28, sp: 6 + Math.random() * 14, r: 0.1 + Math.random() * 0.16, t: Math.random() * 6.28, b: 0.4 + Math.random() * 0.6 }));
-  const start = performance.now() + 250;
+  const start = performance.now() + 1500;                 // the car waits a moment before driving in
   let last = performance.now();
 
   function frame(now) {
