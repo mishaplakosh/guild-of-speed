@@ -653,3 +653,11 @@ a.contact__value:hover { color: var(--accent); }
 .nav__cta.btn--primary:hover { background: var(--accent); color: var(--midnight); transform: none; }
 @media (max-width: 767px) { .nav__inner { padding: 0.6rem var(--edge-m, var(--gut)); } }
 @media (max-width: 1024px) { .nav__cta.btn--primary { display: none; } }
+/* header: links sit toward the right next to the call button; sizes match the hero text */
+@media (min-width: 1025px) {
+  .nav__links { margin-left: auto; margin-right: 1.5rem; }
+  .nav__logo { width: 3.4rem; height: 3.4rem; }
+  .nav__name { font-size: 1.2rem; }
+  .nav__links a { font-size: 1rem; }
+  .nav__cta.btn--primary { min-height: 3.4rem; font-size: 1rem; padding: 0 1.6rem; }
+}
