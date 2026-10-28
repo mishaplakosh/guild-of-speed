@@ -787,3 +787,7 @@ a.contact__value:hover { color: var(--accent); }
 
 /* HERO: same dark colour as the footer */
 .hero3__stage { background: #070d15; }
+
+/* SERVICE TILES: 8 tiles = 4 columns on wide screens, 2 on narrow ones */
+.sq-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) { .sq-grid { grid-template-columns: repeat(2, 1fr); } }
