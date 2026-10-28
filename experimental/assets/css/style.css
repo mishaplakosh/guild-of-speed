@@ -795,3 +795,6 @@ a.contact__value:hover { color: var(--accent); }
 /* SERVICE TILES: the whole tile grows 5% on hover */
 .sq { transition: transform 0.3s cubic-bezier(.2,.8,.2,1); }
 @media (hover: hover) { .sq:hover { transform: scale(1.05); z-index: 2; } }
+
+/* ANCHORS (phone): the amber dash above each section title stays clear of the fixed header */
+@media (max-width: 900px) { .band { scroll-margin-top: 2rem; } }
