@@ -40,6 +40,14 @@ document.querySelectorAll('a[href="#contacts"]:not([data-book])').forEach(a => a
 const stage = document.querySelector('.hero3__stage');
 if (stage) heroScene(stage);
 
+/* the sliding name: size the strip to its text (once the font is in) so the loop is seamless */
+const ghost = document.querySelector('.hero3__ghost svg');
+if (ghost) {
+  const fit = () => { ghost.style.width = ghost.querySelector('text').getComputedTextLength() + 'px'; };
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+  addEventListener('resize', fit);
+}
+
 function heroScene(stage) {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const tall = matchMedia('(max-aspect-ratio: 1/1)');
