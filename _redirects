@@ -1,0 +1,2 @@
+# The page generator lives next to the pages; keep it off the site
+/experimental/_src/*  /404.html  404!
