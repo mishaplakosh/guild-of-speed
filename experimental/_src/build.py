@@ -102,7 +102,7 @@ def page(name, title, description, main, after=''):
     body = f'''  <header class="nav" id="nav">
     <div class="nav__inner">
       <a href="#hero" class="nav__brand" aria-label="Guild of Speed — на початок">
-        <img src="{ASSETS}/img/logo.webp" alt="Guild of Speed" class="nav__logo" width="52" height="52">
+        <img src="{ASSETS}/img/logo.webp" alt="Guild of Speed" class="nav__logo" width="57" height="168">
         <span class="nav__name">GUILD <span class="nav__of">OF</span> SPEED</span>
       </a>
       <nav class="nav__links" aria-label="Головне меню">
