@@ -169,16 +169,6 @@ img { display: block; max-width: 100%; }
 /* call button: translucent amber with centred text and the phone icon pinned right (same on laptop and phone). */
 .hero3__cta { position: absolute; z-index: 8; right: var(--edge); bottom: calc(100% - var(--base) + var(--u) * 1.2); width: calc(var(--u) * 38); height: calc(var(--u) * 6.4); min-height: 3.4rem; display: flex; align-items: center; justify-content: center; padding: 0 calc(var(--u) * 1.6 * 2 + 1.7em); background: var(--amber-75); transition: background 0.6s ease; color: var(--midnight); font: 900 max(0.85rem, calc(var(--u) * 1.3))/1 var(--fh); letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
 .hero3__stage.stopped .hero3__cta { background: var(--accent); }
-.hero3__stage.stopped .hero3__cta .icon { animation: ctaRing 0.7s ease-in-out; }
-.hero3__stage.stopped .hero3__rips b { animation: ctaRipple 0.9s ease-out; }
-.hero3__stage.stopped .hero3__rips b:nth-child(2) { animation-delay: 0.18s; }
-.hero3__stage.stopped .hero3__rips b:nth-child(3) { animation-delay: 0.36s; }
-/* the car has stopped: the button turns bright and solid, the phone rings and ripples spread out from it.
-   Only transform and opacity are animated, so it stays smooth. */
-.hero3__rips { position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none; }
-.hero3__rips b { position: absolute; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; border: 2px solid var(--midnight); border-radius: 50%; opacity: 0; }
-@keyframes ctaRipple { 0% { opacity: 0.8; transform: scale(1); } 100% { opacity: 0; transform: scale(4.2); } }
-@keyframes ctaRing { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(-16deg); } 40% { transform: rotate(14deg); } 60% { transform: rotate(-9deg); } 80% { transform: rotate(5deg); } }
 .hero3__cta > span { position: relative; z-index: 2; }
 .hero3__cta .icon { position: absolute; z-index: 2; right: calc(var(--u) * 1.6); top: 50%; width: 1.7em; height: 1.7em; margin-top: -0.85em; color: var(--midnight); transition: transform 0.35s var(--ease); }
 
@@ -200,10 +190,12 @@ img { display: block; max-width: 100%; }
     --hs: min(calc(var(--v) * 17), 12.75vw);   /* headline size */
     --d: calc(var(--v) * 60 - var(--hs) * 1.95 - var(--v) * 3);   /* the headline is two lines: BMW СЕРВІС / у ЛЬВОВІ */
     --g: max(0px, calc(var(--sh) - (var(--top) + var(--v) * 97.4 + var(--hs) * 1.95 + var(--v) * 14.4 + 2px)));   /* spare height: pushes everything under the headline down so the first screen is filled */
-    --base: calc(var(--top) + var(--v) * 126 - var(--d) + var(--g));
-    --cw: calc(var(--v) * 66);
+    --base: calc(var(--top) + var(--v) * 147.4 - var(--d) + var(--g));
+    --k: min(var(--v), calc((100vw - var(--gut) * 2) / 95.5));   /* car + button + a gap always fit in the width between the margins */
+    --cw: calc(var(--k) * 34.5);
   }
-  .hero3__ghost { top: calc(var(--base) - var(--v) * 47); font-size: calc(var(--v) * 22); }
+  .hero3__city { height: calc(var(--v) * 66); }
+  .hero3__ghost { top: calc(var(--base) - var(--v) * 49); font-size: calc(var(--v) * 25.3); }
   .hero3__t { top: var(--top); font-size: var(--hs); }
   .hero3__t > span:last-child { display: block; }
   .hero3__stats { top: calc(var(--top) + var(--hs) * 1.95 + var(--v) * 10 + var(--g) * 0.4); }
@@ -211,11 +203,11 @@ img { display: block; max-width: 100%; }
   .hero3__stats li:first-child { padding-left: 0; }
   .hero3__stats { right: var(--edge); }
   .hero3__stats li::before { top: calc(var(--v) * -2.6); left: calc(var(--v) * 2.4); width: calc(var(--v) * 5); }
-  .hero3__stats b { font-size: calc(var(--v) * 5.6); }
-  .hero3__stats span { font-size: max(0.7rem, calc(var(--v) * 2.6)); margin-top: calc(var(--v) * 1.4); letter-spacing: 0.12em; white-space: normal; }
-  .hero3__cta { left: var(--edge); right: var(--edge); width: auto; bottom: auto; top: calc(var(--base) + var(--v) * 7); height: calc(var(--v) * 14.4); padding: 0 calc(var(--v) * 4 * 2 + 1.7em); font-size: max(0.9rem, calc(var(--v) * 4)); }
-  .hero3__cta .icon, .hero3__rips b { right: calc(var(--v) * 4); }
-  .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 28.4); }
+  .hero3__stats b { font-size: calc(var(--v) * 5); }
+  .hero3__stats span { font-size: max(0.63rem, calc(var(--v) * 2.31)); margin-top: calc(var(--v) * 1.4); letter-spacing: 0.12em; white-space: normal; }
+  .hero3__cta { right: var(--edge); width: calc(var(--k) * 58); white-space: nowrap; letter-spacing: 0.05em; bottom: calc(100% - var(--base) + var(--v) * 2.4); height: calc(var(--k) * 10.1); min-height: 0; padding: 0 calc(var(--k) * 4 + 1.7em) 0 calc(var(--k) * 2); font-size: max(0.6rem, calc(var(--k) * 2.5)); }
+  .hero3__cta .icon { right: calc(var(--k) * 3); }
+  .marq { position: relative; bottom: auto; margin-top: calc(var(--base) + var(--v) * 7); }
   .marq span { font-size: max(1.3rem, calc(var(--v) * 7.2)); height: calc(var(--v) * 14.4); }
 }
 
@@ -439,6 +431,6 @@ img { display: block; max-width: 100%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
-  .marq__t, .hero3__ghost svg, .lightbox, .faq-list details p, .hero3__stage.stopped .hero3__cta .icon, .hero3__stage.stopped .hero3__rips b { animation: none; }
+  .marq__t, .hero3__ghost svg, .lightbox, .faq-list details p { animation: none; }
   .foot2 a { opacity: 1; transform: none; }
 }
